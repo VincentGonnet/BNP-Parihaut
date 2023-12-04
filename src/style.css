@@ -53,3 +53,16 @@ main {
 
     background-color: lightpink;
 }
+
+/* login form */
+
+fieldset {
+
+   flex: 15;
+
+    display: flex;
+
+    padding: 15px;
+
+    background-color: lightpink; 
+}

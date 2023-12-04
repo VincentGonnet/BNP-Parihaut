@@ -7,7 +7,8 @@ function displayLoginPage(){
             <legend>Connexion à votre compte</legend>
             <p><label>Votre login : </label><input type="text" name="login" /></p>
             <p><label>Votre mot de passe : </label><input type="text" name="password" /></p>
+            <p><input type="submit" value="Se connecter" name="connection" /></p
             </fieldset></form>';
-    require_once 'view/global-layout.php';
+    echo $view;
     
 }
