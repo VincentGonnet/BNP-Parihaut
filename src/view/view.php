@@ -27,3 +27,7 @@ function display($job, $viewFile, $title)
     $head = '<h1>' . $title . '</h1>';
     require_once 'global-layout.php';
 }
+
+function displayLoginPage(){
+    require_once 'loginPage.php'
+}

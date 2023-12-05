@@ -54,15 +54,5 @@ main {
     background-color: lightpink;
 }
 
-/* login form */
+/* login page */
 
-fieldset {
-
-   flex: 15;
-
-    display: flex;
-
-    padding: 15px;
-
-    background-color: lightpink; 
-}
