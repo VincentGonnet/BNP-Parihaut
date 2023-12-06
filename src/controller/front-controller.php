@@ -12,7 +12,5 @@ if(isset($_POST['login'])) {
 if($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
 } else {
-    CtlGlobalLayout();
+    CtlDisplayPage();
 }
-
-
