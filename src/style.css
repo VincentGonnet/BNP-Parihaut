@@ -56,3 +56,11 @@ main {
 
 /* login page */
 
+.loginForm >body {
+    background-color: var(#fbf7f7);
+}
+
+.loginForm > label {
+    color: var(#120909);
+}
+
