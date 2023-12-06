@@ -19,7 +19,33 @@ function CtlDisplayLoginPage() {
 }
 
 function CtlDisplayPage() {
+    if(!isset($_SESSION['loggedInUser'])) {
+        $_SESSION['loggedIn'] = false;
+        displayLoginPage();
+        return;
+    }
 
+    if(!isset($_SESSION['currentPage'])) {
+        if($_SESSION['loggedInUser']->POSTE == 'agent') {
+            $_SESSION['currentPage'] = 'agent-search-client';
+        } else if($_SESSION['loggedInUser']->POSTE == 'conseiller') {
+            $_SESSION['currentPage'] = 'conseiller-planning';
+        } else if($_SESSION['loggedInUser']->POSTE == 'directeur') {
+            $_SESSION['currentPage'] = 'directeur-manage-employees';
+        }
+    }
+
+    switch($_SESSION['currentPage']) {
+        case 'agent-search-client':
+            display("", "view/agent/search-client.php", "Rechercher un client");
+            break;
+        case 'conseiller-planning':
+            display("", "view/conseiller/planning.php", "Planning");
+            break;
+        case 'directeur-manage-employees':
+            display("", "view/directeur/manage-employees.php", "Gérer les employés");
+            break;
+    }
 }
 
 function CtlGlobalLayout() {
