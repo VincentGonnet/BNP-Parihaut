@@ -29,5 +29,5 @@ function display($job, $viewFile, $title)
 }
 
 function displayLoginPage(){
-    require_once 'loginPage.php'
+    require_once 'loginPage.php';
 }

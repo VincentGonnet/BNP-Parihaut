@@ -6,5 +6,5 @@ function CtlDisplayLoginPage(){
 }
 
 function CtlGlobalLayout(){
-    require_once 'vue/global-layout.php';
+    require_once 'view/global-layout.php';
 }
