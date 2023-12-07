@@ -16,6 +16,7 @@
                     <p><input type="text" name="login" /></p>
                     <p><label>Votre mot de passe : </label></p>
                     <p><input type="text" name="password" /></p>
+                    <p><label class="label_nostyle">&nbsp;</label>
                     <p><input type="submit" value="Se connecter" name="connection" /></p>
             </fieldset>
         </form>

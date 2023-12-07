@@ -60,3 +60,11 @@ main {
 }
 
 /* login page */
+
+#loginForm .label_nostyle{
+    background: none;
+}
+
+#loginForm label {
+    color : var(--text-color);  
+}
