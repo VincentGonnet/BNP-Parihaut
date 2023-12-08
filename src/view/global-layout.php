@@ -12,8 +12,8 @@
         <nav>
             <?= $nav ?>
         </nav>
-        <div>
         
+        <div>
             <header>
                 <?= $head ?>
             </header>

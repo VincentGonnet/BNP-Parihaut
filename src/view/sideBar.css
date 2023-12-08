@@ -1,0 +1,95 @@
+:root {
+    --text-color: #120909; 
+    --background-color: #fbf7f7;
+    --secondary-background-color: #f3efef;
+    --primary-color: #b36064;
+    --secondary-color: #d4c0a5;
+    --accent-color: #f64343;
+  }
+
+/*-----------------------------------------------------------------------------------------------*/
+
+body{
+    background: var(--background-color);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+
+.sidebar{
+    background:var(--secondary-background-color);
+    top:4px;
+    position:fixed;
+    left:5px;
+    width:25%;
+    max-width:270px;
+    height:98%;
+    border-top-right-radius:25px;
+    border-bottom-right-radius:25px;
+    transition:0.3s ease-in-out;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+
+#content{
+    margin-top:10px;
+    position:absolute;
+    margin-left:10px;
+    width:90%;
+    height:80%;
+    background-color:var(--secondary-background-color);
+    transition:0.3s ease-in-out;
+    
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+
+.button {
+    font-size:15px;
+    border: none;
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-background-color);
+    color: var(--text-color);
+    width: 240px;
+    height: 40px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+    opacity:50%;
+    cursor: pointer;
+    text-align:justify;
+    text-indent: 33px;
+    transition: background-color 0.2s ease, border-radius 0.2s ease, border-width 0.2s ease, opacity 0.2s ease;
+}
+
+.button:hover {
+    background-color: #e7e7e7;
+    border-radius: 30px;
+    border-width: 25px;
+    opacity: 1;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+#deconnection{
+    margin-top:69%;
+}
+#deconnection2{
+    margin-top:36%;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+
+svg{
+    height:18px;
+    width:20px;
+    margin-left:3px;
+    color: var(--accent-color);
+
+
+}
+/*-----------------------------------------------------------------------------------------------*/

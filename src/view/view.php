@@ -11,13 +11,13 @@ function display($job, $viewFile, $title)
     // TODO: changer la nav en fonction du job, compléter le switch
     switch ($job) {
         case 'director':
-            // director nav
+            $file="view/sidebar-director.php";
             break;
         case 'advisor':
-            // advisor nav
+            $file="view/sidebar-advisor.php";
             break;
         case 'agent':
-            // agent nav
+            $file="view/sidebar-agent.php";
             break;
         default:
             $nav = '<p>Please login</p>';
