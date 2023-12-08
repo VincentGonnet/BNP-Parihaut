@@ -48,9 +48,6 @@ header {
 
     background-color: orange;
 }
-    
-
-   
 
 main {
     flex: 15;
@@ -93,12 +90,10 @@ main {
     flex-direction: column;
 }
 
-#loginForm fieldset .inputBox input{
+#loginForm fieldset .inputBox input {
     width: 80%;
     height: 30px;
     font-size: large;
-
-    
 }
 
 #loginForm fieldset .inputBox {
@@ -106,7 +101,6 @@ main {
     display: flex;
     justify-content: center;
 }
-
 
 .inputBox i {
     position: absolute;
@@ -120,7 +114,7 @@ main {
     justify-content: center;
 }
 
-input[type="submit"]{
+input[type="submit"] {
     height: 50px;
     font-size: large;
     font-weight: bold;
@@ -137,8 +131,7 @@ input[type="submit"]{
     margin-left: 28px;
 }
 
-
-.logo{
+.logo {
     margin-top: 40px;
     margin-left: 500px;
     width: 100%;
