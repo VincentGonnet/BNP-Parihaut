@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BNP Parihaut - Login</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body id="loginBody">
+        <div class="logo">
+                <img src="bnp_parihaut.jpg" alt="bnplogo" />
+        </div>
+        <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <h2>&nbsp;Bienvenue sur BNP Parihaut&nbsp;</h2>
+            <fieldset>
+                
+                <label>Votre identifiant  </label>
+                <div class="inputBox">
+                    <input type="text" name="login" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+
+                <label>Votre mot de passe  </label>
+                <div class="inputBox">
+                    <input type="password" name="password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+
+                <div class="center">
+                    <input type="submit" value="Se connecter" name="connection" />
+                </div>
+
+            </fieldset>
+        </form>    
+    </body>
+</html>

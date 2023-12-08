@@ -1,9 +1,23 @@
 /*  Variables */
 :root {
-    --background-color: #f5f5f5;
+    --text-color: #120909;
+    --background-color: #fbf7f7;
+    --secondary-background-color: #f3efef;
+    --primary-color: #b36064;
+    --secondary-color: #d4c0a5;
+    --accent-color: #f64343;
 }
 
 /* Global Layout */
+
+html {
+    min-width: 100dvw;
+    min-height: 100dvh;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     display: flex;
@@ -17,7 +31,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     background-color: var(--background-color);
 }
 
@@ -56,11 +70,85 @@ main {
 
 /* login page */
 
-.loginForm >body {
-    background-color: var(#fbf7f7);
+#loginBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: var(--background-color);
+    min-height: 80dvh;
 }
 
-.loginForm > label {
-    color: var(#120909);
+#loginForm {
+    border-radius: 10px;
+    background-color: var(--secondary-background-color);
+    height: 400px;
 }
 
+#loginForm h2 {
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+#loginForm fieldset {
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#loginForm fieldset .inputBox input {
+    width: 80%;
+    height: 30px;
+    font-size: large;
+}
+
+#loginForm fieldset .inputBox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.inputBox i {
+    position: absolute;
+    right: 35px;
+    top: 30%;
+    color: var(--accent-color);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+#loginForm input[type="submit"] {
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--accent-color);
+    width: 50%;
+    color: white;
+    border-color: var(--accent-color);
+    margin-top: 40px;
+}
+
+#loginForm label {
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 28px;
+}
+
+.logo {
+    position: fixed;
+    top: 30px;
+    left: 115px;
+    width: 100%;
+}
+img {
+    height: 60px;
+    width: 60px;
+}
