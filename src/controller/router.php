@@ -34,9 +34,17 @@ function getRouteTitle($routeName) {
             return "Contrats";
         case 'advisor-client-appointments':
             return "Rendez-vous";
-            
+
         case 'director-manage-employees':
             return "Gérer les employés";
+        case 'director-add-employee':
+            return "Ajouter un employé";
+        case 'director-manage-account-types':
+            return "Gérer les types de comptes";
+        case 'director-manage-contract-types':
+            return "Gérer les types de contrats";
+        case 'director-see-stats':
+            return "Statistiques";
         case 'director-manage-account-types':
             return "Gérer les comptes";
         default:

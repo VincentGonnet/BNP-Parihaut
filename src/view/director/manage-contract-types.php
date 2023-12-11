@@ -1,0 +1,1 @@
+<p>Gérer les types de contrats</p>

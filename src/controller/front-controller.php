@@ -30,8 +30,16 @@ if(isset($_POST['connection'])) {
     CtlChangeView('advisor-client-contracts'); 
 } else if (isset($_POST['advisor-client-appointments'])) {
     CtlChangeView('advisor-client-appointments'); 
+} else if (isset($_POST['director-manage-employees'])) {
+    CtlChangeView('director-manage-employees');
+} else if (isset($_POST['director-add-employee'])) {
+    CtlChangeView('director-add-employee');
 } else if (isset($_POST['director-manage-account-types'])) {
     CtlChangeView('director-manage-account-types');
+} else if (isset($_POST['director-manage-contract-types'])) {
+    CtlChangeView('director-manage-contract-types');
+} else if (isset($_POST['director-see-stats'])) {
+    CtlChangeView('director-see-stats');
 }
 
 if($_SESSION['loggedIn'] == false) {
