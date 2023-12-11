@@ -20,7 +20,7 @@ function CtlLogout() {
 }
 
 function CtlChangeView($route) {
-    $_SESSION['currentPage'] = 'director-manage-account-types';
+    $_SESSION['currentPage'] = $route;
 }
 
 function CtlDisplayLoginPage() {
