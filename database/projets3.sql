@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `SITUATION` char(15) DEFAULT NULL,
   PRIMARY KEY (`NUMCLIENT`),
   KEY `I_FK_CLIENT_EMPLOYE` (`NUMEMPLOYE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `compte`;
 CREATE TABLE IF NOT EXISTS `compte` (
   `NOMCOMPTE` char(32) NOT NULL,
   PRIMARY KEY (`NOMCOMPTE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `compteclient` (
   PRIMARY KEY (`NUMCLIENT`,`NOMCOMPTE`),
   KEY `I_FK_COMPTECLIENT_CLIENT` (`NUMCLIENT`),
   KEY `I_FK_COMPTECLIENT_COMPTE` (`NOMCOMPTE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS `contrat`;
 CREATE TABLE IF NOT EXISTS `contrat` (
   `NOMCONTRAT` char(32) NOT NULL,
   PRIMARY KEY (`NOMCONTRAT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `contratclient` (
   PRIMARY KEY (`NOMCONTRAT`,`NUMCLIENT`),
   KEY `I_FK_CONTRATCLIENT_CONTRAT` (`NOMCONTRAT`),
   KEY `I_FK_CONTRATCLIENT_CLIENT` (`NUMCLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `MDP` char(60) NOT NULL,
   `CATEGORIE` char(32) NOT NULL,
   PRIMARY KEY (`NUMEMPLOYE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `motif` (
   `LIBELLEMOTIF` char(32) NOT NULL,
   `LISTEPIECES` char(32) NOT NULL,
   PRIMARY KEY (`IDMOTIF`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `operation` (
   PRIMARY KEY (`NUMOP`),
   KEY `I_FK_OPERATION_CLIENT` (`NUMCLIENT`),
   KEY `I_FK_OPERATION_COMPTE` (`NOMCOMPTE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `rdv` (
   KEY `I_FK_RDV_EMPLOYE` (`NUMEMPLOYE`),
   KEY `I_FK_RDV_CLIENT` (`NUMCLIENT`),
   KEY `I_FK_RDV_MOTIF` (`IDMOTIF`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
