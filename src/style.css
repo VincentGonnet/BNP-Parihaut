@@ -51,11 +51,29 @@ body > div {
 header {
     flex: 1;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     min-height: 30px;
     max-height: 46px;
     padding: 5px 15px;
 
-    background-color: orange;
+    background-color: var(--background-color);
+
+    /* TODO: Change this */
+    color: #b30000;
+}
+
+header h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+header h1:nth-child(2) {
+    font-size: 25px;
+    font-weight: normal;
 }
 
 main {

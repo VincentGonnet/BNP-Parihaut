@@ -6,7 +6,7 @@ function getPhpFile($file)
     return ob_get_clean();
 }
 
-function display($job, $viewFile, $title)
+function display($job, $viewFile, $title, $currentClient = null)
 {
     switch ($job) {
         case 'director':
@@ -24,6 +24,9 @@ function display($job, $viewFile, $title)
 
     $view = getPhpFile($viewFile);
     $head = '<h1>' . $title . '</h1>';
+    if ($currentClient) {
+        $head .= '<h1>' . $currentClient . '</h1>';
+    }
     require_once 'global-layout.php';
 }
 
