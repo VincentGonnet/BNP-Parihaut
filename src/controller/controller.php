@@ -6,5 +6,5 @@ function CtlDisplayLoginPage(){
 }
 
 function CtlGlobalLayout(){
-    require_once 'view/global-layout.php';
+    display('agent', 'view/test.php', 'Agent');
 }
