@@ -6,5 +6,5 @@ function CtlDisplayLoginPage(){
 }
 
 function CtlGlobalLayout(){
-    display('director', 'view/test.php', 'Agent');
+    display('agent', 'view/test.php', 'Agent');
 }
