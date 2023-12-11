@@ -2,11 +2,14 @@
 
 require_once 'controller/controller.php';
 
-if(isset($_POST['login'])) {
-    // get the username and password from the form
-    $username = $_POST['username'];
+if(isset($_POST['connection'])) {
+    $login = $_POST['login'];
     $password = $_POST['password'];
-    CtlLogin($username, $password);
+    CtlLogin($login, $password);
+} else if (isset($_POST['logout'])) {
+    CtlLogout();
+} else if (isset($_POST['director-manage-account-types'])) {
+    CtlChangeView('director-manage-account-types');
 }
 
 if($_SESSION['loggedIn'] == false) {

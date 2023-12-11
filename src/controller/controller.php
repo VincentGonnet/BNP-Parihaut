@@ -3,15 +3,24 @@ require_once 'view/view.php';
 session_start();
 
 require_once 'model/user.php';
+require_once 'controller/router.php';
 
 // if not logged in in the session
 if(!isset($_SESSION['loggedIn'])) {
     $_SESSION['loggedIn'] = false;
 }
 
-function CtlLogin($username, $password) {
-    $user = logIn($username, $password);
-    // TODO: if user is null, display error message
+function CtlLogin($login, $password) {
+    $user = logIn($login, $password);
+    // TODO: if user is null, display error message (wrong credentials)
+}
+
+function CtlLogout() {
+    logOut();
+}
+
+function CtlChangeView($route) {
+    $_SESSION['currentPage'] = 'director-manage-account-types';
 }
 
 function CtlDisplayLoginPage() {
@@ -26,26 +35,16 @@ function CtlDisplayPage() {
     }
 
     if(!isset($_SESSION['currentPage'])) {
-        if($_SESSION['loggedInUser']->POSTE == 'agent') {
+        if($_SESSION['loggedInUser']->CATEGORIE == 'agent') {
             $_SESSION['currentPage'] = 'agent-search-client';
-        } else if($_SESSION['loggedInUser']->POSTE == 'conseiller') {
-            $_SESSION['currentPage'] = 'conseiller-planning';
-        } else if($_SESSION['loggedInUser']->POSTE == 'directeur') {
-            $_SESSION['currentPage'] = 'directeur-manage-employees';
+        } else if($_SESSION['loggedInUser']->CATEGORIE == 'advisor') {
+            $_SESSION['currentPage'] = 'advisor-planning';
+        } else if($_SESSION['loggedInUser']->CATEGORIE == 'director') {
+            $_SESSION['currentPage'] = 'director-manage-employees';
         }
     }
 
-    switch($_SESSION['currentPage']) {
-        case 'agent-search-client':
-            display("", "view/agent/search-client.php", "Rechercher un client");
-            break;
-        case 'conseiller-planning':
-            display("", "view/conseiller/planning.php", "Planning");
-            break;
-        case 'directeur-manage-employees':
-            display("", "view/directeur/manage-employees.php", "Gérer les employés");
-            break;
-    }
+    displayRoute($_SESSION['currentPage']);
 }
 
 function CtlGlobalLayout() {
