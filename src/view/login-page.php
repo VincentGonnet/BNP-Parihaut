@@ -3,23 +3,36 @@
     
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BNP Parishaut - Login</title>
+        <title>BNP Parihaut - Login</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="style.css">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     </head>
     
-    <body>
+    <body id="loginBody">
+        <div class="logo">
+                <img src="bnp_parihaut.jpg" alt="bnplogo" />
+                <h1>BNP Parihaut</h1>
+        </div>
         <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <fieldset>
-                <legend>Connexion à votre compte</legend>
-                    <p><label>Votre login : </label></p>
-                    <p><input type="text" name="login" /></p>
-                    <p><label>Votre mot de passe : </label></p>
-                    <p><input type="text" name="password" /></p>
-                    <p><input type="submit" value="Se connecter" name="connection" /></p>
-            </fieldset>
-        </form>
-</body>
+            <h2>Bienvenue</h2>
+            
+            <label>Votre identifiant  </label>
+            <div class="inputBox">
+                <input type="text" name="login" required>
+                <i class='bx bxs-user'></i>
+            </div>
 
+            <label>Votre mot de passe  </label>
+            <div class="inputBox">
+                <input type="password" name="password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+
+            <div class="center">
+                <input type="submit" value="Se connecter" name="connection" />
+            </div>
+        </form>    
+    </body>
 </html>

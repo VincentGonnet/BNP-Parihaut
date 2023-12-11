@@ -1,0 +1,160 @@
+/*  Variables */
+:root {
+    --text-color: #120909;
+    --background-color: #fbf7f7;
+    --secondary-background-color: #f3efef;
+    --primary-color: #b36064;
+    --secondary-color: #d4c0a5;
+    --accent-color: #f64343;
+}
+
+/* Global Layout */
+
+html {
+    min-width: 100dvw;
+    min-height: 100dvh;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    min-width: 100dvw;
+    min-height: 100dvh;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Roboto", sans-serif;
+    background-color: var(--background-color);
+}
+
+nav {
+    flex: 1;
+    min-width: 200px;
+    background-color: lightblue;
+}
+
+body > div {
+    flex: 4;
+
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    flex: 1;
+
+    min-height: 30px;
+    max-height: 46px;
+    padding: 5px 15px;
+
+    background-color: orange;
+}
+
+main {
+    flex: 15;
+
+    display: flex;
+
+    padding: 15px;
+
+    background-color: lightpink;
+}
+
+/* login page */
+
+#loginBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: var(--background-color);
+    min-height: 80dvh;
+}
+
+#loginForm {
+    border-radius: 10px;
+    background-color: var(--secondary-background-color);
+    min-height: 500px;
+    min-width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#loginForm h2 {
+    position: relative;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+#loginForm .inputBox input {
+    width: 85%;
+    height: 30px;
+    font-size: large;
+}
+
+#loginForm .inputBox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.inputBox i {
+    position: absolute;
+    right: 35px;
+    top: 30%;
+    color: var(--accent-color);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+#loginForm input[type="submit"] {
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--accent-color);
+    width: 50%;
+    color: white;
+    border-color: var(--accent-color);
+    margin-top: 40px;
+}
+
+#loginForm label {
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 28px;
+}
+
+.logo {
+    position: fixed;
+    top: 30px;
+    left: 115px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.logo h1 {
+    margin-left: 10px;
+}
+
+img {
+    height: 60px;
+    width: 60px;
+}
