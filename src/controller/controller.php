@@ -6,6 +6,5 @@ function CtlDisplayLoginPage(){
 }
 
 function CtlGlobalLayout(){
-    $nav = getPhpFile('sidebar-agent.php');
-    require_once 'view/global-layout.php';
+    display('agent', 'view/test.php', 'Agent');
 }

@@ -8,16 +8,15 @@ function getPhpFile($file)
 
 function display($job, $viewFile, $title)
 {
-    // TODO: changer la nav en fonction du job, compléter le switch
     switch ($job) {
         case 'director':
-            $file="view/sidebar-director.php";
+            $nav=getPhpFile("sidebars/sidebar-director.php");
             break;
         case 'advisor':
-            $file="view/sidebar-advisor.php";
+            $nav=getPhpFile("sidebars/sidebar-advisor.php");
             break;
         case 'agent':
-            $file="view/sidebar-agent.php";
+            $nav=getPhpFile("sidebars/sidebar-agent.php");
             break;
         default:
             $nav = '<p>Please login</p>';
@@ -29,5 +28,5 @@ function display($job, $viewFile, $title)
 }
 
 function displayLoginPage(){
-    require_once 'loginPage.php';
+    require_once 'login-page.php';
 }
