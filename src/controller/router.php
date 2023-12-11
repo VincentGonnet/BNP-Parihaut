@@ -21,9 +21,20 @@ function getRouteTitle($routeName) {
             return "Contrats";
         case 'agent-client-appointments':
             return "Rendez-vous";
-            
+
         case 'advisor-planning':
             return "Planning";
+        case 'advisor-client-documents':
+            return "Justificatifs";
+        case 'advisor-client-overview':
+            return "Synthèse client";
+        case 'advisor-client-accounts':
+            return "Comptes";
+        case 'advisor-client-contracts':
+            return "Contrats";
+        case 'advisor-client-appointments':
+            return "Rendez-vous";
+            
         case 'director-manage-employees':
             return "Gérer les employés";
         case 'director-manage-account-types':

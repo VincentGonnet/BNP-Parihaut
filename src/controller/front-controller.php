@@ -18,6 +18,18 @@ if(isset($_POST['connection'])) {
     CtlChangeView('agent-client-contracts'); 
 } else if (isset($_POST['agent-client-appointments'])) {
     CtlChangeView('agent-client-appointments'); 
+} else if (isset($_POST['advisor-planning'])) {
+    CtlChangeView('advisor-planning'); 
+} else if (isset($_POST['advisor-client-documents'])) {
+    CtlChangeView('advisor-client-documents'); 
+} else if (isset($_POST['advisor-client-overview'])) {
+    CtlChangeView('advisor-client-overview'); 
+} else if (isset($_POST['advisor-client-accounts'])) {
+    CtlChangeView('advisor-client-accounts'); 
+} else if (isset($_POST['advisor-client-contracts'])) {
+    CtlChangeView('advisor-client-contracts'); 
+} else if (isset($_POST['advisor-client-appointments'])) {
+    CtlChangeView('advisor-client-appointments'); 
 } else if (isset($_POST['director-manage-account-types'])) {
     CtlChangeView('director-manage-account-types');
 }
