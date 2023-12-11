@@ -13,6 +13,15 @@ function getRouteTitle($routeName) {
     switch ($routeName) {
         case 'agent-search-client':
             return "Rechercher un client";
+        case 'agent-client-overview':
+            return "Synthèse client";
+        case 'agent-client-accounts':
+            return "Comptes";
+        case 'agent-client-contracts':
+            return "Contrats";
+        case 'agent-client-appointments':
+            return "Rendez-vous";
+            
         case 'advisor-planning':
             return "Planning";
         case 'director-manage-employees':
