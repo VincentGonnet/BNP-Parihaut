@@ -20,7 +20,8 @@ function CtlLogin($login, $password) {
 }
 
 function CtlLogout() {
-    logOut();
+    session_unset();
+    $_SESSION['loggedIn'] = false;
 }
 
 

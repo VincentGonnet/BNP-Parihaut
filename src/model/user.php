@@ -50,12 +50,6 @@ function isLoggedIn() {
     }
 }
 
-function logOut() {
-    $_SESSION['loggedIn'] = false;
-    $_SESSION['loggedInUser'] = null;
-    $_SESSION['currentPage'] = null;
-}
-
 function getLoggedInUser() {
     if(isset($_SESSION['loggedInUser'])) {
         return $_SESSION['loggedInUser'];
