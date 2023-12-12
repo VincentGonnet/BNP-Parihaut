@@ -10,7 +10,7 @@ function displayRoute($routeName) {
 
 // List all routes here
 function getRouteTitle($routeName) {
-    switch ($routeName) {
+    switch($routeName) {
         case 'agent-search-client':
             return "Rechercher un client";
         case 'agent-client-overview':
@@ -45,8 +45,6 @@ function getRouteTitle($routeName) {
             return "Gérer les types de contrats";
         case 'director-see-stats':
             return "Statistiques";
-        case 'director-manage-account-types':
-            return "Gérer les comptes";
         default:
             return $routeName;
     }
