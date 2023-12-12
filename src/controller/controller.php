@@ -72,6 +72,15 @@ function CtlSearchClientById($clientId) {
     }
 }
 
+function CtlSearchClientByName($name, $firstName) {
+    $clients = searchClientByName($name, $firstName); // returns an array of clients, or null
+    if($clients == null) {
+        unset($_SESSION['currentClient']);
+    } else {
+        CtlSearchClientSetResults($clients);
+    }
+}
+
 function CtlSearchClientSetResults($clients) {
     $_SESSION['searchClientResults'] = $clients;
 }

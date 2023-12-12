@@ -8,6 +8,10 @@
     --accent-color: #f64343;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 /* Global Layout */
 
 body {
@@ -19,6 +23,7 @@ body {
     min-height: 100dvh;
     width: 100%;
     height: 100%;
+    max-height: 100dvh;
     margin: 0;
     padding: 0;
 
@@ -31,6 +36,8 @@ body > div {
 
     display: flex;
     flex-direction: column;
+
+    max-height: 100%;
 }
 
 header {
@@ -41,9 +48,10 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    min-height: 30px;
-    max-height: 46px;
+    min-height: 40px;
+    max-height: 80px;
     padding: 5px 15px;
+    box-sizing: border-box;
 
     background-color: var(--secondary-background-color);
 
@@ -54,6 +62,7 @@ header {
 header h1 {
     font-size: 30px;
     font-weight: bold;
+    margin: 5px;    
 }
 
 header h1:nth-child(2) {
@@ -69,6 +78,8 @@ main {
     padding: 15px;
 
     box-sizing: border-box;
+
+    max-height: 100%;
 
     /* background-color: lightpink; */
 }
@@ -165,7 +176,6 @@ svg {
 #search-client {
     width: 100%;
     height: 100%;
-    margin: 15px;
 
     display: flex;
     flex-direction: column;
@@ -192,9 +202,7 @@ svg {
     justify-content: space-evenly;
 
     width: 100%;
-    height: 33%;
-
-    border: red solid 1px;
+    height: 40%;
 }
 
 #search-client .search-clients-search-fields form {
@@ -204,11 +212,38 @@ svg {
     align-items: center;
     justify-content: center;
 
-    height: 80%;
+    height: 100%;
     padding: 10px;
     box-sizing: border-box;
 
-    border: blue solid 1px;
+    /* border: blue solid 1px; */
+}
+
+#search-client .search-clients-search-fields .fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 90%;
+
+    box-sizing: border-box;
+}
+
+#search-client .search-clients-search-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 7px 0;
+
+    background: transparent;
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#search-client .search-clients-search-fields button {
+    margin-bottom: 15px;
 }
 
 #search-client .search-clients-search-fields hr {
@@ -225,13 +260,13 @@ svg {
 
 #search-client .search-clients-results {
     flex: 1;
+    overflow-y: auto;
     width: 100%;
 
     margin-bottom: 15px;
     padding: 10px;
     box-sizing: border-box;
 
-    border: green solid 1px;
 }
 
 #search-client table {
