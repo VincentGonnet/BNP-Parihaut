@@ -2,12 +2,10 @@
 
 require_once 'controller/controller.php';
 
-if (!empty($_POST)) {
-    $postKey = array_keys($_POST)[0];
-    if (explode('-', $postKey)[0] == "redirect") {  // if first part of the key is "redirect", then redirect to the route specified in the key
-        $route = array_slice(explode('-', $postKey), 1);
-        CtlChangeView(implode('-', $route));
-    }
+$postKey = array_keys($_POST)[0];
+if (explode('-', $postKey)[0] == "redirect") {  // if first part of the key is "redirect", then redirect to the route specified in the key
+    $route = array_slice(explode('-', $postKey), 1);
+    CtlChangeView(implode('-', $route));
 }
 
 if (isset($_POST['connection'])) {
