@@ -1,0 +1,1 @@
+<p>Comptes du client</p>

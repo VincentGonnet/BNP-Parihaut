@@ -1,0 +1,1 @@
+<p>Synthèse client</p>

@@ -7,12 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BNP Parihaut - Login</title>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style/login-style.css">
     </head>
     
     <body id="loginBody">
         <div class="logo">
-                <img src="bnp_parihaut.jpg" alt="bnplogo" />
+                <img src="assets/bnp_parihaut.jpg" alt="bnplogo" />
                 <h1>BNP Parihaut</h1>
         </div>
         <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
