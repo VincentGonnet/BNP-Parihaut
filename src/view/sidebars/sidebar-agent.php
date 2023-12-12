@@ -10,7 +10,7 @@
 
     <?php if(isset($_SESSION['currentClient'])): ?>
     
-    <!-- Below code will be conditional, depending on isset($_SESSION['currentClient']) -->
+    <?php if(isset($_SESSION['currentClient'])): ?>
     
     <hr />
     
