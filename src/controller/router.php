@@ -4,13 +4,13 @@ function displayRoute($routeName) {
     $viewName = array_slice(explode('-', $routeName), 1);
     $viewName = implode('-', $viewName);
 
-    display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName));
+    display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle($routeName));
 }
 
 
 // List all routes here
 function getRouteTitle($routeName) {
-    switch ($routeName) {
+    switch($routeName) {
         case 'agent-search-client':
             return "Rechercher un client";
         case 'agent-client-overview':
@@ -45,9 +45,15 @@ function getRouteTitle($routeName) {
             return "Gérer les types de contrats";
         case 'director-see-stats':
             return "Statistiques";
-        case 'director-manage-account-types':
-            return "Gérer les comptes";
         default:
             return $routeName;
+    }
+}
+
+function getRouteAdditionalTitle() {
+    if(isset($_SESSION['currentClient'])) {
+        return $_SESSION['currentClient']->NOM.' '.$_SESSION['currentClient']->PRENOM.' #'.$_SESSION['currentClient']->NUMCLIENT;
+    } else {
+        return null;
     }
 }
