@@ -3,9 +3,13 @@ require_once 'view/view.php';
 session_start();
 
 require_once 'model/user.php';
+require_once 'model/client.php';
 require_once 'controller/router.php';
 
-// if not logged in in the session
+
+
+// LOGIN FUNCTIONS -------------------------------------------------------------
+
 if(!isset($_SESSION['loggedIn'])) {
     $_SESSION['loggedIn'] = false;
 }
@@ -18,6 +22,10 @@ function CtlLogin($login, $password) {
 function CtlLogout() {
     logOut();
 }
+
+
+
+// PAGE DISPLAY FUNCTIONS ------------------------------------------------------
 
 function CtlChangeView($route) {
     $_SESSION['currentPage'] = $route;
@@ -49,4 +57,27 @@ function CtlDisplayPage() {
 
 function CtlGlobalLayout() {
     require_once 'view/global-layout.php';
+}
+
+
+
+// AGENT FUNCTIONS -------------------------------------------------------------
+
+function CtlSearchClientById($clientId) {
+    $client = searchClientById($clientId); // returns a single client, or null
+    if($client == null) {
+        unset($_SESSION['currentClient']);
+    } else {
+        CtlSearchClientSetResults(array($client));
+    }
+}
+
+function CtlSearchClientSetResults($clients) {
+    $_SESSION['searchClientResults'] = $clients;
+}
+
+function CtlSelectClient($clientId) {
+    $client = searchClientById($clientId);
+    $_SESSION['currentClient'] = $client;
+    $_SESSION['currentPage'] = 'agent-client-overview';
 }

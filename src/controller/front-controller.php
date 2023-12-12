@@ -40,6 +40,13 @@ if(isset($_POST['connection'])) {
     CtlChangeView('director-manage-contract-types');
 } else if (isset($_POST['director-see-stats'])) {
     CtlChangeView('director-see-stats');
+} 
+else if (isset($_POST['agent-search-client-by-id'])) {
+    $clientId = $_POST['client-id'];
+    CtlSearchClientById($clientId);
+} else if (isset($_POST['search-client-select-client'])) {
+    $clientId = $_POST['search-client-select-client'];
+    CtlSelectClient($clientId);
 }
 
 if($_SESSION['loggedIn'] == false) {

@@ -45,7 +45,7 @@ header {
     max-height: 46px;
     padding: 5px 15px;
 
-    background-color: var(--background-color);
+    background-color: var(--secondary-background-color);
 
     /* TODO: Change this */
     color: var(--text-color);
@@ -68,7 +68,9 @@ main {
 
     padding: 15px;
 
-    background-color: lightpink;
+    box-sizing: border-box;
+
+    /* background-color: lightpink; */
 }
 
 .spacer {
@@ -155,4 +157,111 @@ svg {
     /* margin-left: 3px; */
     color: var(--accent-color);
 }
+
 /*-----------------------------------------------------------------------------------------------*/
+/*                                      SEARCH CLIENT                                            */
+/*-----------------------------------------------------------------------------------------------*/
+
+#search-client {
+    width: 100%;
+    height: 100%;
+    margin: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#search-client > hr {
+    border: none;
+    border-top: 2px solid var(--accent-color);
+    border-radius: 5px;
+    width: 75%;
+    opacity: 60%;
+
+    margin: 20px 0;
+}
+
+/* SEARCH FIELDS ---- */
+
+#search-client .search-clients-search-fields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+    height: 33%;
+
+    border: red solid 1px;
+}
+
+#search-client .search-clients-search-fields form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 80%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    border: blue solid 1px;
+}
+
+#search-client .search-clients-search-fields hr {
+    margin: 0 35px;
+
+    border: none;
+    border-left: 2px solid var(--accent-color);
+    border-radius: 5px;
+    height: 75%;
+    opacity: 60%;
+}
+
+/* SEARCH RESULTS ---- */
+
+#search-client .search-clients-results {
+    flex: 1;
+    width: 100%;
+
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    border: green solid 1px;
+}
+
+#search-client table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+}
+
+#search-client th,
+#search-client td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#search-client th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#search-client td > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#search-client th:last-child {
+    width: 18px;
+}
+
+#search-client td:last-child {
+    padding: 0;
+    text-align: center;
+}

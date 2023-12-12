@@ -7,7 +7,7 @@
         Rechercher un client
     </button>
     
-    <!-- Below code will be conditional, depending on isset($_SESSION['currentClient']) -->
+    <?php if(isset($_SESSION['currentClient'])): ?>
     
     <hr />
     
@@ -43,6 +43,8 @@
         </svg>
         Rendez-vous
     </button>
+
+    <?php endif; ?>
     
     <!-- create a space that takes as much place as possible, pushing the next buttons at the bottom regardless of sceen size -->
     <div class="spacer"></div>
