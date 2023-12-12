@@ -244,6 +244,13 @@ svg {
 
 #search-client .search-clients-search-fields button {
     margin-bottom: 15px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
 }
 
 #search-client .search-clients-search-fields hr {
