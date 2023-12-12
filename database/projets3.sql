@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 06 déc. 2023 à 14:53
+-- Généré le : lun. 11 déc. 2023 à 15:39
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -29,20 +29,20 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
-  `IDCLIENT` int NOT NULL AUTO_INCREMENT,
-  `IDEMPLOYE` int NOT NULL,
+  `NUMCLIENT` int NOT NULL AUTO_INCREMENT,
+  `NUMEMPLOYE` int NOT NULL,
   `NOM` char(15) NOT NULL,
   `PRENOM` char(15) NOT NULL,
-  `DATENAISSANCE` date NOT NULL,
-  `PROFESSION` char(32) NOT NULL,
-  `SITUATIONFAMILIALE` char(32) NOT NULL,
-  `NUMTELEPHONE` char(10) NOT NULL,
-  `MAIL` char(32) NOT NULL,
-  `DATEOUVERTURE` date NOT NULL,
-  `DATEFIN` date DEFAULT NULL,
-  PRIMARY KEY (`IDCLIENT`),
-  KEY `I_FK_CLIENT_EMPLOYE` (`IDEMPLOYE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ADRESSE` char(100) NOT NULL,
+  `MAIL` char(32) DEFAULT NULL,
+  `ENREGISTRE` tinyint(1) NOT NULL,
+  `NUMTEL` int DEFAULT NULL,
+  `SITUATION` char(15) DEFAULT NULL,
+  'PROFESSION' char(15) NOT NULL,
+  'DATENAISSANCE' date NOT NULL,
+  PRIMARY KEY (`NUMCLIENT`),
+  KEY `I_FK_CLIENT_EMPLOYE` (`NUMEMPLOYE`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -52,17 +52,28 @@ CREATE TABLE IF NOT EXISTS `client` (
 
 DROP TABLE IF EXISTS `compte`;
 CREATE TABLE IF NOT EXISTS `compte` (
-  `IDCOMPTE` int NOT NULL AUTO_INCREMENT,
-  `IDCLIENT` int NOT NULL,
-  `NOM` char(15) NOT NULL,
+  `NOMCOMPTE` char(32) NOT NULL,
+  PRIMARY KEY (`NOMCOMPTE`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `compteclient`
+--
+
+DROP TABLE IF EXISTS `compteclient`;
+CREATE TABLE IF NOT EXISTS `compteclient` (
+  `NUMCLIENT` int NOT NULL,
+  `NOMCOMPTE` char(32) NOT NULL,
   `DATEOUVERTURE` date NOT NULL,
+  `DATEFERMETURE` date DEFAULT NULL,
   `SOLDE` decimal(10,2) NOT NULL,
-  `DECOUVERT` decimal(10,2) NOT NULL,
-  `DATEFIN` date DEFAULT NULL,
-  `ACTIF` tinyint(1) NOT NULL,
-  PRIMARY KEY (`IDCOMPTE`),
-  KEY `I_FK_COMPTE_CLIENT` (`IDCLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `MONTANTDECOUVERT` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`NUMCLIENT`,`NOMCOMPTE`),
+  KEY `I_FK_COMPTECLIENT_CLIENT` (`NUMCLIENT`),
+  KEY `I_FK_COMPTECLIENT_COMPTE` (`NOMCOMPTE`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -72,36 +83,27 @@ CREATE TABLE IF NOT EXISTS `compte` (
 
 DROP TABLE IF EXISTS `contrat`;
 CREATE TABLE IF NOT EXISTS `contrat` (
-  `IDCONTRAT` int NOT NULL AUTO_INCREMENT,
-  `IDCLIENT` int NOT NULL,
-  `NOM` char(15) NOT NULL,
-  `TARIFMENSUEL` decimal(10,2) NOT NULL,
-  `DATEOUVERTURE` date NOT NULL,
-  `DATEFIN` date DEFAULT NULL,
-  `ACTIF` tinyint(1) NOT NULL,
-  PRIMARY KEY (`IDCONTRAT`),
-  KEY `I_FK_CONTRAT_CLIENT` (`IDCLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `NOMCONTRAT` char(32) NOT NULL,
+  PRIMARY KEY (`NOMCONTRAT`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `creneauoccupe`
+-- Structure de la table `contratclient`
 --
 
-DROP TABLE IF EXISTS `creneauoccupe`;
-CREATE TABLE IF NOT EXISTS `creneauoccupe` (
-  `IDOCCUPE` int NOT NULL AUTO_INCREMENT,
-  `IDMOTIF` int NOT NULL,
-  `IDRDV` int DEFAULT NULL,
-  `IDEMPLOYE` int NOT NULL,
-  `TIMESTAMP_DEBUT` datetime NOT NULL,
-  `TIMESTAMP_FIN` datetime NOT NULL,
-  PRIMARY KEY (`IDOCCUPE`),
-  KEY `I_FK_CRENEAUOCCUPE_MOTIF` (`IDMOTIF`),
-  KEY `I_FK_CRENEAUOCCUPE_RDV` (`IDRDV`),
-  KEY `I_FK_CRENEAUOCCUPE_EMPLOYE` (`IDEMPLOYE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `contratclient`;
+CREATE TABLE IF NOT EXISTS `contratclient` (
+  `NOMCONTRAT` char(32) NOT NULL,
+  `NUMCLIENT` int NOT NULL,
+  `DATEFERMETURE` date DEFAULT NULL,
+  `DATEOUVERTURECONTRAT` date NOT NULL,
+  `TARIFMENSUEL` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`NOMCONTRAT`,`NUMCLIENT`),
+  KEY `I_FK_CONTRATCLIENT_CONTRAT` (`NOMCONTRAT`),
+  KEY `I_FK_CONTRATCLIENT_CLIENT` (`NUMCLIENT`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,14 +113,14 @@ CREATE TABLE IF NOT EXISTS `creneauoccupe` (
 
 DROP TABLE IF EXISTS `employe`;
 CREATE TABLE IF NOT EXISTS `employe` (
-  `IDEMPLOYE` int NOT NULL AUTO_INCREMENT,
+  `NUMEMPLOYE` int NOT NULL AUTO_INCREMENT,
   `NOM` char(15) NOT NULL,
   `PRENOM` char(15) NOT NULL,
-  `POSTE` char(20) NOT NULL,
-  `USERNAME` text NOT NULL,
-  `PASSWORD` varchar(60) NOT NULL,
-  PRIMARY KEY (`IDEMPLOYE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `LOGIN` char(32) NOT NULL,
+  `MDP` char(60) NOT NULL,
+  `CATEGORIE` char(32) NOT NULL,
+  PRIMARY KEY (`NUMEMPLOYE`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,50 +131,29 @@ CREATE TABLE IF NOT EXISTS `employe` (
 DROP TABLE IF EXISTS `motif`;
 CREATE TABLE IF NOT EXISTS `motif` (
   `IDMOTIF` int NOT NULL AUTO_INCREMENT,
-  `NOMMOTIF` char(15) NOT NULL,
+  `LIBELLEMOTIF` char(50) NOT NULL,
+  `LISTEPIECES` text NOT NULL,
   PRIMARY KEY (`IDMOTIF`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nvclient`
+-- Structure de la table `operation`
 --
 
-DROP TABLE IF EXISTS `nvclient`;
-CREATE TABLE IF NOT EXISTS `nvclient` (
-  `IDNVCLIENT` int NOT NULL AUTO_INCREMENT,
-  `NOM` char(15) NOT NULL,
-  `PRENOM` char(15) NOT NULL,
-  `DATENAISSANCE` date NOT NULL,
-  PRIMARY KEY (`IDNVCLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `pieceafournir`
---
-
-DROP TABLE IF EXISTS `pieceafournir`;
-CREATE TABLE IF NOT EXISTS `pieceafournir` (
-  `IDPIECE` int NOT NULL AUTO_INCREMENT,
-  `NOMPIECE` char(15) NOT NULL,
-  PRIMARY KEY (`IDPIECE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `piecemotif`
---
-
-DROP TABLE IF EXISTS `piecemotif`;
-CREATE TABLE IF NOT EXISTS `piecemotif` (
-  `IDPIECE` int NOT NULL,
-  `IDMOTIF` int NOT NULL,
-  PRIMARY KEY (`IDPIECE`,`IDMOTIF`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `operation`;
+CREATE TABLE IF NOT EXISTS `operation` (
+  `NUMOP` int NOT NULL AUTO_INCREMENT,
+  `NUMCLIENT` int NOT NULL,
+  `NOMCOMPTE` char(32) NOT NULL,
+  `MONTANT` decimal(10,2) NOT NULL,
+  `TYPEOP` char(15) NOT NULL,
+  `DATEOP` date NOT NULL,
+  PRIMARY KEY (`NUMOP`),
+  KEY `I_FK_OPERATION_CLIENT` (`NUMCLIENT`),
+  KEY `I_FK_OPERATION_COMPTE` (`NOMCOMPTE`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -182,16 +163,16 @@ CREATE TABLE IF NOT EXISTS `piecemotif` (
 
 DROP TABLE IF EXISTS `rdv`;
 CREATE TABLE IF NOT EXISTS `rdv` (
-  `IDRDV` int NOT NULL AUTO_INCREMENT,
-  `IDEMPLOYE` int NOT NULL,
-  `IDCLIENT` int DEFAULT NULL,
-  `IDNVCLIENT` int DEFAULT NULL,
-  `TIMESTAMP_PRISE_RDV` datetime NOT NULL,
-  PRIMARY KEY (`IDRDV`),
-  KEY `I_FK_RDV_EMPLOYE` (`IDEMPLOYE`),
-  KEY `I_FK_RDV_CLIENT` (`IDCLIENT`),
-  KEY `I_FK_RDV_NVCLIENT` (`IDNVCLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `NUMRDV` int NOT NULL AUTO_INCREMENT,
+  `NUMEMPLOYE` int NOT NULL,
+  `NUMCLIENT` int DEFAULT NULL,
+  `IDMOTIF` int NOT NULL,
+  `DATERDV` date NOT NULL,
+  PRIMARY KEY (`NUMRDV`),
+  KEY `I_FK_RDV_EMPLOYE` (`NUMEMPLOYE`),
+  KEY `I_FK_RDV_CLIENT` (`NUMCLIENT`),
+  KEY `I_FK_RDV_MOTIF` (`IDMOTIF`)
+) ENGINE=MyISAM CHARSET=utf8 COLLATE=utf8_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
