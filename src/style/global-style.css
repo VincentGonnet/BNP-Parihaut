@@ -62,7 +62,7 @@ header {
 header h1 {
     font-size: 30px;
     font-weight: bold;
-    margin: 5px;    
+    margin: 5px;
 }
 
 header h1:nth-child(2) {
@@ -273,7 +273,6 @@ svg {
     margin-bottom: 15px;
     padding: 10px;
     box-sizing: border-box;
-
 }
 
 #search-client table {
@@ -305,5 +304,40 @@ svg {
 
 #search-client td:last-child {
     padding: 0;
+    text-align: center;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                          CALENDAR                                             */
+/*-----------------------------------------------------------------------------------------------*/
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+    table-layout: fixed;
+}
+
+.calendar th,
+.calendar td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.calendar thead {
+    max-height: 40px;
+}
+
+.calendar th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.calendar-event {
+    background-color: var(--primary-color);
+    color: white;
+    /* border-radius: 5px; */
+    padding: 5px;
+    margin: 2px;
     text-align: center;
 }
