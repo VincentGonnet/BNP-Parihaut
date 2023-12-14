@@ -1,5 +1,7 @@
 <td class="calendar-event" rowspan="<?= $eventColspan ?>">
-    <?= getFormattedClientName(searchClientById($event->NUMCLIENT)) ?>
-    <br>
-    <?= getReasonById($event->IDMOTIF)->LIBELLEMOTIF ?>
+    <button name="calendar-event" value="<?= $event->NUMRDV ?>" type="submit">
+        <strong><?= getFormattedClientName(searchClientById($event->NUMCLIENT)) ?></strong>
+        <br>
+        <?= getReasonById($event->IDMOTIF)->LIBELLEMOTIF ?>
+    </button>
 </td>

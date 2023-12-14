@@ -1,6 +1,23 @@
 <?php
 require_once 'connection.php';
 
+function getEventById($eventId) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM rdv WHERE NUMRDV = :eventId');
+    $result->execute(array(
+        'eventId' => $eventId
+    ));
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $event = $result->fetch();
+    $result->closeCursor();
+
+    if(empty($event)) {
+        return null;
+    }
+
+    return $event;
+}
+
 function getEventsByAdvisor($advisorId) {
     $connection = Connection::getInstance()->getConnection();
     $result = $connection->prepare('SELECT * FROM rdv WHERE NUMEMPLOYE = :advisorId');

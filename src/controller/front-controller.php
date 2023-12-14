@@ -26,6 +26,14 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['search-client-select-client'])) {
     $clientId = $_POST['search-client-select-client'];
     CtlSelectClient($clientId);
+    CtlChangeView('agent-client-overview');
+} else if (isset($_POST['calendar-event'])) {
+    $eventId = $_POST['calendar-event'];
+    $event = getEventById($eventId);
+    $clientId = $event->NUMCLIENT;
+    CtlSelectClient($clientId);
+    $_SESSION['currentEvent'] = $event;
+    CtlChangeView('advisor-client-documents');
 } else if (isset($_POST['planning-prev-week'])) {
     CtlPlanningPrevWeek();
 } else if (isset($_POST['planning-next-week'])) {
