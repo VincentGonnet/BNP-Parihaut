@@ -11,6 +11,9 @@ if (explode('-', $postKey)[0] == "redirect") {  // if first part of the key is "
     if (isset($_POST['redirect-director-manage-account-types'])) {
         CtlShowAccounts();
     }
+    if (isset($_POST['redirect-director-manage-contract-types'])) {
+        CtlShowContracts();
+    }
 }
 
 if (isset($_POST['connection'])) {
