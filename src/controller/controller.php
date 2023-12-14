@@ -5,6 +5,7 @@ session_start();
 require_once 'model/user.php';
 require_once 'model/client.php';
 require_once 'controller/router.php';
+require_once 'model/employee.php'
 
 
 
@@ -90,4 +91,20 @@ function CtlSelectClient($clientId) {
     $client = searchClientById($clientId);
     $_SESSION['currentClient'] = $client;
     $_SESSION['currentPage'] = 'agent-client-overview';
+}
+
+
+/*---------Overview fonctions--*/
+function CtlAdvisorOfClient($clientId){
+    $client = searchClientById($clientId);
+    if ($client) {
+        $employeId = $client->NUMEMPLOYE;
+        $employe = searchEmployeeById($employeId);
+        return $employe;
+    } else {
+        return null;
+    }
+}
+function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
+    modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
 }

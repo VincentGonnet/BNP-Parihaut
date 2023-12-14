@@ -24,7 +24,30 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['search-client-select-client'])) {
     $clientId = $_POST['search-client-select-client'];
     CtlSelectClient($clientId);
+}else if (isset($_POST['employeId'])){
+    $employeId = $_POST['employeId'];
+    $employe = CtlAdvisorOfClient($employeId);
+    if ($employe) {
+        echo "Employé trouvé : " . $employe->NOM . " " . $employe->PRENOM;
+    } else {
+        echo "Employé non trouvé.";
+    }
+}else {
+    echo 'test';
+        $name = $_POST['input-name'];
+        $firstName = $_POST['input-first-name'];
+        $clientId =$_POST['input-client-id']; 
+        $adress = $_POST['input-adress'];
+        $birthday = $_POST['input-birthday'];
+        $mail = $_POST['input-mail'];
+        $phoneNumber = $_POST['input-phone-number'] ;
+        $situation = $_POST['input-situation'];
+        $work = $_POST['input-work'];
+        $checked = $_POST['input-checked'];
+        $advisorId =$_POST['input-advisor-id']; 
+        CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
 }
+
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
