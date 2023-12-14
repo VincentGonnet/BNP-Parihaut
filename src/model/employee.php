@@ -1,7 +1,3 @@
-employe.php
-
-
-
 <?php
 require_once 'connection.php';
 
