@@ -307,3 +307,301 @@ svg {
     padding: 0;
     text-align: center;
 }
+
+#search-client {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#search-client > hr {
+    border: none;
+    border-top: 2px solid var(--accent-color);
+    border-radius: 5px;
+    width: 75%;
+    opacity: 60%;
+
+    margin: 20px 0;
+}
+
+/* SEARCH FIELDS ---- */
+
+#search-client .search-clients-search-fields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+    height: 40%;
+}
+
+#search-client .search-clients-search-fields form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    /* border: blue solid 1px; */
+}
+
+#search-client .search-clients-search-fields .fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 90%;
+
+    box-sizing: border-box;
+}
+
+#search-client .search-clients-search-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 7px 0;
+
+    background: transparent;
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#search-client .search-clients-search-fields button {
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+}
+
+#search-client .search-clients-search-fields hr {
+    margin: 0 35px;
+
+    border: none;
+    border-left: 2px solid var(--accent-color);
+    border-radius: 5px;
+    height: 75%;
+    opacity: 60%;
+}
+
+/* SEARCH RESULTS ---- */
+
+#search-client .search-clients-results {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+#search-client table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+}
+
+#search-client th,
+#search-client td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#search-client th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#search-client td > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#search-client th:last-child {
+    width: 18px;
+}
+
+#search-client td:last-child {
+    padding: 0;
+    text-align: center;
+}
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE ACCOUNTS                                          */
+/*-----------------------------------------------------------------------------------------------*/
+
+#allAccounts{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+#allAccounts .showAccounts {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allAccounts th {
+    width: 1000px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#allAccounts table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+#allAccounts form{
+    width: 100%;
+}
+
+
+#allAccounts .account {
+    margin-top: 20px;
+
+}
+
+
+
+#allAccounts input[type="radio"]{
+    width: 50px;
+    height: 20px;
+    
+}
+
+#allAccounts th:last-child {
+    width: 80px;
+}
+
+#allAccounts .edit-accounts {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allAccounts .edit-accounts button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allAccounts .edit-accounts input {
+  height: 40px;
+  font-size: large;
+}
+
+#allAccounts .space {
+    width: 10px;
+}
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE CONTRACTS                                         */
+/*-----------------------------------------------------------------------------------------------*/
+
+#allContracts{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+#allContracts .showContracts {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allContracts th {
+    width: 1000px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#allContracts table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+#allContracts form{
+    width: 100%;
+}
+
+
+#allContracts .contract {
+    margin-top: 20px;
+
+}
+
+
+
+#allContracts input[type="radio"]{
+    width: 50px;
+    height: 20px;
+    
+}
+
+#allContracts th:last-child {
+    width: 80px;
+}
+
+#allContracts .edit-contracts {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allContracts .edit-contracts button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allContracts .edit-contracts input {
+  height: 40px;
+  font-size: large;
+}
+
+#allContracts .space {
+    width: 10px;
+}

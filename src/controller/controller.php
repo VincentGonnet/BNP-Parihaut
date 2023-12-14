@@ -2,6 +2,8 @@
 require_once 'view/view.php';
 session_start();
 
+require_once 'model/compte.php';
+require_once 'model/contrat.php';
 require_once 'model/user.php';
 require_once 'model/client.php';
 require_once 'controller/router.php';
@@ -90,4 +92,52 @@ function CtlSelectClient($clientId) {
     $client = searchClientById($clientId);
     $_SESSION['currentClient'] = $client;
     $_SESSION['currentPage'] = 'agent-client-overview';
+}
+
+//AFFICHAGE COMPTES
+
+function CtlShowAccounts(){
+    $accountsList=showAccounts();
+    $_SESSION['showAllAccounts']= $accountsList;
+}
+
+function CtlShowOneAccount($compte){
+    $account = showOneAccount($compte);
+    $_SESSION['showAllAccounts']=$account;
+}
+
+function CtlDeleteAccount($compte){
+    deleteAccount($compte);
+}
+
+function CtlAddAccount($compte){
+    addAccount($compte);
+}
+
+function CtlDeleteAllAccounts(){
+    deleteAllAccounts();
+}
+
+//AFFICHAGE CONTRATS
+
+function CtlShowContracts(){
+    $contractsList=showContracts();
+    $_SESSION['showAllContracts']= $contractsList;
+}
+
+function CtlShowOneContract($contrat){
+    $contract = showOneContract($contrat);
+    $_SESSION['showAllContracts']=$contrat;
+}
+
+function CtlDeleteContract($contrat){
+    deleteContract($contrat);
+}
+
+function CtlAddContract($contrat){
+    addContract($contrat);
+}
+
+function CtlDeleteAllContracts(){
+    deleteAllContracts();
 }
