@@ -341,3 +341,50 @@ svg {
     margin: 2px;
     text-align: center;
 }
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                  ADVISOR PLANNING                                             */
+/*-----------------------------------------------------------------------------------------------*/
+
+#advisor-planning > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#advisor-planning p {
+    margin: 0 10px;
+}
+
+#advisor-planning select {
+    flex: 1;
+    height: 20px;
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#advisor-planning input[type="date"] {
+    height: 20px;
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#advisor-planning button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#advisor-planning button:hover {
+    background-color: var(--secondary-background-color);
+}

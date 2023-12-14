@@ -26,7 +26,15 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['search-client-select-client'])) {
     $clientId = $_POST['search-client-select-client'];
     CtlSelectClient($clientId);
-}
+} else if (isset($_POST['planning-prev-week'])) {
+    CtlPlanningPrevWeek();
+} else if (isset($_POST['planning-next-week'])) {
+    CtlPlanningNextWeek();
+}else if (isset($_POST['selectAdvisorToViewPlanning']) || isset($_POST['planning-select-date'])) {
+    $advisorId = $_POST['selectAdvisorToViewPlanning'];
+    $_SESSION['advisorToViewPlanning'] = getEmployeeById($advisorId);
+    $_SESSION['calendarDay'] = $_POST['planning-select-date'];
+} 
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();

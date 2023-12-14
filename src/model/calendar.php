@@ -4,7 +4,7 @@ require_once 'model/client.php';
 require_once 'model/reason.php';
 require_once 'view/view.php';
 
-class Calendar  {
+class Calendar {
     private $WEEKDAYS = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
     private $MONTHS = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
                            'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
@@ -21,9 +21,10 @@ class Calendar  {
             $this->month = date('m');
             $this->day = date('d');
         } else {
-            $this->year = substr($_SESSION['calendarDay'], 6, 4);
-            $this->month = substr($_SESSION['calendarDay'], 3, 2);
-            $this->day = substr($_SESSION['calendarDay'], 0, 2);
+            // $_SESSION['calendarDay'] is in format YYYY-MM-DD
+            $this->year = date('Y', strtotime($_SESSION['calendarDay']));
+            $this->month = date('m', strtotime($_SESSION['calendarDay']));
+            $this->day = date('d', strtotime($_SESSION['calendarDay']));
         }
 
         $events = getEventsByAdvisor($advisorId);
