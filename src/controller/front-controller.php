@@ -9,10 +9,10 @@ if (explode('-', $postKey)[0] == "redirect") {  // if first part of the key is "
 
     // additional actions on specific routes
     if (isset($_POST['redirect-director-manage-account-types'])) {
-        CtlShowAccounts();
+        CtlGetAllAccounts();
     }
     if (isset($_POST['redirect-director-manage-contract-types'])) {
-        CtlShowContracts();
+        CtlGetAllContracts();
     }
 }
 
@@ -39,16 +39,16 @@ if (isset($_POST['connection'])) {
         $compte = $_POST['radio-account'];
         CtlDeleteAccount($compte);
     }
-    CtlShowAccounts();        
+    CtlGetAllAccounts();        
 } else if(isset($_POST['add-account'])){
     if(!empty($_POST['account'])){
         $compte=$_POST['account'];
         CtlAddAccount($compte);
-        CtlShowAccounts();  
+        CtlGetAllAccounts();  
     }
 } else if(isset($_POST['delete-all-accounts'])){
     CtlDeleteAllAccounts();
-    CtlShowAccounts();
+    CtlGetAllAccounts();
 }
 //MANAGE-CONTRACT-TYPES
 else if(isset($_POST['delete-contract'])){
@@ -56,16 +56,16 @@ else if(isset($_POST['delete-contract'])){
         $contrat = $_POST['radio-contract'];
         CtlDeleteContract($contrat);
     }
-    CtlShowContracts();        
+    CtlGetAllContracts();        
 } else if(isset($_POST['add-contract'])){
     if(!empty($_POST['contract'])){
         $contrat=$_POST['contract'];
         CtlAddContract($contrat);
-        CtlShowContracts();  
+        CtlGetAllContracts();  
     }
 } else if(isset($_POST['delete-all-contracts'])){
     CtlDeleteAllContracts();
-    CtlShowContracts();
+    CtlGetAllContracts();
 }
 
 if ($_SESSION['loggedIn'] == false) {

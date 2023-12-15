@@ -2,7 +2,7 @@
 
 
 
-function showContracts(){
+function getAllContracts(){
     $connection = Connection::getInstance()->getConnection(); 
     $request="select * from contrat " ;
     $prepare=$connection->prepare($request);
@@ -14,9 +14,9 @@ function showContracts(){
 }
 
 
-function  showOneContract($contrat){
+function  getContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="select NOMCONTRAT from contrat where NOMCONTRAT='$contrat'" ;
+    $request="select NOMCONTRAT from contrat where NOMCONTRAT='$contractName'" ;
     $prepare=$connection->prepare($request);
     $prepare->execute(array());
     $prepare->setFetchMode(PDO::FETCH_OBJ);
@@ -25,9 +25,9 @@ function  showOneContract($contrat){
     return $result;
 }
 
-function deleteContract($contract){
+function deleteContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="delete from contrat where NOMCONTRAT='$contract'" ;
+    $request="delete from contrat where NOMCONTRAT='$contractName'" ;
     $prepare=$connection->prepare($request);
     $prepare->execute();
     $prepare->closeCursor();
@@ -35,9 +35,9 @@ function deleteContract($contract){
 
 
 
-function addContract($contrat){
+function addContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO contrat (NOMCONTRAT) VALUES ('$contrat')" ;
+    $request="INSERT IGNORE INTO contrat (NOMCONTRAT) VALUES ('$contractName')" ;
     $prepare=$connection->prepare($request);
     $prepare->execute();
     $prepare->closeCursor();
@@ -46,8 +46,7 @@ function addContract($contrat){
 function deleteAllContracts(){
     $connection= Connection::getInstance()->getConnection();
     $request="DELETE from contrat" ;
-    $prepare=$connection->prepare($request);
-    $prepare->execute();
-    $prepare->closeCursor();
+    $result=$connection->query($request);
+    $result->closeCursor();
 }
 

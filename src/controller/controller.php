@@ -96,22 +96,22 @@ function CtlSelectClient($clientId) {
 
 //AFFICHAGE COMPTES
 
-function CtlShowAccounts(){
-    $accountsList=showAccounts();
+function CtlGetAllAccounts(){
+    $accountsList=getAllAccounts();
     $_SESSION['showAllAccounts']= $accountsList;
 }
 
-function CtlShowOneAccount($compte){
-    $account = showOneAccount($compte);
+function CtlGetAccount($accountName){
+    $account = getAccount($accountName);
     $_SESSION['showAllAccounts']=$account;
 }
 
-function CtlDeleteAccount($compte){
-    deleteAccount($compte);
+function CtlDeleteAccount($accountName){
+    deleteAccount($accountName);
 }
 
-function CtlAddAccount($compte){
-    addAccount($compte);
+function CtlAddAccount($accountName){
+    addAccount($accountName);
 }
 
 function CtlDeleteAllAccounts(){
@@ -120,22 +120,22 @@ function CtlDeleteAllAccounts(){
 
 //AFFICHAGE CONTRATS
 
-function CtlShowContracts(){
-    $contractsList=showContracts();
+function CtlGetAllContracts(){
+    $contractsList=getAllContracts();
     $_SESSION['showAllContracts']= $contractsList;
 }
 
-function CtlShowOneContract($contrat){
-    $contract = showOneContract($contrat);
-    $_SESSION['showAllContracts']=$contrat;
+function CtlGetContract($contract){
+    $contract = getContract($contract);
+    $_SESSION['showAllContracts']=$contract;
 }
 
-function CtlDeleteContract($contrat){
-    deleteContract($contrat);
+function CtlDeleteContract($contract){
+    deleteContract($contract);
 }
 
-function CtlAddContract($contrat){
-    addContract($contrat);
+function CtlAddContract($contract){
+    addContract($contract);
 }
 
 function CtlDeleteAllContracts(){

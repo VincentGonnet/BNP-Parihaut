@@ -2,7 +2,7 @@
 
 
 
-function showAccounts(){
+function getAllAccounts(){
     $connection = Connection::getInstance()->getConnection(); 
     $request="select * from compte " ;
     $prepare=$connection->prepare($request);
@@ -14,9 +14,9 @@ function showAccounts(){
 }
 
 
-function  showOneAccount($compte){
+function  getAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="select NOMCOMPTE from compte where NOMCOMPTE='$compte'" ;
+    $request="select NOMCOMPTE from compte where NOMCOMPTE='$accountName'" ;
     $prepare=$connection->prepare($request);
     $prepare->execute(array());
     $prepare->setFetchMode(PDO::FETCH_OBJ);
@@ -25,9 +25,9 @@ function  showOneAccount($compte){
     return $result;
 }
 
-function deleteAccount($compte){
+function deleteAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="delete from compte where NOMCOMPTE='$compte'" ;
+    $request="delete from compte where NOMCOMPTE='$accountName'" ;
     $prepare=$connection->prepare($request);
     $prepare->execute();
     $prepare->closeCursor();
@@ -35,9 +35,9 @@ function deleteAccount($compte){
 
 
 
-function addAccount($compte){
+function addAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO compte (NOMCOMPTE) VALUES ('$compte')" ;
+    $request="INSERT IGNORE INTO compte (NOMCOMPTE) VALUES ('$accountName')" ;
     $prepare=$connection->prepare($request);
     $prepare->execute();
     $prepare->closeCursor();
@@ -46,8 +46,7 @@ function addAccount($compte){
 function deleteAllAccounts(){
     $connection= Connection::getInstance()->getConnection();
     $request="DELETE from compte" ;
-    $prepare=$connection->prepare($request);
-    $prepare->execute();
-    $prepare->closeCursor();
+    $result=$connection->query($request);
+    $result->closeCursor();
 }
 
