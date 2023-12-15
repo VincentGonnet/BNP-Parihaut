@@ -406,3 +406,7 @@ svg {
     left: 0;
     color: white;
 }
+
+#advisor-planning .calendar-event button:disabled {
+    cursor: default;
+}
