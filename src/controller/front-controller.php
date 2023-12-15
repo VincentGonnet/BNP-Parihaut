@@ -33,7 +33,6 @@ if (isset($_POST['connection'])) {
         echo "Employé non trouvé.";
     }
 }else {
-    echo 'test';
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
         $clientId =$_POST['input-client-id']; 
