@@ -32,7 +32,8 @@ if (isset($_POST['connection'])) {
     } else {
         echo "Employé non trouvé.";
     }
-}else {
+}else if (isset($_POST['submit-overview-changes'])){
+    echo 'test'
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
         $clientId =$_POST['input-client-id']; 

@@ -2,10 +2,9 @@
 
 <form id="overview"   action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-    if(isset($_SESSION['currentClient'])){  
+
+   if(isset($_SESSION['currentClient'])){  
         $employeId = $_SESSION['currentClient']->NUMEMPLOYE;
         $employe = searchEmployeeById($employeId);
         $name = $_SESSION['currentClient']->NOM;
@@ -113,7 +112,7 @@ ini_set('display_errors', 1);
         Modifier
         </button>
 
-        <button type="submit">
+        <button type="submit" name="submit-overview-changes">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
         </svg>
@@ -123,7 +122,7 @@ ini_set('display_errors', 1);
     </div>
 
     <?php 
-        
+    /   
     } else {
        echo "Identifiant de client non spécifié.";
     }
