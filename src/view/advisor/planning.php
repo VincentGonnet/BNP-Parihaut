@@ -5,7 +5,7 @@
             <?php foreach (getAllAdvisors() as $advisor): ?>
                 <!-- The long condition sets the default selected employee -->
                 <option value="<?= $advisor->NUMEMPLOYE ?>" 
-                    <?= (isset($_SESSION['advisorToViewPlanning']) && $_SESSION['advisorToViewPlanning']->NUMEMPLOYE == $advisor->NUMEMPLOYE) || $_SESSION['loggedInUser']->NUMEMPLOYE == $advisor->NUMEMPLOYE
+                    <?= (isset($_SESSION['advisorToViewPlanning']) && $_SESSION['advisorToViewPlanning']->NUMEMPLOYE == $advisor->NUMEMPLOYE) || (!isset($_SESSION['advisorToViewPlanning']) &&  $_SESSION['loggedInUser']->NUMEMPLOYE == $advisor->NUMEMPLOYE)
                         ? "selected" : "" ?> 
                 >
                     <?= $advisor->PRENOM." ".strtoupper($advisor->NOM) ?>

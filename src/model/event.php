@@ -33,6 +33,19 @@ function getEventsByAdvisor($advisorId) {
     return $events;
 }
 
+function addEvent($advisorId, $clientId, $reasonId, $start, $end) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('INSERT INTO rdv (NUMEMPLOYE, NUMCLIENT, IDMOTIF, DATERDV, DATEFINRDV) VALUES (:advisorId, :clientId, :reasonId, :start, :end)');
+    $result->execute(array(
+        'advisorId' => $advisorId,
+        'clientId' => $clientId,
+        'reasonId' => $reasonId,
+        'start' => $start,
+        'end' => $end
+    ));
+    $result->closeCursor();
+}
+
 function getEventMinute($event) {
     return date('i', strtotime($event->DATERDV));
 }
