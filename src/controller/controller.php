@@ -7,6 +7,7 @@ require_once 'model/contrat.php';
 require_once 'model/user.php';
 require_once 'model/client.php';
 require_once 'controller/router.php';
+require_once 'model/employee.php';
 
 
 
@@ -140,4 +141,10 @@ function CtlAddContract($contract){
 
 function CtlDeleteAllContracts(){
     deleteAllContracts();
+}
+
+//AJOUTER UN EMPLOYE
+
+function CtlAddEmployee($name , $firstname , $job , $login , $password){
+    addEmployee($name , $firstname , $job , $login , $password);
 }

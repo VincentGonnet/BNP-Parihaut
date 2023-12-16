@@ -70,6 +70,16 @@ else if(isset($_POST['delete-contract'])){
     CtlDeleteAllContracts();
     CtlGetAllContracts();
 }
+//ADD-EMPLOYE
+  else if(isset($_POST['register-new-employee'])){
+    $name = $_POST['name'];
+    $firstname = $_POST['firstname'];
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+    $job = $_POST['job'];
+    CtlAddEmployee($name , $firstname , $login , $password , $job);
+
+  }
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
