@@ -497,6 +497,14 @@ svg {
     justify-content: center;
 }
 
+#calendar-modal form .inputs {
+    margin-top: 4px;
+}
+
+#calendar-modal form .inputs > * {
+    margin: 13px 10px;
+}
+
 #calendar-modal form .form-container input {
     color: var(--text-color);
 }
@@ -538,6 +546,18 @@ svg {
     justify-content: center;
 }
 
+#calendar-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
 #new-event-start-time {
     -o-appearance: none;
     -ms-appearance: none;
@@ -554,6 +574,5 @@ svg {
     border: none !important;
 
     margin: 0;
-    margin-bottom: 15px;
     padding: 0;
 }

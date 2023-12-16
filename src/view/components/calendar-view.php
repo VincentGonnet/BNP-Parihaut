@@ -34,18 +34,20 @@
         <h1>Nouveau RDV</h1>
         <div class="spacer"></div>
         <div class="form-container">
-            <select disabled name="new-event-start-time" id="new-event-start-time">
-                <option value="" selected>Date du rendez-vous : </option>
-            </select>
+            
             <div>
                 <div class="label-containers">
+                    <p>Date</p>
                     <p>Motif</p>
                     <p>Durée</p>
                 </div>
                 <div class="inputs">
+                    <select readonly name="new-event-start-time" id="new-event-start-time">
+                        <option value="" selected>Date : </option>
+                    </select>
                     <select name="new-event-reason" id="new-event-reason">
                         <?php foreach (getAllReasons() as $reason): ?>
-                        <option value="<?= $reason->NUMMOTIF ?>"><?= $reason->LIBELLEMOTIF ?></option>
+                        <option value="<?= $reason->IDMOTIF ?>"><?= $reason->LIBELLEMOTIF ?></option>
                         <?php endforeach; ?>
                     </select>
                     <div class="horizontal">
@@ -66,10 +68,10 @@
                 </div>
             </div>
         </div>
-        <button type="button" onclick="submitModal()">submit</button>
         <div class="spacer"></div>
-        </form>
-    </modal>
+        <button type="submit" name="add-event" id="add-event">Valider</button>
+    </form>
+</modal>
 
 <script>
     let modal = document.getElementById('calendar-modal');
@@ -141,10 +143,6 @@
         if (minutes == 0) minutes = "00";
 
         document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
-    }
-
-    function submitModal() {
-
     }
 
     // click anywhere outside the modal to close it

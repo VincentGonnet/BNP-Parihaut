@@ -34,23 +34,24 @@ if (isset($_POST['connection'])) {
     CtlSelectClient($clientId);
     $_SESSION['currentEvent'] = $event;
     CtlChangeView('advisor-client-documents');
-} else if (isset($_POST['calendar-add-event'])) {
-    $dateHour = $_POST['calendar-add-event'];
-    $date = date('Y-m-d', strtotime($dateHour));
-    $hour = date('H:i', strtotime($dateHour));
- 
-
 } else if (isset($_POST['planning-prev-week'])) {
     CtlPlanningPrevWeek();
 } else if (isset($_POST['planning-next-week'])) {
     CtlPlanningNextWeek();
-}else if (isset($_POST['selectAdvisorToViewPlanning']) || isset($_POST['planning-select-date'])) {
+} else if (isset($_POST['selectAdvisorToViewPlanning']) || isset($_POST['planning-select-date'])) {
     if (isset($_POST['selectAdvisorToViewPlanning'])) {
         $advisorId = $_POST['selectAdvisorToViewPlanning'];
         $_SESSION['advisorToViewPlanning'] = getEmployeeById($advisorId);
     }
     $_SESSION['calendarDay'] = $_POST['planning-select-date'];
-} 
+} else if (isset($_POST['add-event'])) {
+    $startDate = $_POST["new-event-start-time"];
+    $duration = $_POST["new-event-duration"];
+    $reasonId = $_POST["new-event-reason"];
+    $start = date('Y-m-d H:i:s', strtotime($startDate));
+    $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
+    CtlAddEvent($start, $end, $reasonId);
+}
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();

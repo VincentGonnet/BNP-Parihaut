@@ -104,6 +104,11 @@ function CtlPlanningPrevWeek() {
     $_SESSION['calendarDay'] = date('Y-m-d', strtotime($_SESSION['calendarDay'] . ' - 7 days'));
 }
 
+function CtlAddEvent($start, $end, $reasonId) {
+    $client = $_SESSION['currentClient'];
+    addEvent($client->NUMEMPLOYE, $client->NUMCLIENT, $reasonId, $start, $end);
+}
+
 // ADVISOR FUNCTIONS ----------------------------------------------------------
 
 function CtlSelectEvent($eventId) {
