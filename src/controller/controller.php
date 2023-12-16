@@ -105,6 +105,7 @@ function CtlAdvisorOfClient($clientId){
         return null;
     }
 }
+
 function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
     modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
 }
