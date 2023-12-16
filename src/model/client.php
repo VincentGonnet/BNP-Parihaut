@@ -50,3 +50,7 @@ function searchClientByName($name, $firstName) {
 
     return $clients;
 }
+
+function getFormattedClientName($client) {
+    return $client->NOM . ' ' . $client->PRENOM;
+}

@@ -8,61 +8,62 @@
         Planning
     </button>
 
-    <!-- Below code will be conditional, depending on isset($_SESSION['currentClient']) -->
-
-    <hr />
-
-    <button name="redirect-advisor-client-documents" value="redirect-advisor-client-documents">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+    <?php if (isset($_SESSION['currentEvent'])): ?>
+        
+        <hr />
+        
+        <button name="redirect-advisor-client-documents" value="redirect-advisor-client-documents">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round"
-                d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+            d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
         </svg>
-
+        
         Justificatifs
-    </button>
-
-    <button name="redirect-advisor-client-overview" value="redirect-advisor-client-overview">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd"
+        </button>
+        
+        <button name="redirect-advisor-client-overview" value="redirect-advisor-client-overview">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
                 d="M2 3a1 1 0 00-1 1v1a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1H2zm0 4.5h16l-.811 7.71a2 2 0 01-1.99 1.79H4.802a2 2 0 01-1.99-1.79L2 7.5zM10 9a.75.75 0 01.75.75v2.546l.943-1.048a.75.75 0 111.114 1.004l-2.25 2.5a.75.75 0 01-1.114 0l-2.25-2.5a.75.75 0 111.114-1.004l.943 1.048V9.75A.75.75 0 0110 9z"
                 clip-rule="evenodd" />
-        </svg>
-        Synthèse client
-    </button>
-
-
-
-    <button name="redirect-advisor-client-accounts" value="redirect-advisor-client-accounts">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd"
+            </svg>
+            Synthèse client
+        </button>
+        
+        
+        
+        <button name="redirect-advisor-client-accounts" value="redirect-advisor-client-accounts">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
                 d="M1 4a1 1 0 011-1h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4zm12 4a3 3 0 11-6 0 3 3 0 016 0zM4 9a1 1 0 100-2 1 1 0 000 2zm13-1a1 1 0 11-2 0 1 1 0 012 0zM1.75 14.5a.75.75 0 000 1.5c4.417 0 8.693.603 12.749 1.73 1.111.309 2.251-.512 2.251-1.696v-.784a.75.75 0 00-1.5 0v.784a.272.272 0 01-.35.25A49.043 49.043 0 001.75 14.5z"
                 clip-rule="evenodd" />
-        </svg>
-
-        Gérer les comptes
-    </button>
-
-
-    <button name="redirect-advisor-client-contracts" value="redirect-advisor-client-contracts">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            </svg>
+            
+            Gérer les comptes
+        </button>
+        
+        
+        <button name="redirect-advisor-client-contracts" value="redirect-advisor-client-contracts">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
+                <path stroke-linecap="round" stroke-linejoin="round"
                 d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-        </svg>
+            </svg>
+            
+            Gérer les contrats
+        </button>
 
-        Gérer les contrats
-    </button>
-
-    <button name="redirect-advisor-client-appointments" value="redirect-advisor-client-appointments">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd"
+        <button name="redirect-advisor-client-appointments" value="redirect-advisor-client-appointments">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
                 clip-rule="evenodd" />
-        </svg>
-        Nouveau RDV
-    </button>
+            </svg>
+            Nouveau RDV
+        </button>
 
+    <?php endif; ?>
     <!-- create a space that takes as much place as possible, pushing the next buttons at the bottom regardless of sceen size -->
     <div class="spacer"></div>
 
