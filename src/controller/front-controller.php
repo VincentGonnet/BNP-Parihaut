@@ -27,11 +27,6 @@ if (isset($_POST['connection'])) {
 }else if (isset($_POST['employeId'])){
     $employeId = $_POST['employeId'];
     $employe = CtlAdvisorOfClient($employeId);
-    if ($employe) {
-        echo "Employé trouvé : " . $employe->NOM . " " . $employe->PRENOM;
-    } else {
-        echo "Employé non trouvé.";
-    }
 }else if (isset($_POST['submit-overview-changes'])){
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
