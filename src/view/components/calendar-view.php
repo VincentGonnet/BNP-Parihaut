@@ -43,7 +43,7 @@
                 </div>
                 <div class="inputs">
                     <select readonly name="new-event-start-time" id="new-event-start-time">
-                        <option value="" selected>Date : </option>
+                        <option value="" selected>Date</option>
                     </select>
                     <select name="new-event-reason" id="new-event-reason">
                         <?php foreach (getAllReasons() as $reason): ?>
@@ -86,7 +86,7 @@
         console.log(formattedDateHour);
         console.log(maxEventDuration);
 
-        document.querySelector("#new-event-start-time option").innerHTML = "Date : " +  formattedDateHour.toString().replace('T', ' à ');
+        document.querySelector("#new-event-start-time option").innerHTML = formattedDateHour.toString().replace('T', ' à ');
         document.querySelector("#new-event-start-time option").value = formattedDateHour;
     }
 

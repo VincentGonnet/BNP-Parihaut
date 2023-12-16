@@ -467,7 +467,7 @@ svg {
     justify-content: center;
 
     width: 468px;
-    height: 500px;
+    height: 400px;
 
     background-color: var(--secondary-background-color);
     border-radius: 5px;
@@ -502,7 +502,7 @@ svg {
 }
 
 #calendar-modal form .inputs > * {
-    margin: 13px 10px;
+    margin: 14px 30px;
 }
 
 #calendar-modal form .form-container input {
@@ -537,6 +537,7 @@ svg {
 #calendar-modal .label-containers p {
     margin: 15px;
     margin-left: 0;
+    font-size: large;
 }
 
 #calendar-modal .horizontal {
