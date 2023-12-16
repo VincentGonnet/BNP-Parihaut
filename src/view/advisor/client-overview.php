@@ -5,7 +5,6 @@
 
 
     if(isset($_SESSION['currentClient'])){  
-        echo 'test';
         $employeId = $_SESSION['currentClient']->NUMEMPLOYE;
         $employe = searchEmployeeById($employeId);
         $name = $_SESSION['currentClient']->NOM;

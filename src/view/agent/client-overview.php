@@ -121,8 +121,7 @@
         </button>
     </div>
 
-    <?php 
-    /   
+    <?php  
     } else {
        echo "Identifiant de client non spécifié.";
     }
