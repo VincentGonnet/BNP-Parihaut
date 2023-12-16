@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 12, 2023 at 03:47 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 14 déc. 2023 à 18:54
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `BNPPariHaut`
+-- Base de données : `parihaut`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
 CREATE TABLE `client` (
@@ -42,7 +42,7 @@ CREATE TABLE `client` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MAIL`, `ENREGISTRE`, `NUMTEL`, `SITUATION`, `PROFESSION`, `DATENAISSANCE`) VALUES
@@ -70,17 +70,27 @@ INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compte`
+-- Structure de la table `compte`
 --
 
 CREATE TABLE `compte` (
   `NOMCOMPTE` char(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`NOMCOMPTE`) VALUES
+('CEL'),
+('Courant'),
+('PEL'),
+('Pro');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compteclient`
+-- Structure de la table `compteclient`
 --
 
 CREATE TABLE `compteclient` (
@@ -93,7 +103,7 @@ CREATE TABLE `compteclient` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `compteclient`
+-- Déchargement des données de la table `compteclient`
 --
 
 INSERT INTO `compteclient` (`NUMCLIENT`, `NOMCOMPTE`, `DATEOUVERTURE`, `DATEFERMETURE`, `SOLDE`, `MONTANTDECOUVERT`) VALUES
@@ -129,17 +139,26 @@ INSERT INTO `compteclient` (`NUMCLIENT`, `NOMCOMPTE`, `DATEOUVERTURE`, `DATEFERM
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contrat`
+-- Structure de la table `contrat`
 --
 
 CREATE TABLE `contrat` (
   `NOMCONTRAT` char(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Déchargement des données de la table `contrat`
+--
+
+INSERT INTO `contrat` (`NOMCONTRAT`) VALUES
+('Assurance auto'),
+('Assurance sante'),
+('Pret');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contratclient`
+-- Structure de la table `contratclient`
 --
 
 CREATE TABLE `contratclient` (
@@ -151,7 +170,7 @@ CREATE TABLE `contratclient` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `contratclient`
+-- Déchargement des données de la table `contratclient`
 --
 
 INSERT INTO `contratclient` (`NOMCONTRAT`, `NUMCLIENT`, `DATEFERMETURE`, `DATEOUVERTURECONTRAT`, `TARIFMENSUEL`) VALUES
@@ -162,7 +181,7 @@ INSERT INTO `contratclient` (`NOMCONTRAT`, `NUMCLIENT`, `DATEFERMETURE`, `DATEOU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employe`
+-- Structure de la table `employe`
 --
 
 CREATE TABLE `employe` (
@@ -175,7 +194,7 @@ CREATE TABLE `employe` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `employe`
+-- Déchargement des données de la table `employe`
 --
 
 INSERT INTO `employe` (`NUMEMPLOYE`, `NOM`, `PRENOM`, `LOGIN`, `MDP`, `CATEGORIE`) VALUES
@@ -228,7 +247,7 @@ INSERT INTO `employe` (`NUMEMPLOYE`, `NOM`, `PRENOM`, `LOGIN`, `MDP`, `CATEGORIE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `motif`
+-- Structure de la table `motif`
 --
 
 CREATE TABLE `motif` (
@@ -237,10 +256,17 @@ CREATE TABLE `motif` (
   `LISTEPIECES` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Déchargement des données de la table `motif`
+--
+
+INSERT INTO `motif` (`IDMOTIF`, `LIBELLEMOTIF`, `LISTEPIECES`) VALUES
+(1, 'Ouverture compte courant', "Carte d\'identité");
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `operation`
+-- Structure de la table `operation`
 --
 
 CREATE TABLE `operation` (
@@ -255,7 +281,7 @@ CREATE TABLE `operation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rdv`
+-- Structure de la table `rdv`
 --
 
 CREATE TABLE `rdv` (
@@ -263,28 +289,37 @@ CREATE TABLE `rdv` (
   `NUMEMPLOYE` int(11) NOT NULL,
   `NUMCLIENT` int(11) DEFAULT NULL,
   `IDMOTIF` int(11) NOT NULL,
-  `DATERDV` date NOT NULL
+  `DATERDV` datetime NOT NULL,
+  `DATEFINRDV` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Indexes for dumped tables
+-- Déchargement des données de la table `rdv`
+--
+
+INSERT INTO `rdv` (`NUMRDV`, `NUMEMPLOYE`, `NUMCLIENT`, `IDMOTIF`, `DATERDV`, `DATEFINRDV`) VALUES
+(1, 2, 2, 1, '2023-12-13 10:00:00', '2023-12-13 11:00:00'),
+(2, 2, 6, 1, '2023-12-15 12:30:00', '2023-12-15 14:30:00');
+
+--
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `client`
+-- Index pour la table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`NUMCLIENT`),
   ADD KEY `I_FK_CLIENT_EMPLOYE` (`NUMEMPLOYE`);
 
 --
--- Indexes for table `compte`
+-- Index pour la table `compte`
 --
 ALTER TABLE `compte`
   ADD PRIMARY KEY (`NOMCOMPTE`);
 
 --
--- Indexes for table `compteclient`
+-- Index pour la table `compteclient`
 --
 ALTER TABLE `compteclient`
   ADD PRIMARY KEY (`NUMCLIENT`,`NOMCOMPTE`),
@@ -292,13 +327,13 @@ ALTER TABLE `compteclient`
   ADD KEY `I_FK_COMPTECLIENT_COMPTE` (`NOMCOMPTE`);
 
 --
--- Indexes for table `contrat`
+-- Index pour la table `contrat`
 --
 ALTER TABLE `contrat`
   ADD PRIMARY KEY (`NOMCONTRAT`);
 
 --
--- Indexes for table `contratclient`
+-- Index pour la table `contratclient`
 --
 ALTER TABLE `contratclient`
   ADD PRIMARY KEY (`NOMCONTRAT`,`NUMCLIENT`),
@@ -306,19 +341,19 @@ ALTER TABLE `contratclient`
   ADD KEY `I_FK_CONTRATCLIENT_CLIENT` (`NUMCLIENT`);
 
 --
--- Indexes for table `employe`
+-- Index pour la table `employe`
 --
 ALTER TABLE `employe`
   ADD PRIMARY KEY (`NUMEMPLOYE`);
 
 --
--- Indexes for table `motif`
+-- Index pour la table `motif`
 --
 ALTER TABLE `motif`
   ADD PRIMARY KEY (`IDMOTIF`);
 
 --
--- Indexes for table `operation`
+-- Index pour la table `operation`
 --
 ALTER TABLE `operation`
   ADD PRIMARY KEY (`NUMOP`),
@@ -326,7 +361,7 @@ ALTER TABLE `operation`
   ADD KEY `I_FK_OPERATION_COMPTE` (`NOMCOMPTE`);
 
 --
--- Indexes for table `rdv`
+-- Index pour la table `rdv`
 --
 ALTER TABLE `rdv`
   ADD PRIMARY KEY (`NUMRDV`),
@@ -335,38 +370,38 @@ ALTER TABLE `rdv`
   ADD KEY `I_FK_RDV_MOTIF` (`IDMOTIF`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `client`
+-- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
   MODIFY `NUMCLIENT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `employe`
+-- AUTO_INCREMENT pour la table `employe`
 --
 ALTER TABLE `employe`
   MODIFY `NUMEMPLOYE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `motif`
+-- AUTO_INCREMENT pour la table `motif`
 --
 ALTER TABLE `motif`
-  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `operation`
+-- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
   MODIFY `NUMOP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `rdv`
+-- AUTO_INCREMENT pour la table `rdv`
 --
 ALTER TABLE `rdv`
-  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
