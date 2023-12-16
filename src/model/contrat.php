@@ -16,9 +16,11 @@ function getAllContracts(){
 
 function  getContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="select NOMCONTRAT from contrat where NOMCONTRAT='$contractName'" ;
+    $request="select NOMCONTRAT from contrat where NOMCONTRAT like :contractName" ;
     $prepare=$connection->prepare($request);
-    $prepare->execute(array());
+    $prepare->execute(array(
+        'contractName' => $contractName
+    ));
     $prepare->setFetchMode(PDO::FETCH_OBJ);
     $result = $prepare->fetchall();
     $prepare->closeCursor();
@@ -27,9 +29,11 @@ function  getContract($contractName){
 
 function deleteContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="delete from contrat where NOMCONTRAT='$contractName'" ;
+    $request="delete from contrat where NOMCONTRAT LIKE :contractName" ;
     $prepare=$connection->prepare($request);
-    $prepare->execute();
+    $prepare->execute(array(
+        'contractName' => $contractName
+    ));
     $prepare->closeCursor();
 }
 
@@ -37,9 +41,11 @@ function deleteContract($contractName){
 
 function addContract($contractName){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO contrat (NOMCONTRAT) VALUES ('$contractName')" ;
+    $request="INSERT IGNORE INTO contrat (NOMCONTRAT) VALUES ( :contractName)" ;
     $prepare=$connection->prepare($request);
-    $prepare->execute();
+    $prepare->execute(array(
+        'contractName' => $contractName
+    ));
     $prepare->closeCursor();
 }
 

@@ -16,9 +16,11 @@ function getAllAccounts(){
 
 function  getAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="select NOMCOMPTE from compte where NOMCOMPTE='$accountName'" ;
+    $request="select NOMCOMPTE from compte where NOMCOMPTE LIKE :accountName" ;
     $prepare=$connection->prepare($request);
-    $prepare->execute(array());
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
     $prepare->setFetchMode(PDO::FETCH_OBJ);
     $result = $prepare->fetchall();
     $prepare->closeCursor();
@@ -27,9 +29,11 @@ function  getAccount($accountName){
 
 function deleteAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="delete from compte where NOMCOMPTE='$accountName'" ;
+    $request="delete from compte where NOMCOMPTE LIKE :accountName";
     $prepare=$connection->prepare($request);
-    $prepare->execute();
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
     $prepare->closeCursor();
 }
 
@@ -37,9 +41,11 @@ function deleteAccount($accountName){
 
 function addAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO compte (NOMCOMPTE) VALUES ('$accountName')" ;
+    $request="INSERT IGNORE INTO compte (NOMCOMPTE) VALUES ( :accountName)" ;
     $prepare=$connection->prepare($request);
-    $prepare->execute();
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
     $prepare->closeCursor();
 }
 
