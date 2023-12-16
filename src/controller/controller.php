@@ -8,13 +8,13 @@ require_once 'model/reason.php';
 require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
-require_once 'model/employee.php'
+require_once 'model/employee.php';
 
 
 
 // LOGIN FUNCTIONS -------------------------------------------------------------
 
-if(!isset($_SESSION['loggedIn'])) {
+if (!isset($_SESSION['loggedIn'])) {
     $_SESSION['loggedIn'] = false;
 }
 
@@ -102,7 +102,7 @@ function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);
     if ($client) {
         $employeId = $client->NUMEMPLOYE;
-        $employe = searchEmployeeById($employeId);
+        $employe = getEmployeeById($employeId);
         return $employe;
     } else {
         return null;
