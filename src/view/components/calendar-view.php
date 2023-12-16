@@ -28,3 +28,131 @@
         </tbody>
     </table>
 </form>
+
+<modal id="calendar-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h1>Nouveau RDV</h1>
+        <div class="spacer"></div>
+        <div class="form-container">
+            <select disabled name="new-event-start-time" id="new-event-start-time">
+                <option value="" selected>Date du rendez-vous : </option>
+            </select>
+            <div>
+                <div class="label-containers">
+                    <p>Motif</p>
+                    <p>Durée</p>
+                </div>
+                <div class="inputs">
+                    <select name="new-event-reason" id="new-event-reason">
+                        <?php foreach (getAllReasons() as $reason): ?>
+                        <option value="<?= $reason->NUMMOTIF ?>"><?= $reason->LIBELLEMOTIF ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="horizontal">
+                        <input type="time" name="new-event-duration" id="new-event-duration" value="01:00" min="01:00" step="1800" readonly required>
+                        <div class="arrow-container">
+                            <button type="button" onclick="incrementDuration()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+                            <button type="button" onclick="decrementDuration()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="submitModal()">submit</button>
+        <div class="spacer"></div>
+        </form>
+    </modal>
+
+<script>
+    let modal = document.getElementById('calendar-modal');
+    let formattedDateHour = "";
+    let maxEventDuration = "";
+
+    function openModal(fDate, maxDuration) {
+        modal.style.opacity = 1;
+        modal.style.pointerEvents = "auto";
+        formattedDateHour = fDate;
+        maxEventDuration = maxDuration;
+        console.log(formattedDateHour);
+        console.log(maxEventDuration);
+
+        document.querySelector("#new-event-start-time option").innerHTML = "Date : " +  formattedDateHour.toString().replace('T', ' à ');
+        document.querySelector("#new-event-start-time option").value = formattedDateHour;
+    }
+
+    function closeModal() {
+        modal.style.opacity = 0;
+        modal.style.pointerEvents = "none";
+    }
+
+    function incrementDuration() {
+        let duration = document.querySelector("#calendar-modal input[type='time']").value;
+        if (duration > maxEventDuration) {
+            duration = maxEventDuration;
+            document.querySelector("#calendar-modal input[type='time']").value = duration;
+            return;
+        }
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        let maxMinutes = parseInt(maxEventDuration.split(':')[1]);
+        let maxHours = parseInt(maxEventDuration.split(':')[0]);
+        if (hours == maxHours && minutes == maxMinutes) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+            hours++;
+        } else {
+            minutes = 30;
+        }
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes == 0) {
+            minutes = "00";
+        }
+        document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function decrementDuration() {
+        let duration = document.querySelector("#calendar-modal input[type='time']").value;
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        if (hours == 1 && minutes == 0) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+        } else {
+            minutes = 30;
+            hours--;
+        }
+
+        if (hours < 10) hours = "0" + hours;
+        if (minutes == 0) minutes = "00";
+
+        document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function submitModal() {
+
+    }
+
+    // click anywhere outside the modal to close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+
+</script>

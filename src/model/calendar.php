@@ -14,9 +14,12 @@ class Calendar {
     private $day;
     private $displayedEvents;
     private $occupiedCells = [];
+    private $eventCells = [];
+    private $seededDates = [];
 
     public function __construct($advisorId) {
         if (!isset($_SESSION['calendarDay'])) {
+            $_SESSION['calendarDay'] = date('Y-m-d');
             $this->year = date('Y');
             $this->month = date('m');
             $this->day = date('d');
@@ -205,35 +208,123 @@ class Calendar {
     }
 
 
+    /**
+     * Displays the event cell for the given date, hour and minute
+     * @param $date string
+     * @param $hour int
+     * @param $minute int
+     * @return void
+     */
     private function displayCalendarEvent($date, $hour, $minute) {
         if (isset($this->displayedEvents[$date])) {
-            $occupiedCells = [];
-            foreach ($this->displayedEvents[$date] as $event) {
-                if (getEventHour($event) == $hour && getEventMinute($event) == $minute) {
-                    // calculate duration with DATERDV and DATEFINRDV
-                    $eventStart = strtotime($event->DATERDV);
-                    $eventEnd = strtotime($event->DATEFINRDV);
-                    $eventDuration = ($eventEnd - $eventStart) / 60;
-                    $eventColspan = $eventDuration / 30;
+            // seed the events cells of this date if not already done
+            if (!in_array($date, $this->seededDates)) {
+                $this->seedEventCells($date);
+            }
 
+            // check if displaying an event cell, else display an empty cell if not occupied
+            if (in_array([$date, $hour, $minute], $this->eventCells) && !in_array([$date, $hour, $minute], $this->occupiedCells)) {
+                $event = $this->displayedEvents[$date][0];
+                $eventStart = strtotime($event->DATERDV);
+                $eventEnd = strtotime($event->DATEFINRDV);
+                $eventDuration = ($eventEnd - $eventStart) / 60;
+                $eventRowspan = $eventDuration / 30; // Used in calendar-event.php
+
+                for ($i = 1; $i < $eventRowspan; $i++) {
+                    $minute = $minute == 0 ? 30 : 0;
+                    $hour = $minute == 30 ? $hour : $hour + 1;
                     $this->occupiedCells[] = [$date, $hour, $minute];
-
-                    // add this hour and minute to the occupied cells
-                    // minutes are stored as 0, 30 and then increment hour
-                    for ($i = 1; $i < $eventColspan; $i++) {
-                        $minute = $minute == 0 ? 30 : 0;
-                        $hour = $minute == 30 ? $hour : $hour + 1;
-                        $this->occupiedCells[] = [$date, $hour, $minute];
-                    }
-                    require 'view/components/calendar-event.php';
-                } else if (!in_array([$date, $hour, $minute], $this->occupiedCells)) {
-                    echo "<td></td>";
                 }
+
+                require 'view/components/calendar-event.php';
+            } else if (!in_array([$date, $hour, $minute], $this->occupiedCells)) {
+                $this->displayEmptyCell($date, $hour, $minute);
+                $this->occupiedCells[] = [$date, $hour, $minute];
             }
         } else if (!in_array([$date, $hour, $minute], $this->occupiedCells)) {
-            echo "<td></td>";
+            $this->displayEmptyCell($date, $hour, $minute);
             $this->occupiedCells[] = [$date, $hour, $minute];
         }
+    }
+
+    /**
+     * Adds the events of the given date to the event cells
+     * It will create an array of that will be seeded before displaying the cells
+     * It allows to check if the next half hour is occupied, allowing to change the display accordingly
+     * @param $date string
+     * @return void
+     */
+    private function seedEventCells($date) {
+        // for each hour between 8:00 and 18:00, check if there is an event
+        for ($hour = 8; $hour < 18; $hour++) {
+            for ($minute = 0; $minute < 60; $minute += 30) {
+                foreach ($this->displayedEvents[$date] as $event) {
+                    if (getEventHour($event) == $hour && getEventMinute($event) == $minute) {
+                        $this->eventCells[] = [$date, $hour, $minute]; // add the event to the event cells
+                    }
+                }
+            }
+        }
+        $this->seededDates[] = $date;
+    }
+
+    /**
+     * Displays an empty cell
+     * If the current page is advisor-planning, it will display an empty cell
+     * If the current page is agent-client-appointments, it will display a button to add an event
+     * If the next half hour is occupied, it will not display the button
+     * @param $date string
+     * @param $hour int
+     * @param $minute int
+     * @return void
+     */
+    private function displayEmptyCell($date, $hour, $minute) {
+        if ($_SESSION['currentPage'] == 'advisor-planning') {
+            echo "<td></td>";
+        } else if ($_SESSION['currentPage'] != 'agent-client-appointments' || !$this->isNextHalfHourOccupied($date, $hour, $minute)) {
+            $formattedDateHour = date('Y-m-d H:i', strtotime($date . ' ' . $hour . ':' . $minute));
+            require 'view/components/calendar-add-event.php';
+        } else {
+            echo "<td></td>";
+        }
+    }
+
+    /**
+     * Returns true if the next half hour is occupied
+     * @param $date string
+     * @param $hour int
+     * @param $minute int
+     * @return bool
+     */
+    private function isNextHalfHourOccupied($date, $hour, $minute) {
+        $nextHour = $minute == 30 ? $hour + 1 : $hour;
+        $nextMinute = $minute == 30 ? 0 : 30;
+        if ($nextHour == 18 && $nextMinute == 00) {
+            return true;
+        }
+        if ($nextHour == 18 && $nextMinute == 00) {
+            return true;
+        }
+        return in_array([$date, $nextHour, $nextMinute], $this->eventCells);
+    }
+
+    private function getTimeUntilNextEvent($date, $hour, $minute) {
+        $initialTimeStamp = strtotime($date . ' ' . $hour . ':' . $minute);
+        $timeToNextEvent = date('h:i' ,strtotime($date . ' ' . 17 . ':' . 00) - $initialTimeStamp);
+        
+        if (empty($this->displayedEvents[$date])) {
+            return $timeToNextEvent;
+        }
+
+        while ($hour < 18) {
+            if (in_array([$date, $hour, $minute], $this->eventCells)) {
+                return date('h:i' ,strtotime($date . ' ' . $hour-1 . ':' . $minute) - $initialTimeStamp);
+            }
+            $minute = $minute == 30 ? 0 : 30;
+            $hour = $minute == 0 ? $hour : $hour + 1;
+        }
+
+        return $timeToNextEvent;
     }
 
 

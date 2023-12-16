@@ -16,3 +16,22 @@ function getReasonById($reasonId) {
 
     return $reason;
 }
+
+function getAllReasons() {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM motif');
+    $result->execute();
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $reasons = $result->fetchAll();
+    $result->closeCursor();
+
+    if(empty($reasons)) {
+        return null;
+    }
+
+    if (!is_array($reasons)) {
+        $reasons = array($reasons);
+    }
+
+    return $reasons;
+}
