@@ -51,6 +51,39 @@ function searchClientByName($name, $firstName) {
     return $clients;
 }
 
+
+function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId) {
+    $connection = Connection::getInstance()->getConnection();
+     $result = $connection->prepare('UPDATE client SET NOM=:name, PRENOM=:firstName, ADRESSE=:adress, NUMCLIENT=:clientId, MAIL=:mail, NUMTEL=:phoneNumber, PROFESSION=:work, SITUATION=:situation, ENREGISTRE=:checked,DATENAISSANCE=:birthday WHERE NUMCLIENT=:clientId');
+     $result->execute(array(
+         'name' => $name,
+         'firstName' => $firstName,
+         'clientId' => $clientId,
+         'adress' => $adress,
+         'birthday' => $birthday, 
+         'mail' => $mail,
+         'phoneNumber' => $phoneNumber,
+         'situation' => $situation,
+         'work' => $work,
+         'checked' => $checked,
+         'advisorId' => $advisorId 
+     ));
+     $result->closeCursor();
+     $_SESSION['currentClient']->NOM=$name ;
+     $_SESSION['currentClient']->PRENOM =$firstName ;
+     $_SESSION['currentClient']->NUMCLIENT =$clientId ;
+     $_SESSION['currentClient']->ADRESSE=$adress;
+     $_SESSION['currentClient']->DATENAISSANCE=$birthday ;
+     $_SESSION['currentClient']->MAIL=$mail ;
+     $_SESSION['currentClient']->NUMTEL =$phoneNumber ;
+     $_SESSION['currentClient']->SITUATION =$situation ;
+     $_SESSION['currentClient']->PROFESSION=$work ;
+     $_SESSION['currentClient']->ENREGISTRE=$checked ;
+     $_SESSION['currentClient']->NUMEMPLOYE=$advisorId;
+ }
+ 
+
 function getFormattedClientName($client) {
     return $client->NOM . ' ' . $client->PRENOM;
 }
+
