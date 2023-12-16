@@ -4,6 +4,9 @@ session_start();
 
 require_once 'model/user.php';
 require_once 'model/client.php';
+require_once 'model/reason.php';
+require_once 'model/event.php';
+require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php'
 
@@ -108,4 +111,21 @@ function CtlAdvisorOfClient($clientId){
 
 function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
     modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+}
+
+// PLANNING FUNCTIONS ----------------------------------------------------------
+
+function CtlPlanningNextWeek() {
+    $_SESSION['calendarDay'] = date('Y-m-d', strtotime($_SESSION['calendarDay'] . ' + 7 days'));
+}
+
+function CtlPlanningPrevWeek() {
+    $_SESSION['calendarDay'] = date('Y-m-d', strtotime($_SESSION['calendarDay'] . ' - 7 days'));
+}
+
+// ADVISOR FUNCTIONS ----------------------------------------------------------
+
+function CtlSelectEvent($eventId) {
+    $event = getEventById($eventId);
+    $_SESSION['currentEvent'] = $event;
 }

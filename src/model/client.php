@@ -52,8 +52,6 @@ function searchClientByName($name, $firstName) {
 }
 
 
-/*------------------------------------OVERVIEW-----------------------------------------*/
-
 function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId) {
     $connection = Connection::getInstance()->getConnection();
      $result = $connection->prepare('UPDATE client SET NOM=:name, PRENOM=:firstName, ADRESSE=:adress, NUMCLIENT=:clientId, MAIL=:mail, NUMTEL=:phoneNumber, PROFESSION=:work, SITUATION=:situation, ENREGISTRE=:checked,DATENAISSANCE=:birthday WHERE NUMCLIENT=:clientId');
@@ -84,3 +82,8 @@ function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneN
      $_SESSION['currentClient']->NUMEMPLOYE=$advisorId;
  }
  
+
+function getFormattedClientName($client) {
+    return $client->NOM . ' ' . $client->PRENOM;
+}
+
