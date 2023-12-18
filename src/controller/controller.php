@@ -10,12 +10,13 @@ require_once 'model/reason.php';
 require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
+require_once 'model/employee.php';
 
 
 
 // LOGIN FUNCTIONS -------------------------------------------------------------
 
-if(!isset($_SESSION['loggedIn'])) {
+if (!isset($_SESSION['loggedIn'])) {
     $_SESSION['loggedIn'] = false;
 }
 
@@ -97,6 +98,7 @@ function CtlSelectClient($clientId) {
     $_SESSION['currentPage'] = 'agent-client-overview';
 }
 
+
 //AFFICHAGE COMPTES
 
 function CtlGetAllAccounts(){
@@ -143,6 +145,22 @@ function CtlAddContract($contract){
 
 function CtlDeleteAllContracts(){
     deleteAllContracts();
+=======
+
+/*---------Overview fonctions--*/
+function CtlAdvisorOfClient($clientId){
+    $client = searchClientById($clientId);
+    if ($client) {
+        $employeId = $client->NUMEMPLOYE;
+        $employe = getEmployeeById($employeId);
+        return $employe;
+    } else {
+        return null;
+    }
+}
+
+function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
+    modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
 }
 
 // PLANNING FUNCTIONS ----------------------------------------------------------
@@ -153,6 +171,11 @@ function CtlPlanningNextWeek() {
 
 function CtlPlanningPrevWeek() {
     $_SESSION['calendarDay'] = date('Y-m-d', strtotime($_SESSION['calendarDay'] . ' - 7 days'));
+}
+
+function CtlAddEvent($start, $end, $reasonId) {
+    $client = $_SESSION['currentClient'];
+    addEvent($client->NUMEMPLOYE, $client->NUMCLIENT, $reasonId, $start, $end);
 }
 
 // ADVISOR FUNCTIONS ----------------------------------------------------------

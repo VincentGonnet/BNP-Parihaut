@@ -71,6 +71,23 @@ else if(isset($_POST['delete-contract'])){
     CtlGetAllContracts();
 }
     CtlChangeView('agent-client-overview');
+} else if (isset($_POST['employeId'])){
+    $employeId = $_POST['employeId'];
+    $employe = CtlAdvisorOfClient($employeId);
+   
+}else if (isset($_POST['submit-overview-changes'])){
+        $name = $_POST['input-name'];
+        $firstName = $_POST['input-first-name'];
+        $clientId =$_POST['input-client-id']; 
+        $adress = $_POST['input-adress'];
+        $birthday = $_POST['input-birthday'];
+        $mail = $_POST['input-mail'];
+        $phoneNumber = $_POST['input-phone-number'] ;
+        $situation = $_POST['input-situation'];
+        $work = $_POST['input-work'];
+        $checked = $_POST['input-checked'];
+        $advisorId =$_POST['input-advisor-id']; 
+        CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
 } else if (isset($_POST['calendar-event'])) {
     $eventId = $_POST['calendar-event'];
     $event = getEventById($eventId);
@@ -82,11 +99,21 @@ else if(isset($_POST['delete-contract'])){
     CtlPlanningPrevWeek();
 } else if (isset($_POST['planning-next-week'])) {
     CtlPlanningNextWeek();
-}else if (isset($_POST['selectAdvisorToViewPlanning']) || isset($_POST['planning-select-date'])) {
-    $advisorId = $_POST['selectAdvisorToViewPlanning'];
-    $_SESSION['advisorToViewPlanning'] = getEmployeeById($advisorId);
+} else if (isset($_POST['selectAdvisorToViewPlanning']) || isset($_POST['planning-select-date'])) {
+    if (isset($_POST['selectAdvisorToViewPlanning'])) {
+        $advisorId = $_POST['selectAdvisorToViewPlanning'];
+        $_SESSION['advisorToViewPlanning'] = getEmployeeById($advisorId);
+    }
     $_SESSION['calendarDay'] = $_POST['planning-select-date'];
-} 
+} else if (isset($_POST['add-event'])) {
+    $startDate = $_POST["new-event-start-time"];
+    $duration = $_POST["new-event-duration"];
+    $reasonId = $_POST["new-event-reason"];
+    $start = date('Y-m-d H:i:s', strtotime($startDate));
+    $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
+    CtlAddEvent($start, $end, $reasonId);
+}
+
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
