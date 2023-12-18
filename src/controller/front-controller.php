@@ -36,6 +36,53 @@ if (isset($_POST['connection'])) {
     $clientId = $_POST['search-client-select-client'];
     CtlSelectClient($clientId);
     CtlChangeView('agent-client-overview');
+} 
+//MANAGE-ACCOUNT-TYPES
+ else if(isset($_POST['delete-account'])){
+    if(!empty($_POST['radio-account'])){
+        $compte = $_POST['radio-account'];
+        CtlDeleteAccount($compte);
+    }
+    CtlGetAllAccounts();        
+} else if(isset($_POST['add-account'])){
+    if(!empty($_POST['account'])){
+        $compte=$_POST['account'];
+        CtlAddAccount($compte);
+        CtlGetAllAccounts();  
+    }
+} else if(isset($_POST['delete-all-accounts'])){
+    CtlDeleteAllAccounts();
+    CtlGetAllAccounts();
+}
+//MANAGE-CONTRACT-TYPES
+else if(isset($_POST['delete-contract'])){
+    if(!empty($_POST['radio-contract'])){
+        $contrat = $_POST['radio-contract'];
+        CtlDeleteContract($contrat);
+    }
+    CtlGetAllContracts();        
+} else if(isset($_POST['add-contract'])){
+    if(!empty($_POST['contract'])){
+        $contrat=$_POST['contract'];
+        CtlAddContract($contrat);
+        CtlGetAllContracts();  
+    }
+} else if(isset($_POST['delete-all-contracts'])){
+    CtlDeleteAllContracts();
+    CtlGetAllContracts();
+}
+
+//ADD-EMPLOYE
+  else if(isset($_POST['register-new-employee'])){
+    $name = $_POST['name'];
+    $firstname = $_POST['firstname'];
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+    $job = $_POST['job'];
+    CtlAddEmployee($name , $firstname , $login , $password , $job);
+
+  }
+    
 } else if (isset($_POST['employeId'])){
     $employeId = $_POST['employeId'];
     $employe = CtlAdvisorOfClient($employeId);
@@ -118,6 +165,7 @@ else if(isset($_POST['delete-contract'])){
     
 
 } 
+
 
 
 if ($_SESSION['loggedIn'] == false) {

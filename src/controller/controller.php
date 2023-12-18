@@ -147,6 +147,12 @@ function CtlDeleteAllContracts(){
     deleteAllContracts();
 }
 
+//AJOUTER UN EMPLOYE
+
+function CtlAddEmployee($name , $firstname , $job , $login , $password){
+    addEmployee($name , $firstname , $job , $login , $password);
+}
+
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);
@@ -187,4 +193,5 @@ function CtlDeleteEvent($eventId) {
 function CtlSelectEvent($eventId) {
     $event = getEventById($eventId);
     $_SESSION['currentEvent'] = $event;
+
 }
