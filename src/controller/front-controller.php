@@ -80,12 +80,6 @@ else if(isset($_POST['delete-contract'])){
     $password = $_POST['password'];
     $job = $_POST['job'];
     CtlAddEmployee($name , $firstname , $login , $password , $job);
-
-  }
-    
-} else if (isset($_POST['employeId'])){
-    $employeId = $_POST['employeId'];
-    $employe = CtlAdvisorOfClient($employeId);
 } else if (isset($_POST['submit-overview-changes'])){
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
