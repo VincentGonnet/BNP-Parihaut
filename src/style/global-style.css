@@ -631,6 +631,8 @@ svg {
 
 #allAccounts th {
     width: 1000px;
+    background-color: var(--primary-color);
+    color: white;
 }  
 
 #allAccounts table {
@@ -768,7 +770,7 @@ svg {
 
 #allContracts .space {
     width: 10px;
-=======
+}
 
 #advisor-planning .calendar-event button:disabled {
     cursor: default;

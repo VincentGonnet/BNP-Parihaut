@@ -145,7 +145,7 @@ function CtlAddContract($contract){
 
 function CtlDeleteAllContracts(){
     deleteAllContracts();
-=======
+}
 
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
