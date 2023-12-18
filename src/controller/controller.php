@@ -145,14 +145,13 @@ function CtlAddContract($contract){
 
 function CtlDeleteAllContracts(){
     deleteAllContracts();
-
 }
 
 //AJOUTER UN EMPLOYE
 
 function CtlAddEmployee($name , $firstname , $job , $login , $password){
     addEmployee($name , $firstname , $job , $login , $password);
-
+}
 
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
@@ -183,6 +182,10 @@ function CtlPlanningPrevWeek() {
 function CtlAddEvent($start, $end, $reasonId) {
     $client = $_SESSION['currentClient'];
     addEvent($client->NUMEMPLOYE, $client->NUMCLIENT, $reasonId, $start, $end);
+}
+
+function CtlDeleteEvent($eventId) {
+    deleteEvent($eventId);
 }
 
 // ADVISOR FUNCTIONS ----------------------------------------------------------

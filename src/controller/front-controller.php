@@ -35,6 +35,7 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['search-client-select-client'])) {
     $clientId = $_POST['search-client-select-client'];
     CtlSelectClient($clientId);
+    CtlChangeView('agent-client-overview');
 } 
 //MANAGE-ACCOUNT-TYPES
  else if(isset($_POST['delete-account'])){
@@ -81,13 +82,11 @@ else if(isset($_POST['delete-contract'])){
     CtlAddEmployee($name , $firstname , $login , $password , $job);
 
   }
-
-    CtlChangeView('agent-client-overview');
+    
 } else if (isset($_POST['employeId'])){
     $employeId = $_POST['employeId'];
     $employe = CtlAdvisorOfClient($employeId);
-   
-}else if (isset($_POST['submit-overview-changes'])){
+} else if (isset($_POST['submit-overview-changes'])){
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
         $clientId =$_POST['input-client-id']; 
@@ -124,7 +123,48 @@ else if(isset($_POST['delete-contract'])){
     $start = date('Y-m-d H:i:s', strtotime($startDate));
     $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
     CtlAddEvent($start, $end, $reasonId);
+} else if (isset($_POST["delete-event"])) {
+    $eventId = $_POST["delete-event"];
+    CtlDeleteEvent($eventId);
 }
+
+
+//MANAGE-ACCOUNT-TYPES
+ else if(isset($_POST['delete-account'])){
+    if(!empty($_POST['radio-account'])){
+        $compte = $_POST['radio-account'];
+        CtlDeleteAccount($compte);
+    }
+    CtlGetAllAccounts();        
+} else if(isset($_POST['add-account'])){
+    if(!empty($_POST['account'])){
+        $compte=$_POST['account'];
+        CtlAddAccount($compte);
+        CtlGetAllAccounts();  
+    }
+} else if(isset($_POST['delete-all-accounts'])){
+    CtlDeleteAllAccounts();
+    CtlGetAllAccounts();
+}
+//MANAGE-CONTRACT-TYPES
+else if(isset($_POST['delete-contract'])){
+    if(!empty($_POST['radio-contract'])){
+        $contrat = $_POST['radio-contract'];
+        CtlDeleteContract($contrat);
+    }
+    CtlGetAllContracts();        
+} else if(isset($_POST['add-contract'])){
+    if(!empty($_POST['contract'])){
+        $contrat=$_POST['contract'];
+        CtlAddContract($contrat);
+        CtlGetAllContracts();  
+    }
+} else if(isset($_POST['delete-all-contracts'])){
+    CtlDeleteAllContracts();
+    CtlGetAllContracts();
+    
+
+} 
 
 
 
