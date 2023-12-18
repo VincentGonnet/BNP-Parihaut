@@ -2,6 +2,8 @@
 require_once 'view/view.php';
 session_start();
 
+require_once 'model/compte.php';
+require_once 'model/contrat.php';
 require_once 'model/user.php';
 require_once 'model/client.php';
 require_once 'model/reason.php';
@@ -96,6 +98,54 @@ function CtlSelectClient($clientId) {
     $_SESSION['currentPage'] = 'agent-client-overview';
 }
 
+
+//AFFICHAGE COMPTES
+
+function CtlGetAllAccounts(){
+    $accountsList=getAllAccounts();
+    $_SESSION['showAllAccounts']= $accountsList;
+}
+
+function CtlGetAccount($accountName){
+    $account = getAccount($accountName);
+    $_SESSION['showAllAccounts']=$account;
+}
+
+function CtlDeleteAccount($accountName){
+    deleteAccount($accountName);
+}
+
+function CtlAddAccount($accountName){
+    addAccount($accountName);
+}
+
+function CtlDeleteAllAccounts(){
+    deleteAllAccounts();
+}
+
+//AFFICHAGE CONTRATS
+
+function CtlGetAllContracts(){
+    $contractsList=getAllContracts();
+    $_SESSION['showAllContracts']= $contractsList;
+}
+
+function CtlGetContract($contract){
+    $contract = getContract($contract);
+    $_SESSION['showAllContracts']=$contract;
+}
+
+function CtlDeleteContract($contract){
+    deleteContract($contract);
+}
+
+function CtlAddContract($contract){
+    addContract($contract);
+}
+
+function CtlDeleteAllContracts(){
+    deleteAllContracts();
+=======
 
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
