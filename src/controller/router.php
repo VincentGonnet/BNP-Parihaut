@@ -52,7 +52,7 @@ function getRouteTitle($routeName) {
 
 function getRouteAdditionalTitle() {
     if(isset($_SESSION['currentClient'])) {
-        return $_SESSION['currentClient']->NOM.' '.$_SESSION['currentClient']->PRENOM.' #'.$_SESSION['currentClient']->NUMCLIENT;
+        return $_SESSION['currentClient']->PRENOM.' '.strtoupper($_SESSION['currentClient']->NOM).' #'.$_SESSION['currentClient']->NUMCLIENT;
     } else {
         return null;
     }
