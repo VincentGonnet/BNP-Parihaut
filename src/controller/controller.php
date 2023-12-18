@@ -11,6 +11,7 @@ require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
+require_once 'model/documents.php';
 
 
 
@@ -98,6 +99,7 @@ function CtlSelectClient($clientId) {
     $_SESSION['currentPage'] = 'agent-client-overview';
 }
 
+//DIRECTOR FUNCTIONS
 
 //AFFICHAGE COMPTES
 
@@ -147,6 +149,17 @@ function CtlDeleteAllContracts(){
     deleteAllContracts();
 }
 
+//AFFICHAGE MOTIF
+
+function CtlGetAllDocuments(){
+    $documentsList=getAllDocuments();
+    $_SESSION['showAllDocuments']= $documentsList;
+}
+
+function CtlDeleteDocument($DocumentID){
+    deleteDocument($DocumentID);
+}
+
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);
@@ -184,3 +197,5 @@ function CtlSelectEvent($eventId) {
     $event = getEventById($eventId);
     $_SESSION['currentEvent'] = $event;
 }
+
+
