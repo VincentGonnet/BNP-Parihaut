@@ -178,6 +178,10 @@ function CtlAddEvent($start, $end, $reasonId) {
     addEvent($client->NUMEMPLOYE, $client->NUMCLIENT, $reasonId, $start, $end);
 }
 
+function CtlDeleteEvent($eventId) {
+    deleteEvent($eventId);
+}
+
 // ADVISOR FUNCTIONS ----------------------------------------------------------
 
 function CtlSelectEvent($eventId) {

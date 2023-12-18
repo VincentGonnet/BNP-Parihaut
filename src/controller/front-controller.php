@@ -39,8 +39,7 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['employeId'])){
     $employeId = $_POST['employeId'];
     $employe = CtlAdvisorOfClient($employeId);
-   
-}else if (isset($_POST['submit-overview-changes'])){
+} else if (isset($_POST['submit-overview-changes'])){
         $name = $_POST['input-name'];
         $firstName = $_POST['input-first-name'];
         $clientId =$_POST['input-client-id']; 
@@ -77,6 +76,9 @@ if (isset($_POST['connection'])) {
     $start = date('Y-m-d H:i:s', strtotime($startDate));
     $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
     CtlAddEvent($start, $end, $reasonId);
+} else if (isset($_POST["delete-event"])) {
+    $eventId = $_POST["delete-event"];
+    CtlDeleteEvent($eventId);
 }
 
 
