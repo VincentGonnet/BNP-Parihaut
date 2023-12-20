@@ -121,8 +121,23 @@ else if(isset($_POST['delete-contract'])){
     $eventId = $_POST["delete-event"];
     CtlDeleteEvent($eventId);
 }
-
-
+// MANAGE EMPLOYEE
+else if (isset($_POST["submit-manage-employee"])) {
+    $employeeId = $_POST["submit-manage-employee"];
+    $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
+    CtlChangeView('director-employee-overview');
+} else if (isset($_POST["modify-login-infos"])) {
+    $employeeId = $_SESSION['employeeToManage']->NUMEMPLOYE;
+    $login = $_POST["login"];
+    $password = $_POST["password"];
+    CtlModifyCredentials($employeeId, $login, $password);
+    $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
+}else if (isset($_POST["modify-general-infos"])) {
+    $employeeId = $_SESSION['employeeToManage']->NUMEMPLOYE;
+    $job = $_POST["job"];
+    CtlModifyJob($employeeId, $job);
+    $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
+}
 //MANAGE-ACCOUNT-TYPES
  else if(isset($_POST['delete-account'])){
     if(!empty($_POST['radio-account'])){

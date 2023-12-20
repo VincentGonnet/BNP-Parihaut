@@ -25,6 +25,10 @@ function CtlLogin($login, $password) {
     // TODO: if user is null, display error message (wrong credentials)
 }
 
+function CtlModifyCredentials($employeeId, $login, $password) {
+    modifyCredentials($employeeId, $login, $password);
+}
+
 function CtlLogout() {
     session_unset();
     $_SESSION['loggedIn'] = false;
@@ -194,4 +198,10 @@ function CtlSelectEvent($eventId) {
     $event = getEventById($eventId);
     $_SESSION['currentEvent'] = $event;
 
+}
+
+// DIRECTOR FUNCTIONS ---------------------------------------------------------
+
+function CtlModifyJob($employeeId, $job) {
+    modifyEmployeeJob($employeeId, $job);
 }
