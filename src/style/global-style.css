@@ -1132,6 +1132,18 @@ svg {
     text-align: center;
 }
 
+#manage-employees > input[type="text"] {
+    align-self: flex-start;
+    margin: 10px;
+
+    width: 20%;
+    height: 30px;
+    font-size: large;
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    outline: none;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*                                      EMPLOYEE OVERVIEW                                          */
 /* ----------------------------------------------------------------------------------------------- */

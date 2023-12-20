@@ -1,5 +1,5 @@
 <div id="manage-employees">
-    <input type="text" onkeyup="liveSearch(this.value)" placeholder="NOM Prénom">
+    <input type="text" onkeyup="liveSearch(this.value)" placeholder="Nom ou Prénom">
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <table class="employee-table">
             <thead>
