@@ -58,13 +58,13 @@ function getLoggedInUser() {
     }
 }
 
-function addUser($username, $password) {
-    // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+function modifyCredentials($employeeId, $login, $password) {
     $connection = Connection::getInstance()->getConnection();
-    $result = $connection->prepare('INSERT INTO employe (LOGIN, MDP) VALUES (:username, :password)');
+    $result = $connection->prepare('UPDATE employe SET LOGIN = :login, MDP = :password WHERE NUMEMPLOYE = :employeeId');
     $result->execute(array(
-        'username' => $username,
-        'password' => $password
+        'login' => $login,
+        'password' => $password,
+        'employeeId' => $employeeId
     ));
     $result->closeCursor();
 }

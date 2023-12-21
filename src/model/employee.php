@@ -58,3 +58,38 @@ function getAllAdvisors() {
     return $advisors;
 }
 
+// AJAX LIVE SEARCH EMPLOYEES
+function liveSearchEmployee($input) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM employe WHERE NOM LIKE :input OR PRENOM LIKE :input');
+    $result->execute(array(
+        'input' => '%' . $input . '%'
+    ));
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $employees = $result->fetchAll();
+    $result->closeCursor();
+
+    if (empty($employees)) return array();
+    if (!is_array($employees)) return array($employees);
+
+    return $employees;
+}
+
+function deleteEmployee($employeeId) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('DELETE FROM employe WHERE NUMEMPLOYE = :employeeId');
+    $result->execute(array(
+        'employeeId' => $employeeId
+    ));
+    $result->closeCursor();
+}
+
+function modifyEmployeeJob($employeeId, $job) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('UPDATE employe SET CATEGORIE = :job WHERE NUMEMPLOYE = :employeeId');
+    $result->execute(array(
+        'job' => $job,
+        'employeeId' => $employeeId
+    ));
+    $result->closeCursor();
+}

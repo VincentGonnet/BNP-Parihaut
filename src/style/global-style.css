@@ -463,7 +463,6 @@ svg {
     margin-bottom: 15px;
     padding: 10px;
     box-sizing: border-box;
-
 }
 
 #search-client table {
@@ -477,8 +476,8 @@ svg {
     border: 1px solid #ddd;
     padding: 8px;
 }
-  
- #search-client th {
+
+#search-client th {
     background-color: var(--primary-color);
     color: white;
 }
@@ -498,7 +497,6 @@ svg {
     text-align: center;
 }
 
-  
 /*-----------------------------------------------------------------------------------------------*/
 /*                                          CALENDAR                                             */
 /*-----------------------------------------------------------------------------------------------*/
@@ -509,7 +507,6 @@ svg {
     background-color: var(--secondary-background-color);
     table-layout: fixed;
 }
-
 
 .calendar th,
 .calendar td {
@@ -525,7 +522,6 @@ svg {
     background-color: var(--primary-color);
     color: white;
 }
-
 
 .calendar-event {
     background-color: var(--primary-color);
@@ -605,19 +601,18 @@ svg {
     left: 0;
     color: white;
 }
-  
+
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      MANAGE ACCOUNTS                                          */
 /*-----------------------------------------------------------------------------------------------*/
 
-#allAccounts{
+#allAccounts {
     width: 100%;
     height: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 #allAccounts .showAccounts {
@@ -629,32 +624,26 @@ svg {
     width: 1000px;
     background-color: var(--primary-color);
     color: white;
-}  
+}
 
 #allAccounts table {
     background-color: var(--secondary-background-color);
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 }
 
-#allAccounts form{
+#allAccounts form {
     width: 100%;
 }
 
-
 #allAccounts .account {
     margin-top: 20px;
-
 }
 
-
-
-#allAccounts input[type="radio"]{
+#allAccounts input[type="radio"] {
     width: 50px;
     height: 20px;
-    
 }
 
 #allAccounts th:last-child {
@@ -664,7 +653,7 @@ svg {
 #allAccounts .edit-accounts {
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     width: 100%;
     margin-top: 100px;
 }
@@ -679,26 +668,24 @@ svg {
 }
 
 #allAccounts .edit-accounts input {
-  height: 40px;
-  font-size: large;
+    height: 40px;
+    font-size: large;
 }
 
 #allAccounts .space {
     width: 10px;
 }
 
-
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      MANAGE CONTRACTS                                         */
 /*-----------------------------------------------------------------------------------------------*/
 
-#allContracts{
+#allContracts {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 #allContracts .showContracts {
@@ -717,25 +704,19 @@ svg {
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 }
 
-#allContracts form{
+#allContracts form {
     width: 100%;
 }
 
-
 #allContracts .contract {
     margin-top: 20px;
-
 }
 
-
-
-#allContracts input[type="radio"]{
+#allContracts input[type="radio"] {
     width: 50px;
     height: 20px;
-    
 }
 
 #allContracts th:last-child {
@@ -745,7 +726,7 @@ svg {
 #allContracts .edit-contracts {
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     width: 100%;
     margin-top: 100px;
 }
@@ -760,8 +741,8 @@ svg {
 }
 
 #allContracts .edit-contracts input {
-  height: 40px;
-  font-size: large;
+    height: 40px;
+    font-size: large;
 }
 
 #allContracts .space {
@@ -772,16 +753,15 @@ svg {
 /*                                      ADD EMPLOYE                                              */
 /*-----------------------------------------------------------------------------------------------*/
 
-#add-employe{
+#add-employe {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
-#add-employe form{
+#add-employe form {
     background-color: var(--secondary-background-color);
     display: flex;
     flex-direction: column;
@@ -799,16 +779,11 @@ svg {
     width: 1000px;
 }
 
-
 #add-employe td {
     height: 50px;
     font-size: large;
     font-weight: bold;
-    
 }
-
-
-
 
 #add-employe td input {
     width: 50%;
@@ -826,8 +801,6 @@ svg {
     margin-bottom: 10px;
 }
 
-
-
 #add-employe .space {
     width: 10px;
     height: 20px;
@@ -835,10 +808,9 @@ svg {
 
 #add-employe .buttons {
     margin-top: 30px;
-
 }
 
-#add-employe .buttons button{
+#add-employe .buttons button {
     width: 140px;
     height: 40px;
     background-color: var(--primary-color);
@@ -846,7 +818,6 @@ svg {
     border-radius: 10px;
     border-color: var(--primary-color);
 }
-
 
 /* .td-with-delete-button:hover {
     background-color: var(--secondary-background-color) !important;
@@ -1034,7 +1005,6 @@ svg {
 
     margin: 0;
     padding: 0;
-
 }
 
 #delete-event-modal {
@@ -1093,4 +1063,101 @@ svg {
     cursor: pointer;
     color: white;
     font-size: larger;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      MANAGE EMPLOYEES                                           */
+/* ----------------------------------------------------------------------------------------------- */
+
+#manage-employees {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    box-sizing: border-box;
+    padding-bottom: 15px;
+}
+
+#manage-employees form {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#manage-employees table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+}
+
+#manage-employees th,
+#manage-employees td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#manage-employees th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#manage-employees td > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#manage-employees th {
+    width: 31%;
+}
+
+#manage-employees th:first-child {
+    width: 27px !important;
+}
+
+#manage-employees th:last-child {
+    width: 18px !important;
+}
+
+#manage-employees td:last-child {
+    padding: 0;
+    text-align: center;
+}
+
+#manage-employees > input[type="text"] {
+    align-self: flex-start;
+    margin: 10px;
+
+    width: 20%;
+    height: 30px;
+    font-size: large;
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    outline: none;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      EMPLOYEE OVERVIEW                                          */
+/* ----------------------------------------------------------------------------------------------- */
+
+#employee-overview .login-infos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "login-infos login-infos";
+}
+
+#employee-overview .general-infos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "general-infos general-infos";
 }
