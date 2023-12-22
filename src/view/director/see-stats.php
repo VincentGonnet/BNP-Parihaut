@@ -135,7 +135,7 @@
                 $objectName = "Clients";
                 break;
             case 'balance-chart':
-                document.querySelector('#balance-chart-value').innerHTML = "Solde totale : " + newContractsAmount + "€";
+                document.querySelector('#balance-chart-value').innerHTML = "Solde total : " + newContractsAmount + "€";
                 $objectName = "Solde";
                 break;
             default:
