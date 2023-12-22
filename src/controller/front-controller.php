@@ -39,21 +39,16 @@ if (isset($_POST['connection'])) {
 } 
 //MANAGE-ACCOUNT-TYPES
  else if(isset($_POST['delete-account'])){
-    if(!empty($_POST['radio-account'])){
-        $compte = $_POST['radio-account'];
+        $compte = $_POST['delete-account'];
         CtlDeleteAccount($compte);
-    }
-    CtlGetAllAccounts();        
+        CtlGetAllAccounts(); 
 } else if(isset($_POST['add-account'])){
-    if(!empty($_POST['account'])){
-        $compte=$_POST['account'];
+    if(!empty($_POST['new-account'])){
+        $compte=$_POST['new-account'];
         CtlAddAccount($compte);
         CtlGetAllAccounts();  
     }
-} else if(isset($_POST['delete-all-accounts'])){
-    CtlDeleteAllAccounts();
-    CtlGetAllAccounts();
-}
+} 
 //MANAGE-CONTRACT-TYPES
 else if(isset($_POST['delete-contract'])){
     if(!empty($_POST['radio-contract'])){
