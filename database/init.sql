@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 14 déc. 2023 à 18:54
+-- Généré le : sam. 23 déc. 2023 à 00:13
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -38,34 +38,35 @@ CREATE TABLE `client` (
   `NUMTEL` int(11) DEFAULT NULL,
   `SITUATION` char(15) DEFAULT NULL,
   `PROFESSION` char(15) NOT NULL,
-  `DATENAISSANCE` date NOT NULL
+  `DATENAISSANCE` date NOT NULL,
+  `DATEENREGISTREMENT` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MAIL`, `ENREGISTRE`, `NUMTEL`, `SITUATION`, `PROFESSION`, `DATENAISSANCE`) VALUES
-(1, 2, 'Musk', 'Melon', '123 Main Street', 'melon.musk@space.x', 1, 123456789, 'Married', 'Business', '1971-06-28'),
-(2, 3, 'Johnson', 'Jane', '456 Oak Avenue', 'jane.johnson@example.com', 1, 234567890, 'Married', 'Teacher', '1990-05-15'),
-(3, 4, 'Williams', 'Emma', '789 Birch Lane', 'emma.williams@example.com', 1, 345678901, 'Divorced', 'Engineer', '1985-08-22'),
-(4, 5, 'Davis', 'Michael', '987 Pine Avenue', 'michael.davis@example.com', 1, 456789012, 'Single', 'Doctor', '1988-12-10'),
-(5, 6, 'Miller', 'Olivia', '654 Cedar Street', 'olivia.miller@example.com', 1, 567890123, 'Married', 'Architect', '1982-06-18'),
-(6, 8, 'Moore', 'Mason', '876 Oak Avenue', 'mason.moore@example.com', 1, 789012345, 'Divorced', 'Lawyer', '1980-11-05'),
-(7, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Lawyer', '1985-01-05'),
-(8, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'IT Consultant', '1980-08-28'),
-(9, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'IT Consultant', '2000-07-30'),
-(10, 5, 'Fisher', 'Ava', '543 Pine Avenue', 'ava.fisher@example.com', 1, 456789012, 'Single', 'IT Consultant', '1975-11-02'),
-(11, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Civil Engineer', '1984-02-28'),
-(12, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'Data Scientist', '1991-10-20'),
-(13, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'Sales Manager', '1986-06-15'),
-(14, 12, 'Ward', 'Lucas', '321 Elm Street', 'lucas.ward@example.com', 1, 12345678, 'Single', 'Data Analyst', '1992-07-05'),
-(15, 11, 'Xu', 'Isabella', '876 Oak Avenue', 'isabella.xu@example.com', 1, 123456789, 'Married', 'Data Analyst', '1985-05-25'),
-(16, 10, 'Yates', 'Liam', '543 Pine Avenue', 'liam.yates@example.com', 1, 234567890, 'Single', 'Civil Engineer', '1994-02-28'),
-(17, 10, 'Zhang', 'Sophie', '210 Cedar Street', 'sophie.zhang@example.com', 1, 345678901, 'Single', 'Teacher', '1999-09-28'),
-(18, 5, 'Jackson', 'Avery', '876 Oak Avenue', 'avery.jackson@example.com', 1, 345678901, 'Married', 'HR Specialist', '1994-10-22'),
-(19, 9, 'Owens', 'Mason', '321 Elm Street', 'mason.owens@example.com', 1, 890123456, 'Single', 'HR Specialist', '1994-12-02'),
-(20, 3, 'Perez', 'Liam', '876 Oak Avenue', 'liam.perez@example.com', 1, 901234567, 'Divorced', 'Teacher', '1983-09-18');
+INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MAIL`, `ENREGISTRE`, `NUMTEL`, `SITUATION`, `PROFESSION`, `DATENAISSANCE`, `DATEENREGISTREMENT`) VALUES
+(1, 2, 'Musk', 'Melon', '123 Main Street', 'melon.musk@space.x', 1, 123456789, 'Married', 'Business man', '1971-06-28', '2023-12-22'),
+(2, 3, 'Johnson', 'Jane', '456 Oak Avenue', 'jane.johnson@example.com', 1, 234567890, 'Married', 'Teacher', '1990-05-15', '2023-12-22'),
+(3, 4, 'Williams', 'Emma', '789 Birch Lane', 'emma.williams@example.com', 1, 345678901, 'Divorced', 'Engineer', '1985-08-22', '2023-12-22'),
+(4, 5, 'Davis', 'Michael', '987 Pine Avenue', 'michael.davis@example.com', 1, 456789012, 'Single', 'Doctor', '1988-12-10', '2023-12-22'),
+(5, 6, 'Miller', 'Olivia', '654 Cedar Street', 'olivia.miller@example.com', 1, 567890123, 'Married', 'Architect', '1982-06-18', '2023-12-22'),
+(6, 8, 'Moore', 'Mason', '876 Oak Avenue', 'mason.moore@example.com', 1, 789012345, 'Divorced', 'Lawyer', '1980-11-05', '2023-12-22'),
+(7, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Lawyer', '1985-01-05', '2023-12-22'),
+(8, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'IT Consultant', '1980-08-28', '2023-12-22'),
+(9, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'IT Consultant', '2000-07-30', '2023-12-22'),
+(10, 5, 'Fisher', 'Ava', '543 Pine Avenue', 'ava.fisher@example.com', 1, 456789012, 'Single', 'IT Consultant', '1975-11-02', '2023-12-22'),
+(11, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Civil Engineer', '1984-02-28', '2023-12-22'),
+(12, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'Data Scientist', '1991-10-20', '2023-12-22'),
+(13, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'Sales Manager', '1986-06-15', '2023-12-22'),
+(14, 12, 'Ward', 'Lucas', '321 Elm Street', 'lucas.ward@example.com', 1, 12345678, 'Single', 'Data Analyst', '1992-07-05', '2023-12-22'),
+(15, 11, 'Xu', 'Isabella', '876 Oak Avenue', 'isabella.xu@example.com', 1, 123456789, 'Married', 'Data Analyst', '1985-05-25', '2023-12-22'),
+(16, 10, 'Yates', 'Liam', '543 Pine Avenue', 'liam.yates@example.com', 1, 234567890, 'Single', 'Civil Engineer', '1994-02-28', '2023-12-22'),
+(17, 10, 'Zhang', 'Sophie', '210 Cedar Street', 'sophie.zhang@example.com', 1, 345678901, 'Single', 'Teacher', '1999-09-28', '2023-12-22'),
+(18, 5, 'Jackson', 'Avery', '876 Oak Avenue', 'avery.jackson@example.com', 1, 345678901, 'Married', 'HR Specialist', '1994-10-22', '2023-12-22'),
+(19, 9, 'Owens', 'Mason', '321 Elm Street', 'mason.owens@example.com', 1, 890123456, 'Single', 'HR Specialist', '1994-12-02', '2023-12-22'),
+(20, 3, 'Perez', 'Liam', '876 Oak Avenue', 'liam.perez@example.com', 1, 901234567, 'Divorced', 'Teacher', '1983-09-18', '2023-12-22');
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,8 @@ CREATE TABLE `contratclient` (
 INSERT INTO `contratclient` (`NOMCONTRAT`, `NUMCLIENT`, `DATEFERMETURE`, `DATEOUVERTURECONTRAT`, `TARIFMENSUEL`) VALUES
 ('Assurance auto', 6, NULL, '2020-05-10', 50.00),
 ('Assurance sante', 10, NULL, '2022-07-20', 30.00),
-('Pret', 4, NULL, '2021-09-10', 150.00);
+('Pret', 4, NULL, '2021-09-10', 150.00),
+('Pret', 1, NULL, '2023-12-21', 10.00);
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,8 @@ INSERT INTO `employe` (`NUMEMPLOYE`, `NOM`, `PRENOM`, `LOGIN`, `MDP`, `CATEGORIE
 (42, 'Gomez', 'Isaac', 'agent27', 'agent27', 'agent'),
 (43, 'Hart', 'Sophie', 'agent28', 'agent28', 'agent'),
 (44, 'Ingram', 'Mason', 'agent29', 'agent29', 'agent'),
-(45, 'Jackson', 'Ella', 'agent30', 'agent30', 'agent');
+(45, 'Jackson', 'Ella', 'agent30', 'agent30', 'agent'),
+(46, 'Valjean', 'Jean', 'agent0', 'agent0', 'advisor');
 
 -- --------------------------------------------------------
 
@@ -261,7 +264,8 @@ CREATE TABLE `motif` (
 --
 
 INSERT INTO `motif` (`IDMOTIF`, `LIBELLEMOTIF`, `LISTEPIECES`) VALUES
-(1, 'Ouverture compte courant', "Carte d\'identité");
+(1, 'Ouverture compte courant', 'Carte d\'identité'),
+(2, 'PEL', 'JUSTIFICATIF DE DOMICILE, CARTE D\'IDENTITÉ');
 
 -- --------------------------------------------------------
 
@@ -277,6 +281,13 @@ CREATE TABLE `operation` (
   `TYPEOP` char(15) NOT NULL,
   `DATEOP` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `operation`
+--
+
+INSERT INTO `operation` (`NUMOP`, `NUMCLIENT`, `NOMCOMPTE`, `MONTANT`, `TYPEOP`, `DATEOP`) VALUES
+(1, 1, 'Courant', 500.00, 'ajout', '2023-12-22');
 
 -- --------------------------------------------------------
 
@@ -298,8 +309,7 @@ CREATE TABLE `rdv` (
 --
 
 INSERT INTO `rdv` (`NUMRDV`, `NUMEMPLOYE`, `NUMCLIENT`, `IDMOTIF`, `DATERDV`, `DATEFINRDV`) VALUES
-(1, 2, 2, 1, '2023-12-13 10:00:00', '2023-12-13 11:00:00'),
-(2, 2, 6, 1, '2023-12-15 12:30:00', '2023-12-15 14:30:00');
+(23, 2, 1, 1, '2023-12-21 09:30:00', '2023-12-21 12:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -383,25 +393,25 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `employe`
 --
 ALTER TABLE `employe`
-  MODIFY `NUMEMPLOYE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `NUMEMPLOYE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `motif`
 --
 ALTER TABLE `motif`
-  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `NUMOP` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NUMOP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `rdv`
 --
 ALTER TABLE `rdv`
-  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
