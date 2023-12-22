@@ -1,4 +1,5 @@
 <?php
+
 require_once 'view/view.php';
 session_start();
 
