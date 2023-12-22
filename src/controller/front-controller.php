@@ -125,20 +125,11 @@ else if(isset($_POST['delete-contract'])){
     CtlDeleteDocument($DocumentID);
     CtlGetAllDocuments();
 
-} else if(isset($_POST['add-document'])){
-    if(!empty($_POST['document']) && !empty($_POST['list'])){
-        $document=$_POST['document'];
-        $list=$_POST['list'];
+}  else if(isset($_POST['add-document'])){
+    if(!empty($_POST['new-doc'] && !empty($_POST['new-list']))){
+        $document=$_POST['new-doc'];
+        $list=$_POST['new-list'];
         CtlAddDocument($document , $list);
-        CtlGetAllDocuments();  
-    }
-    
-} else if(isset($_POST['valid-changes'])){
-    if(!empty($_POST['input-doc'] && !empty($_POST['input-list']))){
-        $document=$_POST['input-doc'];
-        $list=$_POST['input-list'];
-        $iddoc=$_POST['edit-list'];
-        CtlEditList($document,$list , $iddoc);
     }
     CtlGetAllDocuments();
 } 
