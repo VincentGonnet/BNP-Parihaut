@@ -1043,7 +1043,7 @@ svg {
 }
 
 
-#edit-doc-modal {
+#add-doc-modal {
     display: flex;
     width: 100%;
     height: 100%;
@@ -1063,7 +1063,7 @@ svg {
     justify-content: center;
 }
 
-#edit-doc-modal form {
+#add-doc-modal form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1078,21 +1078,21 @@ svg {
     box-sizing: border-box;
 }
 
-#edit-doc-modal form .form-content {
+#add-doc-modal form .form-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
 
-#edit-doc-modal form .form-content > div {
+#add-doc-modal form .form-content > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-#edit-doc-modal form .form-content > div > div {
+#add-doc-modal form .form-content > div > div {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -1100,26 +1100,26 @@ svg {
     justify-content: center;
 }
 
-#edit-doc-modal form .inputs {
+#add-doc-modal form .inputs {
     margin-top: 4px;
 }
 
-#edit-doc-modal form .inputs > * {
+#add-doc-modal form .inputs > * {
     margin: 14px 30px;
 }
 
-#edit-doc-modal form .form-content input {
+#add-doc-modal form .form-content input {
     color: var(--text-color);
 }
 
-#edit-doc-modal .arrow-container {
+#add-doc-modal .arrow-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#edit-doc-modal .arrow-container button {
+#add-doc-modal .arrow-container button {
     border: none;
     /* background-color: transparent; */
     cursor: pointer;
@@ -1130,27 +1130,27 @@ svg {
     /* height: 10px; */
 }
 
-#edit-doc-modal .arrow-container svg {
+#add-doc-modal .arrow-container svg {
     color: var(--text-color);
     opacity: 1;
     width: 10px;
     height: 10px;
 }
 
-#edit-doc-modal .label-containers p {
+#add-doc-modal .label-containers p {
     margin: 15px;
     margin-left: 0;
     font-size: large;
 }
 
-#edit-doc-modal .horizontal {
+#add-doc-modal .horizontal {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-#edit-doc-modal form > button {
+#add-doc-modal form > button {
     margin-bottom: 37px;
     padding: 5px 10px;
     border: none;

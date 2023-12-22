@@ -41,13 +41,13 @@
     
         <div class="edit-documents-list" >
             <div class="edit-list-buttons">
-                <button name="add-document" value="add-document" onclick="openModal()">
+                <button name="add-document" value="add-document" onclick="openModal(); return false;">
                     Ajouter un motif
                 </button>
             </div> 
         </div>
 
-    <modal id="edit-doc-modal">
+    <modal id="add-doc-modal">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <h1>Ajouter un motif</h1>
             <div class="spacer"></div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="spacer"></div>
-            <button type="submit" name="add-document" id="edit-document"  >Valider</button>
+            <button type="submit" name="add-document" id="add-document"  >Valider</button>
         </form>
     </modal>
     
@@ -74,7 +74,7 @@
 
 
 <script>
-    let modal = document.getElementById('edit-doc-modal');
+    let modal = document.getElementById('add-doc-modal');
 
     function openModal() {
         modal.style.opacity = 1;
@@ -92,12 +92,4 @@
         }
     }
 
-    function modify(event) {
-                var buttonValue = event.target.value;
-                var inputs = document.querySelectorAll("#" + buttonValue);
-                inputs.forEach(function(input) {
-                    input.readOnly = false;
-            });
-        
-    }
 </script>
