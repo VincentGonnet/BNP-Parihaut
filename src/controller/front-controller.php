@@ -89,14 +89,23 @@ if (isset($_POST['connection'])) {
     $accountType=$_POST['chosen-account'];
     $solde=$_POST['solde'];
     $decouvert=$_POST['decouvert'];
-    if($solde-$ammount>=(-$decouvert)){
+    if ($accountType=='courant'){
+        if($solde-$ammount>=(-$decouvert)){
             CtlDebit($ammount, $clientId, $accountType);
         }else{
             echo '<script>alert("Vous ne pouvez pas retirer ce montant. Veuillez indiquer un montant plus petit.");</script>';
 
         }
-        echo '<script>window.location.replace("http://localhost/ProjetS3/src/");</script>';
-}else if(isset($_POST['contract'])){
+    }else{
+            if ($solde-$ammount>=0){
+                CtlDebit($ammount, $clientId, $accountType);
+            }else{
+                echo '<script>alert("Vous ne pouvez pas retirer ce montant. Veuillez indiquer un montant plus petit.");</script>';
+            }
+        }
+    echo '<script>window.location.replace("http://localhost/ProjetS3/src/");</script>';
+
+} else if(isset($_POST['contract'])){
     $clientId=$_POST['client-id'];
 }
 
