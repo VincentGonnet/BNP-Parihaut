@@ -75,3 +75,24 @@ function getEventYear($event) {
     return date('Y', strtotime($event->DATERDV));
 }
 
+function getAllEventsBeforeDate($date) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = $connection->prepare("SELECT * FROM rdv WHERE DATERDV < :date");
+    $request->execute(array(
+        'date' => $date
+    ));
+    $request->setFetchMode(PDO::FETCH_OBJ);
+    $events = $request->fetchAll();
+    $request->closeCursor();
+
+    if(empty($events)) {
+        return null;
+    }
+
+    if(!is_array($events)) {
+        $events = array($events);
+    }
+
+    return $events;
+}
+

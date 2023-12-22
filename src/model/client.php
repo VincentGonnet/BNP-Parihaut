@@ -87,3 +87,23 @@ function getFormattedClientName($client) {
     return $client->NOM . ' ' . $client->PRENOM;
 }
 
+function getAllClientsBeforeDate($date) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = $connection->prepare("SELECT * FROM client WHERE DATEENREGISTREMENT <= :date");
+    $request->execute(array(
+        'date' => $date
+    ));
+    $request->setFetchMode(PDO::FETCH_OBJ);
+    $clients = $request->fetchAll();
+    $request->closeCursor();
+
+    if(empty($clients)) {
+        return null;
+    }
+
+    if(!is_array($clients)) {
+        $clients = array($clients);
+    }
+
+    return $clients;
+}

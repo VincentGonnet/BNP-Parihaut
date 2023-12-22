@@ -205,3 +205,18 @@ function CtlSelectEvent($eventId) {
 function CtlModifyJob($employeeId, $job) {
     modifyEmployeeJob($employeeId, $job);
 }
+
+function CtlLoadStats() {
+    if (empty($_SESSION['stats-contract-dates'])) {
+        $_SESSION['stats-contract-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-appointment-dates'])) {
+        $_SESSION['stats-appointment-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-clients-dates'])) {
+        $_SESSION['stats-client-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-balance-dates'])) {
+        $_SESSION['stats-balance-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+}

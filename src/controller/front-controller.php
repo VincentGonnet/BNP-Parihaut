@@ -9,13 +9,18 @@ if (!empty($_POST)) {
         CtlChangeView(implode('-', $route));
       
 
-    // additional actions on specific routes
-    if (isset($_POST['redirect-director-manage-account-types'])) {
-        CtlGetAllAccounts();
-    }
-    if (isset($_POST['redirect-director-manage-contract-types'])) {
-        CtlGetAllContracts();
-    }
+        // additional actions on specific routes
+        if (isset($_POST['redirect-director-manage-account-types'])) {
+            CtlGetAllAccounts();
+        }
+        if (isset($_POST['redirect-director-manage-contract-types'])) {
+            CtlGetAllContracts();
+        }
+
+        // Statistics 
+        if (isset($_POST['redirect-director-see-stats'])) {
+            CtlLoadStats();
+        }
     }
 }
 
