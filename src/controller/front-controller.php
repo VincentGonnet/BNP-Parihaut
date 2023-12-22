@@ -60,15 +60,12 @@ else if(isset($_POST['delete-contract'])){
     }
     CtlGetAllContracts();        
 } else if(isset($_POST['add-contract'])){
-    if(!empty($_POST['contract'])){
-        $contrat=$_POST['contract'];
+    if(!empty($_POST['new-contract'])){
+        $contrat=$_POST['new-contract'];
         CtlAddContract($contrat);
         CtlGetAllContracts();  
     }
-} else if(isset($_POST['delete-all-contracts'])){
-    CtlDeleteAllContracts();
-    CtlGetAllContracts();
-}
+} 
 
 //ADD-EMPLOYE
   else if(isset($_POST['register-new-employee'])){
