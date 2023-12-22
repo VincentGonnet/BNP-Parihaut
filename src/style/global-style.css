@@ -695,7 +695,7 @@ svg {
     width: 10px;
 }
 
-#add-account-modal {
+#add-contract-modal {
     display: flex;
     width: 100%;
     height: 100%;
@@ -831,9 +831,16 @@ svg {
 }
 
 #allContracts th {
-    width: 1000px;
+    width: 1100px;
     background-color: var(--primary-color);
     color: white;
+}
+
+#allContracts .contract input {
+    border: none;
+    background-color: var(--secondary-background-color);
+    width: 95%;
+    font-size: medium;
 }
 
 #allContracts table {
@@ -849,15 +856,24 @@ svg {
 
 #allContracts .contract {
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
-#allContracts input[type="radio"] {
-    width: 50px;
-    height: 20px;
+#allContracts .contract input:focus{
+    outline: none;
 }
 
-#allContracts th:last-child {
-    width: 80px;
+#allContracts .contract .buttons {
+    display: flex;
+    text-align: right;
+    position: relative;
+    bottom: 3px;
+}
+
+#allContracts .contract .buttons button{
+    border: none;
+    
 }
 
 #allContracts .edit-contracts {
@@ -884,6 +900,125 @@ svg {
 
 #allContracts .space {
     width: 10px;
+}
+
+#add-contract-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-contract-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-contract-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-contract-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-contract-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-contract-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-contract-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-contract-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-contract-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-contract-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
