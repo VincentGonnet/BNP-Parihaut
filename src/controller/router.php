@@ -45,6 +45,8 @@ function getRouteTitle($routeName) {
             return "Gérer les types de contrats";
         case 'director-see-stats':
             return "Statistiques";
+        case 'director-manage-documents';
+            return "Pièces justificatives";
         case 'director-employee-overview':
             return $_SESSION['employeeToManage']->PRENOM." ".strtoupper($_SESSION['employeeToManage']->NOM);
         default:

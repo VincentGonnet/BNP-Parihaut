@@ -16,6 +16,9 @@ if (!empty($_POST)) {
     if (isset($_POST['redirect-director-manage-contract-types'])) {
         CtlGetAllContracts();
     }
+    if (isset($_POST['redirect-director-manage-documents'])) {
+        CtlGetAllDocuments();
+    }
     }
 }
 
@@ -171,10 +174,23 @@ else if(isset($_POST['delete-contract'])){
 } else if(isset($_POST['delete-all-contracts'])){
     CtlDeleteAllContracts();
     CtlGetAllContracts();
-    
-
 } 
 
+//MANAGE-DOCUMENTS
+
+  else if (isset($_POST['delete-document'])){
+    $DocumentID= $_POST['delete-document'];
+    CtlDeleteDocument($DocumentID);
+    CtlGetAllDocuments();
+
+}  else if(isset($_POST['add-document'])){
+    if(!empty($_POST['new-doc'] && !empty($_POST['new-list']))){
+        $document=$_POST['new-doc'];
+        $list=$_POST['new-list'];
+        CtlAddDocument($document , $list);
+    }
+    CtlGetAllDocuments();
+} 
 
 
 if ($_SESSION['loggedIn'] == false) {

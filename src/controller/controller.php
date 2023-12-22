@@ -11,6 +11,7 @@ require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
+require_once 'model/documents.php';
 
 
 
@@ -102,6 +103,7 @@ function CtlSelectClient($clientId) {
     $_SESSION['currentPage'] = 'agent-client-overview';
 }
 
+//DIRECTOR FUNCTIONS
 
 //AFFICHAGE COMPTES
 
@@ -151,11 +153,40 @@ function CtlDeleteAllContracts(){
     deleteAllContracts();
 }
 
+
+//AFFICHAGE MOTIF
+
+function CtlGetAllDocuments(){
+    $documentsList=getAllDocuments();
+    $_SESSION['showAllDocuments']= $documentsList;
+}
+
+function CtlDeleteDocument($DocumentID){
+    deleteDocument($DocumentID);
+}
+
+function CtlAddDocument($document , $list){
+    addDocument($document , $list);
+}
+
+function CtlEditList($document , $list , $iddoc){
+    editList($document , $list , $iddoc);
+}
+
+function CtlGetDocument($documentId){
+    $document=getDocument($documentId);
+    $_SESSION['getDoc']=$document;
+}
+
+
+
+
 //AJOUTER UN EMPLOYE
 
 function CtlAddEmployee($name , $firstname , $job , $login , $password){
     addEmployee($name , $firstname , $job , $login , $password);
 }
+
 
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
@@ -205,3 +236,4 @@ function CtlSelectEvent($eventId) {
 function CtlModifyJob($employeeId, $job) {
     modifyEmployeeJob($employeeId, $job);
 }
+
