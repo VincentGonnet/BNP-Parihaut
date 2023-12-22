@@ -637,3 +637,166 @@ svg {
     margin: 0;
     padding: 0;
 }
+
+
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      OVERVIEW-CLIENT                                          */
+/*-----------------------------------------------------------------------------------------------*/
+
+#account-page {
+    justify-content: space-between;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    }
+
+#account-page > div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    }
+#account-page > div > p{
+    height:2%
+}
+
+#account-page > div >p> select {
+        color:var(--text-color) ;
+        border-style: none;
+        background-color:#e8d2d2 ;
+        padding: 6px 1% 8px 2%;
+        box-sizing: border-box;
+        width: 45%;
+        margin-bottom: 5px;
+    }
+
+#account-page > div > p > input {
+    display:flex;
+    flex-direction:column;
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%; 
+    box-sizing: border-box; 
+    width: 45%; 
+    margin-left:2px;
+}
+
+
+#account-page > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#account-page > div > p > button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left:2px;
+    margin-bottom:5px;
+}
+
+#account-page > div > button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left:2px;
+    margin-bottom:5px;
+}
+#account-page> div > p > label {
+    display:flex;
+    float:left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding:5px 1% 5px 2%; 
+    box-sizing: border-box; 
+    width: 45%;
+    margin-left:5px; 
+}
+#account-page > div > p > input[type="radio"] {
+    display: contents;
+    margin-bottom: 5px;
+    width:4%;
+}
+#account-page > div > p > .positive-balance {
+    color: green; /* Couleur du texte en vert pour un solde positif */
+}
+
+#account-page > div > p > .negative-balance {
+    color: red; /* Couleur du texte en rouge pour un solde négatif */
+}
+
+
+/*-----------------*/
+
+
+#contract-page {
+    justify-content: space-between;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    }
+
+#contract-page > div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    }
+#contract-page > div > p{
+    height:2%
+}
+
+#contract-page > div >p> select {
+        color:var(--text-color) ;
+        border-style: none;
+        background-color:#e8d2d2 ;
+        padding: 6px 1% 8px 2%;
+        box-sizing: border-box;
+        width: 45%;
+        margin-bottom: 5px;
+    }
+
+#contract-page > div > p > input {
+    display:flex;
+    flex-direction:column;
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%; 
+    box-sizing: border-box; 
+    width: 45%; 
+    margin-left:2px;
+}
+
+
+#contract-page > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#contract-page> div > p > label {
+    display:flex;
+    float:left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding:5px 1% 5px 2%; 
+    box-sizing: border-box; 
+    width: 45%;
+    margin-left:5px; 
+}

@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 require_once 'view/view.php';
 session_start();
 
@@ -96,8 +98,6 @@ function CtlSelectClient($clientId) {
     $_SESSION['currentPage'] = 'agent-client-overview';
 }
 
-
-/*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);
     if ($client) {
@@ -111,6 +111,23 @@ function CtlAdvisorOfClient($clientId){
 
 function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
     modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+}
+
+function CtlGetAccountData($clientId){
+   getAccountData($clientId);
+}
+function CtlGetContractData($clientId){
+    getContractData($clientId);
+ }
+function CtlModifyDecouvert($decouvert,$clientId,$accountType){
+    
+    modifyDecouvert($decouvert,$clientId,$accountType);
+}
+function CtlCredit($ammount,$clientId,$accountType){
+    credit($ammount,$clientId,$accountType);
+}
+function CtlDebit($ammount,$clientId,$accountType){
+    debit($ammount,$clientId,$accountType);
 }
 
 // PLANNING FUNCTIONS ----------------------------------------------------------

@@ -2,7 +2,8 @@
 
 <form id="overview"   action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
    if(isset($_SESSION['currentClient'])){  
         $employeId = $_SESSION['currentClient']->NUMEMPLOYE;
