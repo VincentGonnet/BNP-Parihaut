@@ -1,4 +1,5 @@
 <?php
+
 require_once 'view/view.php';
 session_start();
 
@@ -8,7 +9,7 @@ require_once 'model/reason.php';
 require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
-require_once 'model/employee.php'
+require_once 'model/employee.php';
 
 
 

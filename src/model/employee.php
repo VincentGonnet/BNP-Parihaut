@@ -16,6 +16,7 @@ function searchEmployeeById($employeId) {
     }
 
     return $employe;
+}
 
 function getEmployeeById($employeeId) {
     $connection = Connection::getInstance()->getConnection();

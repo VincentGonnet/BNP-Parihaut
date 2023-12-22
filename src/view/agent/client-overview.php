@@ -3,7 +3,6 @@
 <form id="overview"   action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <?php
 
-
    if(isset($_SESSION['currentClient'])){  
         $employeId = $_SESSION['currentClient']->NUMEMPLOYE;
         $employe = searchEmployeeById($employeId);
@@ -43,7 +42,7 @@
 
         <p>
             <label id="adress"> Adresse:</label>
-            <input  name="input-adress" for="adress" type="text" value="<?= $adress ?>" readOnly>
+            <input class="read" name="input-adress" for="adress" type="text" value="<?= $adress ?>" readOnly>
         </p>
 
 
@@ -56,23 +55,23 @@
     <div>
         <p> 
             <label id="mail"> Mail:</label>
-            <input  name="input-mail" for="mail" type="text" value="<?= $mail ?>" readOnly>
+            <input  class="read" name="input-mail" for="mail" type="text" value="<?= $mail ?>" readOnly>
         </p> 
 
         <p>
             <label id="phone">Numéro de telephone:</label>
-            <input name="input-phone-number"  for="phone" type="text" value="<?= $phoneNumber?>" readOnly>
+            <input class="read" name="input-phone-number"  for="phone" type="text" value="<?= $phoneNumber?>" readOnly>
         </p>
 
         <p>
             <label id="situation">Situation familiale:</label>
-            <input name="input-situation"  for="situation" type="text" value="<?= $situation?>" readOnly>
+            <input class="read" name="input-situation"  for="situation" type="text" value="<?= $situation?>" readOnly>
         </p>
 
 
         <p>
             <label id="work">Profession:</label>
-            <input name="input-work" for="work" type="text" value="<?= $work ?>" readOnly>
+            <input class="read" name="input-work" for="work" type="text" value="<?= $work ?>" readOnly>
         </p>
 
     
@@ -88,7 +87,7 @@
         
     <p>
         <label id="advisor">Id conseiller:</label>
-        <input name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
+        <input class="read" name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
     </p>
 
     <p>
@@ -124,20 +123,16 @@
     <?php  } ?>
     
     <script>
-        
-        var inputs = document.querySelectorAll('#overview input[type="text"]');
-        function modifier(){
-            inputs.forEach(function(input) {
+    var readInputs = document.querySelectorAll('#overview .read');
+
+    function modifier() {
+        readInputs.forEach(function (input) {
             input.readOnly = false;
-            });
-            
-        }
-                    
-        
-        
-        
-    
-    </script>
+        });
+    }
+</script>
+
+
 
 
 </form>
