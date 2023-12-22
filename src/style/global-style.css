@@ -621,7 +621,7 @@ svg {
 }
 
 #allAccounts th {
-    width: 1000px;
+    width: 1100px;
     background-color: var(--primary-color);
     color: white;
 }
@@ -633,22 +633,41 @@ svg {
     flex-direction: column;
 }
 
+
+
 #allAccounts form {
     width: 100%;
 }
 
 #allAccounts .account {
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
-#allAccounts input[type="radio"] {
-    width: 50px;
-    height: 20px;
+#allAccounts .account input{
+    border: none;
+    background-color: var(--secondary-background-color);
+    width: 95%;
+    font-size: medium;
 }
 
-#allAccounts th:last-child {
-    width: 80px;
+#allAccounts .account input:focus{
+    outline: none;
 }
+
+#allAccounts .account .buttons {
+    display: flex;
+    text-align: right;
+    position: relative;
+    bottom: 3px;
+}
+
+#allAccounts .account .buttons button{
+    border: none;
+    
+}
+
 
 #allAccounts .edit-accounts {
     display: flex;
@@ -676,6 +695,124 @@ svg {
     width: 10px;
 }
 
+#add-account-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-account-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-account-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-account-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-account-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-account-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-account-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-account-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-account-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-account-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      MANAGE CONTRACTS                                         */
 /*-----------------------------------------------------------------------------------------------*/
