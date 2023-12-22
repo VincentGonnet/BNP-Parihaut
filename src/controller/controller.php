@@ -160,6 +160,21 @@ function CtlDeleteDocument($DocumentID){
     deleteDocument($DocumentID);
 }
 
+function CtlAddDocument($document , $list){
+    addDocument($document , $list);
+}
+
+function CtlEditList($document , $list , $iddoc){
+    editList($document , $list , $iddoc);
+}
+
+function CtlGetDocument($documentId){
+    $document=getDocument($documentId);
+    $_SESSION['getDoc']=$document;
+}
+
+
+
 /*---------Overview fonctions--*/
 function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);

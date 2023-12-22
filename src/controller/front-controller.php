@@ -121,10 +121,8 @@ else if(isset($_POST['delete-contract'])){
 //MANAGE-DOCUMENTS
 
   else if (isset($_POST['delete-document'])){
-    if(!empty($_POST['radio-document'])){
-        $DocumentID= $_POST['radio-document'];
-        CtlDeleteDocument($DocumentID);
-    }
+    $DocumentID= $_POST['delete-document'];
+    CtlDeleteDocument($DocumentID);
     CtlGetAllDocuments();
 
 } else if(isset($_POST['add-document'])){
@@ -134,7 +132,16 @@ else if(isset($_POST['delete-contract'])){
         CtlAddDocument($document , $list);
         CtlGetAllDocuments();  
     }
-}
+    
+} else if(isset($_POST['valid-changes'])){
+    if(!empty($_POST['input-doc'] && !empty($_POST['input-list']))){
+        $document=$_POST['input-doc'];
+        $list=$_POST['input-list'];
+        $iddoc=$_POST['edit-list'];
+        CtlEditList($document,$list , $iddoc);
+    }
+    CtlGetAllDocuments();
+} 
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();

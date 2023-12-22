@@ -967,6 +967,10 @@ svg {
     color: white;
 }  
 
+#allDocuments th:first-child{
+    width: 300px;
+}
+
 #allDocuments table {
     background-color: var(--secondary-background-color);
     display: flex;
@@ -974,6 +978,15 @@ svg {
     flex-direction: column;
 
 }
+
+#allDocuments table td input{
+    border: none;
+    width: 90%;
+    font-size: medium;
+    background-color: var(--secondary-background-color);
+}
+
+
 
 #allDocuments form{
     width: 100%;
@@ -993,19 +1006,18 @@ svg {
     
 }
 
-#allDocuments th:last-child {
-    width: 80px;
-}
 
-#allDocuments .edit-Documents {
+
+#allDocuments .edit-documents-list {
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
+    flex-direction: column;    
     width: 100%;
     margin-top: 100px;
 }
 
-#allDocuments .edit-Documents button {
+#allDocuments .edit-documents-list button {
     width: 140px;
     height: 40px;
     background-color: var(--primary-color);
@@ -1014,7 +1026,7 @@ svg {
     border-color: var(--primary-color);
 }
 
-#allDocuments .edit-Documents input {
+#allDocuments .edit-documents-list input {
   height: 40px;
   font-size: large;
 }
@@ -1022,3 +1034,20 @@ svg {
 #allDocuments .space {
     width: 10px;
 }
+
+#allDocuments .add-delete {
+    display: flex;
+    flex-direction: row;
+}
+
+#allDocuments .edit-list-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#allDocuments .document button {
+    border: none;
+    color: var(--primary-color);
+}
+
