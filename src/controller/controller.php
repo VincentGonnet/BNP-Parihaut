@@ -231,11 +231,6 @@ function CtlSelectEvent($eventId) {
 
 }
 
-
-
-
-}
-
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
 function CtlModifyJob($employeeId, $job) {
