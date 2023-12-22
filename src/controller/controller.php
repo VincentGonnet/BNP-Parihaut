@@ -26,6 +26,10 @@ function CtlLogin($login, $password) {
     // TODO: if user is null, display error message (wrong credentials)
 }
 
+function CtlModifyCredentials($employeeId, $login, $password) {
+    modifyCredentials($employeeId, $login, $password);
+}
+
 function CtlLogout() {
     session_unset();
     $_SESSION['loggedIn'] = false;
@@ -149,6 +153,7 @@ function CtlDeleteAllContracts(){
     deleteAllContracts();
 }
 
+
 //AFFICHAGE MOTIF
 
 function CtlGetAllDocuments(){
@@ -173,6 +178,14 @@ function CtlGetDocument($documentId){
     $_SESSION['getDoc']=$document;
 }
 
+
+
+
+//AJOUTER UN EMPLOYE
+
+function CtlAddEmployee($name , $firstname , $job , $login , $password){
+    addEmployee($name , $firstname , $job , $login , $password);
+}
 
 
 /*---------Overview fonctions--*/
@@ -206,11 +219,26 @@ function CtlAddEvent($start, $end, $reasonId) {
     addEvent($client->NUMEMPLOYE, $client->NUMCLIENT, $reasonId, $start, $end);
 }
 
+function CtlDeleteEvent($eventId) {
+    deleteEvent($eventId);
+}
+
 // ADVISOR FUNCTIONS ----------------------------------------------------------
 
 function CtlSelectEvent($eventId) {
     $event = getEventById($eventId);
     $_SESSION['currentEvent'] = $event;
+
 }
 
+
+
+
+}
+
+// DIRECTOR FUNCTIONS ---------------------------------------------------------
+
+function CtlModifyJob($employeeId, $job) {
+    modifyEmployeeJob($employeeId, $job);
+}
 
