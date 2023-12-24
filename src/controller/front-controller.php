@@ -55,12 +55,12 @@ if (isset($_POST['connection'])) {
 } 
 //MANAGE-CONTRACT-TYPES
 else if(isset($_POST['delete-contract'])){
-    if(!empty($_POST['radio-contract'])){
-        $contrat = $_POST['radio-contract'];
+        $contrat = $_POST['delete-contract'];
         CtlDeleteContract($contrat);
+        CtlGetAllContracts();
     }
-    CtlGetAllContracts();        
-} else if(isset($_POST['add-contract'])){
+            
+ else if(isset($_POST['add-contract'])){
     if(!empty($_POST['new-contract'])){
         $contrat=$_POST['new-contract'];
         CtlAddContract($contrat);
@@ -134,40 +134,8 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlModifyJob($employeeId, $job);
     $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
 }
-//MANAGE-ACCOUNT-TYPES
- else if(isset($_POST['delete-account'])){
-    if(!empty($_POST['radio-account'])){
-        $compte = $_POST['radio-account'];
-        CtlDeleteAccount($compte);
-    }
-    CtlGetAllAccounts();        
-} else if(isset($_POST['add-account'])){
-    if(!empty($_POST['account'])){
-        $compte=$_POST['account'];
-        CtlAddAccount($compte);
-        CtlGetAllAccounts();  
-    }
-} else if(isset($_POST['delete-all-accounts'])){
-    CtlDeleteAllAccounts();
-    CtlGetAllAccounts();
-}
-//MANAGE-CONTRACT-TYPES
-else if(isset($_POST['delete-contract'])){
-    if(!empty($_POST['radio-contract'])){
-        $contrat = $_POST['radio-contract'];
-        CtlDeleteContract($contrat);
-    }
-    CtlGetAllContracts();        
-} else if(isset($_POST['add-contract'])){
-    if(!empty($_POST['contract'])){
-        $contrat=$_POST['contract'];
-        CtlAddContract($contrat);
-        CtlGetAllContracts();  
-    }
-} else if(isset($_POST['delete-all-contracts'])){
-    CtlDeleteAllContracts();
-    CtlGetAllContracts();
-} 
+
+ 
 
 //MANAGE-DOCUMENTS
 
