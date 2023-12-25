@@ -1,5 +1,32 @@
 
-<form id="account-page" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form class="account-list-form" id="account-page" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <?php 
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+        $selectedAccount = null;
+        if (isset($_SESSION['currentClient'])) { 
+            $clientId = $_SESSION['currentClient']->NUMCLIENT;
+            $accounts = getAccountData($clientId);
+    ?>
+    <div id="div-container">
+    <?php
+        foreach ($accounts as $account) {
+            $optionValue = $account->NOMCOMPTE;
+            echo '<div class="account-div">';
+            echo '<div class="information-div">';
+            echo '<p>Compte:' . $optionValue . '</p>';
+            echo '<p>Solde:' . $account->SOLDE . '</p>';
+            echo '<input type="button" value="Voir détails"  style="background-color: #e8d2d2;border-style: inset;" class="button" onclick="switchForms(\'' . $optionValue . '\', ' . $account->SOLDE . ', ' . $account->MONTANTDECOUVERT . ')">';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+    ?>
+    </div>
+</form>
+
+
+<form class="account-details-page" id="account-page" style="display: none;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <?php 
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
@@ -14,16 +41,9 @@
 
         <p>
             <label>Compte:</label>
-            <select id="account" name="chosen-account" onchange="updateBalance()">
-                <?php
-                    foreach ($accounts as $account) {
-                        $optionValue = $account->NOMCOMPTE;
-                        $isSelected = ($optionValue == @$_POST['chosen-account']) ? 'selected' : '';
-                        echo '<option name="' . $optionValue . '" value="' . $optionValue . '" ' . $isSelected . '>' . $optionValue . '</option>';
-                        }
-                    echo '<option value="" selected disabled hidden>Sélectionnez un compte</option>';
-                    ?>
-            </select> 
+            <input type="text" id="selected-account-text" name="selected-account-text" readonly>
+            <input type="hidden" id="selected-account" name="selected-account"> 
+        
         </p>
 
         <p >
@@ -39,6 +59,7 @@
 
         <input type="hidden" name="client-id" value="<?php echo $clientId; ?>">
         <input type="hidden" name="selected-account" id="selected-account" value="">
+        <input type="hidden" name="chosen-account" id="chosen-account" value="">
 
 
 
@@ -85,32 +106,14 @@
     </div>
     
     
-</form>
+
 
 <?php }?>
 
-
+</form>
 <script>
         
-        function updateBalance() {
-    var selectedAccountIndex = document.getElementById('account').selectedIndex;
-    var soldeInput = document.getElementById('solde');
-    var decouvertInput = document.getElementById('decouvert');
-    var selectedAccount = <?php echo json_encode($accounts); ?>[selectedAccountIndex];
-
-    document.getElementById('selected-account').value = selectedAccount;
-    soldeInput.value = selectedAccount.SOLDE;
-    decouvertInput.value = selectedAccount.MONTANTDECOUVERT;
-
-    // Mettez à jour la classe en fonction du solde
-    if (selectedAccount.SOLDE > 0) {
-        soldeInput.classList.remove('negative-balance');
-        soldeInput.classList.add('positive-balance');
-    } else {
-        soldeInput.classList.remove('positive-balance');
-        soldeInput.classList.add('negative-balance');
-    }
-}
+    
 
 
     function setMax(operation) {
@@ -132,4 +135,21 @@
         decouvert.readOnly=false;
         }
 
+
+
+
+    
+    function switchForms(selectedAccount, solde, decouvert) {
+        document.getElementById('selected-account-text').value = selectedAccount;
+        document.getElementById('solde').value = solde;
+        document.getElementById('decouvert').value = decouvert;
+        document.getElementById('chosen-account').value = selectedAccount;
+
+        var form1 = document.querySelector('.account-list-form');
+        var form2 = document.querySelector('.account-details-page');
+        form1.style.display = 'none';
+        form2.style.display = 'block';
+    }
+
 </script>
+
