@@ -15,7 +15,7 @@ function getAllDocuments(){
 
 function getDocument($documentId){
     $connection= Connection::getInstance()->getConnection();
-    $request="select LIBELLEMOTIF,LISTEPIECES from motif where IDMOTIF LIKE :documentId";
+    $request="select * from motif where IDMOTIF LIKE :documentId";
     $prepare=$connection->prepare($request);
     $prepare->execute(array(
         'documentId' => $documentId

@@ -1483,6 +1483,7 @@ svg {
 
 
 
+
 #allDocuments form{
     width: 100%;
 }
@@ -1655,4 +1656,39 @@ svg {
     cursor: pointer;
     color: white;
     font-size: larger;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      ADVISOR DOCUMENTS                                          */
+/* ----------------------------------------------------------------------------------------------- */
+
+#allDocuments #list-name {
+    opacity: 0;
+}
+
+#allDocuments .advisor-documents th {
+    width: 400px;
+    height: 50px;
+}
+
+#allDocuments .advisor-documents td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    margin-top: 15px;
+
+    font-size: large;
+    
+    width: 100%;
+
+}
+
+#allDocuments .advisor-documents td input[type="checkbox"]{
+    height: 20px;
+    width: 30px;
+    margin-left: auto;
+
+    
 }
