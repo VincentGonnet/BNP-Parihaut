@@ -1692,3 +1692,7 @@ svg {
 
     
 }
+
+#allDocuments .advisor-documents {
+    margin-right: auto;
+}
