@@ -13,6 +13,7 @@ require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
 require_once 'model/documents.php';
+require_once 'model/client-account.php';
 
 
 
@@ -232,6 +233,10 @@ function CtlSelectEvent($eventId) {
 
 }
 
+function CtlGetAllAccountsClient($idClient){
+    $accounts = getAllAccountsClient($idClient);
+    $_SESSION['client-accounts']=$accounts;
+}
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
 function CtlModifyJob($employeeId, $job) {

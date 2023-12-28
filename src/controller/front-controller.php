@@ -20,6 +20,10 @@ if (!empty($_POST)) {
     if (isset($_POST['redirect-director-manage-documents'])) {
         CtlGetAllDocuments();
     }
+    if (isset($_POST['redirect-advisor-client-accounts'])) {
+        $idClient = $_SESSION['currentEvent']->NUMCLIENT;
+        CtlGetAllAccountsClient($idClient);
+    }
     }
 }
 

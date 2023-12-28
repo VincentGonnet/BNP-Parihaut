@@ -1656,3 +1656,72 @@ svg {
     color: white;
     font-size: larger;
 }
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      ADVISOR ACCOUNTS                                           */
+/* ----------------------------------------------------------------------------------------------- */
+
+#allAccounts .advisor-accounts {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#allAccounts .advisor-accounts table {
+    width: 100%;
+    display: flex;
+    background-color: var(--secondary-background-color);
+    
+}
+
+#allAccounts .advisor-accounts td {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    height: 30px;
+}
+
+#allAccounts .advisor-accounts td .date{
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 30px;
+}
+
+#allAccounts .advisor-accounts td .overdraft{
+    display: flex;
+    flex-direction: row;
+
+}
+
+#allAccounts .advisor-accounts td input[type="text"] {
+    width: 160px;
+    border: none;
+    background-color: var(--secondary-background-color);
+    font-size: large;
+}
+
+#allAccounts .advisor-accounts td input[name="overdraft-title"] {
+    width: 300px;
+}
+
+
+#allAccounts .advisor-accounts td input[type="text"]:focus {
+    outline: none;
+}
+
+#allAccounts .advisor-accounts td input[type="text"]:first-child {
+    width: 150px;
+}
+
+#allAccounts .advisor-accounts button {
+    border: none;
+}
+
+#allAccounts .advisor-accounts form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
