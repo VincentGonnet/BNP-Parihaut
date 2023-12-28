@@ -642,40 +642,45 @@ svg {
 
 
 /*-----------------------------------------------------------------------------------------------*/
-/*                                      OVERVIEW-CLIENT                                          */
+/*                                      Account-contract-CLIENT                                          */
 /*-----------------------------------------------------------------------------------------------*/
-
-#account-details-page {
+.account-list-form {
     justify-content: space-between;
-    background-color: var(--secondary-background-color);
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    }
+  }
 
-#account-details-page > div {
-    display: flex;
-    flex-direction: column;
-    width: 48%;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    }
-#account-details-page > div > p{
+.account-list-form #div-container {
+        display: grid;
+    
+        height: 60%;
+        width: 70%;
+        row-gap: 1%;
+        column-gap: 1%;
+      }
+.p{
     height:2%
 }
 
-#account-details-page > div >p> select {
-        color:var(--text-color) ;
-        border-style: none;
-        background-color:#e8d2d2 ;
-        padding: 6px 1% 8px 2%;
-        box-sizing: border-box;
-        width: 45%;
-        margin-bottom: 5px;
-    }
+#div-container .account-div {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    background-color: var(--secondary-background-color);
+  }
+  #div-container .information-div {
+    padding: 7% 7% 7% 7%;
+    text-align: center;
+    width: 90%;
+    background-color: var(--secondary-background-color);
+  }
 
-#account-details-page > div > p > input {
+.input {
     display:flex;
     flex-direction:column;
     color: var(--text-color);
@@ -684,17 +689,16 @@ svg {
     padding: 6px 1% 8px 2%; 
     box-sizing: border-box; 
     width: 45%; 
-    margin-left:2px;
+    margin-left:5px;
+}
+.input[type="number"]{
+    margin-top:10%;
 }
 
 
-#account-details-page > div > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
-#account-details-page > div > p > button {
+
+.button {
     background-color: #e8d2d2;
     width: 45%;
     padding: 6px 1% 5px 2%;
@@ -705,17 +709,7 @@ svg {
     margin-bottom:5px;
 }
 
-#account-details-page > div > button {
-    background-color: #e8d2d2;
-    width: 45%;
-    padding: 6px 1% 5px 2%;
-    margin-top: 2%;
-    display: flex;
-    flex-direction: row;
-    margin-left:2px;
-    margin-bottom:5px;
-}
-#account-details-page> div > p > label {
+.label {
     display:flex;
     float:left;
     background-color: var(--primary-color);
@@ -725,17 +719,10 @@ svg {
     width: 45%;
     margin-left:5px; 
 }
-#account-details-page > div > p > input[type="radio"] {
+.radio {
     display: contents;
     margin-bottom: 5px;
     width:4%;
-}
-#account-details-page > div > p > .positive-balance {
-    color: green; /* Couleur du texte en vert pour un solde positif */
-}
-
-#account-details-page > div > p > .negative-balance {
-    color: red; /* Couleur du texte en rouge pour un solde négatif */
 }
 
 
@@ -752,7 +739,7 @@ svg {
     height: 100%;
     }
 
-#contract-page  form > div {
+#contract-page > div {
     display: flex;
     flex-direction: column;
     width: 48%;

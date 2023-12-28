@@ -101,16 +101,6 @@ function getAccountData($clientId) {
     return $accounts;
 }
 
-function modifyDecouvert($decouvert,$clientId,$accountType){
-     $connection = Connection::getInstance()->getConnection();
-     $result = $connection->prepare('UPDATE compteclient SET  MONTANTDECOUVERT=:decouvert WHERE NUMCLIENT=:clientId and NOMCOMPTE=:accountType' );
-     $result->execute(array(
-         'decouvert' => $decouvert,
-         'clientId' => $clientId,
-         'accountType'=>$accountType
-        ));
-    $_POST['decouvert']=$decouvert;
-}
 
 function credit($ammount,$clientId,$accountType){
     $connection = Connection::getInstance()->getConnection();

@@ -73,11 +73,6 @@ if (isset($_POST['connection'])) {
 } else if (isset($_POST['account'])){
     $clientId = $_POST['clientId'];
     CtlGetAccountData($clientId);
-}else if (isset($_POST['submit-decouvert-changes'])){
-    $clientId=$_POST['client-id'];
-    $decouvert=$_POST['decouvert'];
-    $accountType=$_POST['chosen-account'];
-    CtlModifyDecouvert($decouvert,$clientId,$accountType);
 }else if (isset($_POST['submit-credit'])) {
     $ammount=$_POST['ammount'];
     $clientId=$_POST['client-id'];
@@ -100,7 +95,7 @@ if (isset($_POST['connection'])) {
             if ($solde-$ammount>=0){
                 CtlDebit($ammount, $clientId, $accountType);
             }else{
-                echo '<script>alert("Vous ne pouvez pas retirer ce montant. Veuillez indiquer un montant plus petit.");</script>';
+                echo '<script>alert("Vous ne pouvez pas depasser votre solde. Veuillez indiquer un montant plus petit.");</script>';
             }
         }
     echo '<script>window.location.replace("http://localhost/ProjetS3/src/");</script>';
