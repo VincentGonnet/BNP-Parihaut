@@ -4,7 +4,7 @@ function displayRoute($routeName) {
     $viewName = array_slice(explode('-', $routeName), 1);
     $viewName = implode('-', $viewName);
 
-    display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle($routeName));
+    display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle());
 }
 
 
@@ -45,6 +45,10 @@ function getRouteTitle($routeName) {
             return "Gérer les types de contrats";
         case 'director-see-stats':
             return "Statistiques";
+        case 'director-manage-documents';
+            return "Pièces justificatives";
+        case 'director-employee-overview':
+            return $_SESSION['employeeToManage']->PRENOM." ".strtoupper($_SESSION['employeeToManage']->NOM);
         default:
             return $routeName;
     }

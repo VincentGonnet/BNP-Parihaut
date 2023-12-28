@@ -305,21 +305,19 @@ svg {
 #search-client td:last-child {
     padding: 0;
     text-align: center;
-
 }
 
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      OVERVIEW-CLIENT                                          */
 /*-----------------------------------------------------------------------------------------------*/
 
-
 #overview {
     justify-content: space-between;
     background-color: var(--secondary-background-color);
     display: flex;
     flex-wrap: wrap;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
 
 #overview > div {
@@ -329,42 +327,174 @@ svg {
     margin-bottom: 15px;
     box-sizing: border-box;
 }
-#overview >div  >p {
-    height:5%;
+#overview > div > p {
+    height: 5%;
 }
 
 #overview > div > p > label {
-    display:flex;
-    float:left;
+    display: flex;
+    float: left;
     background-color: var(--primary-color);
     color: #120909;
-    padding:5px 1% 5px 2%; 
-    box-sizing: border-box; 
+    padding: 5px 1% 5px 2%;
+    box-sizing: border-box;
     width: 45%;
-    margin-left:5px; 
+    margin-left: 5px;
 }
 
 #overview > div > p > input {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     color: var(--text-color);
     border-style: none;
     background-color: #e8d2d2;
-    padding: 6px 1% 8px 2%; 
-    box-sizing: border-box; 
-    width: 45%; 
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
 }
 
-#overview > div  > button{
-  background-color: #e8d2d2;
-  width: 45%;
-  padding: 5px 1% 5px 2%;
-  margin-top: 5px;
-  margin-left: 47%;
-  display: flex;
-  flex-direction: row;
-    
+#overview > div > button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 5px 1% 5px 2%;
+    margin-top: 5px;
+    margin-left: 47%;
+    display: flex;
+    flex-direction: row;
+}
 
+#search-client {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#search-client > hr {
+    border: none;
+    border-top: 2px solid var(--accent-color);
+    border-radius: 5px;
+    width: 75%;
+    opacity: 60%;
+
+    margin: 20px 0;
+}
+
+/* SEARCH FIELDS ---- */
+
+#search-client .search-clients-search-fields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+    height: 40%;
+}
+
+#search-client .search-clients-search-fields form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    /* border: blue solid 1px; */
+}
+
+#search-client .search-clients-search-fields .fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 90%;
+
+    box-sizing: border-box;
+}
+
+#search-client .search-clients-search-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 7px 0;
+
+    background: transparent;
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#search-client .search-clients-search-fields button {
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+}
+
+#search-client .search-clients-search-fields hr {
+    margin: 0 35px;
+
+    border: none;
+    border-left: 2px solid var(--accent-color);
+    border-radius: 5px;
+    height: 75%;
+    opacity: 60%;
+}
+
+/* SEARCH RESULTS ---- */
+
+#search-client .search-clients-results {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#search-client table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+}
+
+#search-client th,
+#search-client td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#search-client th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#search-client td > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#search-client th:last-child {
+    width: 18px;
+}
+
+#search-client td:last-child {
+    padding: 0;
+    text-align: center;
 }
 
 /*-----------------------------------------------------------------------------------------------*/
@@ -470,6 +600,517 @@ svg {
     top: 0;
     left: 0;
     color: white;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE ACCOUNTS                                          */
+/*-----------------------------------------------------------------------------------------------*/
+
+#allAccounts {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allAccounts .showAccounts {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allAccounts th {
+    width: 1100px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#allAccounts table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+
+#allAccounts form {
+    width: 100%;
+}
+
+#allAccounts .account {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+#allAccounts .account input{
+    border: none;
+    background-color: var(--secondary-background-color);
+    width: 95%;
+    font-size: medium;
+}
+
+#allAccounts .account input:focus{
+    outline: none;
+}
+
+#allAccounts .account .buttons {
+    display: flex;
+    text-align: right;
+    position: relative;
+    bottom: 3px;
+}
+
+#allAccounts .account .buttons button{
+    border: none;
+    
+}
+
+
+#allAccounts .edit-accounts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allAccounts .edit-accounts button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allAccounts .edit-accounts input {
+    height: 40px;
+    font-size: large;
+}
+
+#allAccounts .space {
+    width: 10px;
+}
+
+#add-account-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-account-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-account-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-account-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-account-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-account-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-account-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-account-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-account-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-account-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-account-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE CONTRACTS                                         */
+/*-----------------------------------------------------------------------------------------------*/
+
+#allContracts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allContracts .showContracts {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allContracts th {
+    width: 1100px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#allContracts .contract input {
+    border: none;
+    background-color: var(--secondary-background-color);
+    width: 95%;
+    font-size: medium;
+}
+
+#allContracts table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#allContracts form {
+    width: 100%;
+}
+
+#allContracts .contract {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+#allContracts .contract input:focus{
+    outline: none;
+}
+
+#allContracts .contract .buttons {
+    display: flex;
+    text-align: right;
+    position: relative;
+    bottom: 3px;
+}
+
+#allContracts .contract .buttons button{
+    border: none;
+    
+}
+
+#allContracts .edit-contracts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allContracts .edit-contracts button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allContracts .edit-contracts input {
+    height: 40px;
+    font-size: large;
+}
+
+#allContracts .space {
+    width: 10px;
+}
+
+#add-contract-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-contract-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-contract-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-contract-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-contract-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-contract-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-contract-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-contract-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-contract-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-contract-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-contract-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      ADD EMPLOYE                                              */
+/*-----------------------------------------------------------------------------------------------*/
+
+#add-employe {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#add-employe form {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-employe th {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#add-employe table {
+    width: 1000px;
+}
+
+#add-employe td {
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+}
+
+#add-employe td input {
+    width: 50%;
+    height: 30px;
+    font-size: large;
+    border-width: 1px;
+    margin-bottom: 10px;
+}
+
+#add-employe td select {
+    width: 50%;
+    height: 30px;
+    font-size: large;
+    border-width: 1px;
+    margin-bottom: 10px;
+}
+
+#add-employe .space {
+    width: 10px;
+    height: 20px;
+}
+
+#add-employe .buttons {
+    margin-top: 30px;
+}
+
+#add-employe .buttons button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+/* .td-with-delete-button:hover {
+    background-color: var(--secondary-background-color) !important;
+} */
+
+#advisor-planning .delete-button:hover strong {
+    color: transparent;
+}
+#advisor-planning .delete-button:hover {
+    font-size: 0;
+}
+
+#advisor-planning .delete-button svg {
+    color: var(--secondary-background-color);
+    display: none;
+}
+
+#advisor-planning .delete-button:hover svg {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
 }
 
 #advisor-planning .calendar-event button:disabled {
@@ -637,6 +1278,7 @@ svg {
     margin: 0;
     padding: 0;
 }
+
 
 
 
@@ -819,3 +1461,381 @@ svg {
     background-color: var(--secondary-background-color);
 }
 
+
+#delete-event-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-event-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 630px;
+    height: 195px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#delete-event-modal form > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#delete-event-modal button {
+    margin: 15px;
+    padding: 5px 10px;
+
+    width: 100px;
+    height: 40px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      MANAGE EMPLOYEES                                           */
+/* ----------------------------------------------------------------------------------------------- */
+
+#manage-employees {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    box-sizing: border-box;
+    padding-bottom: 15px;
+}
+
+#manage-employees form {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#manage-employees table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-background-color);
+}
+
+#manage-employees th,
+#manage-employees td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#manage-employees th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#manage-employees td > button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#manage-employees th {
+    width: 31%;
+}
+
+#manage-employees th:first-child {
+    width: 27px !important;
+}
+
+#manage-employees th:last-child {
+    width: 18px !important;
+}
+
+#manage-employees td:last-child {
+    padding: 0;
+    text-align: center;
+}
+
+#manage-employees > input[type="text"] {
+    align-self: flex-start;
+    margin: 10px;
+
+    width: 20%;
+    height: 30px;
+    font-size: large;
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    outline: none;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      EMPLOYEE OVERVIEW                                          */
+/* ----------------------------------------------------------------------------------------------- */
+
+#employee-overview .login-infos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "login-infos login-infos";
+}
+
+#employee-overview .general-infos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "general-infos general-infos";
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE DOCUMENTS                                         */
+/*-----------------------------------------------------------------------------------------------*/
+
+
+
+
+#allDocuments{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+#allDocuments .showDocuments {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allDocuments th {
+    width: 1000px;
+    background-color: var(--primary-color);
+    color: white;
+}  
+
+#allDocuments th:first-child{
+    width: 300px;
+}
+
+#allDocuments table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+#allDocuments table td input{
+    border: none;
+    width: 95%;
+    font-size: medium;
+    background-color: var(--secondary-background-color);
+}
+
+
+
+#allDocuments form{
+    width: 100%;
+}
+
+
+#allDocuments .account {
+    margin-top: 20px;
+
+}
+
+
+#allDocuments .edit-documents-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;    
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allDocuments .edit-documents-list button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allDocuments .edit-documents-list input {
+  height: 40px;
+  font-size: large;
+}
+
+#allDocuments .space {
+    width: 10px;
+}
+
+#allDocuments .add-delete {
+    display: flex;
+    flex-direction: row;
+}
+
+#allDocuments .edit-list-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#allDocuments .document button {
+    border: none;
+    color: var(--primary-color);
+}
+
+
+#add-doc-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-doc-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-doc-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-doc-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-doc-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-doc-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-doc-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-doc-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-doc-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-doc-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}

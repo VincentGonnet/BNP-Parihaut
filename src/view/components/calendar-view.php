@@ -73,12 +73,23 @@
     </form>
 </modal>
 
+<modal id="delete-event-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h2>Voulez-vous vraiment supprimer cet évènement ?</h2>
+        <div>
+            <button name="delete-event" id="delete-event" type="submit">Oui</button>
+            <button onclick="closeDeleteEventModal()" type="button">Non</button>
+        </div>
+    </form>
+
+</modal>
+
 <script>
     let modal = document.getElementById('calendar-modal');
     let formattedDateHour = "";
     let maxEventDuration = "";
 
-    function openModal(fDate, maxDuration) {
+    function openNewEventModal(fDate, maxDuration) {
         modal.style.opacity = 1;
         modal.style.pointerEvents = "auto";
         formattedDateHour = fDate;
@@ -90,7 +101,7 @@
         document.querySelector("#new-event-start-time option").value = formattedDateHour;
     }
 
-    function closeModal() {
+    function closeNewEventModal() {
         modal.style.opacity = 0;
         modal.style.pointerEvents = "none";
     }
@@ -148,9 +159,23 @@
     // click anywhere outside the modal to close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            closeModal();
+            closeNewEventModal();
+        } else if (event.target == deleteEventModal) {
+            closeDeleteEventModal();
         }
     }
 
+    let deleteEventModal = document.getElementById('delete-event-modal');
+
+    function openDeleteEventModal($eventId) {
+        deleteEventModal.style.opacity = 1;
+        deleteEventModal.style.pointerEvents = "auto";
+        deleteEventModal.querySelector("#delete-event").value = $eventId;
+    }
+
+    function closeDeleteEventModal() {
+        deleteEventModal.style.opacity = 0;
+        deleteEventModal.style.pointerEvents = "none";
+    }
 
 </script>

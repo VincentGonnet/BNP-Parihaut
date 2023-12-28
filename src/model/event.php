@@ -46,6 +46,15 @@ function addEvent($advisorId, $clientId, $reasonId, $start, $end) {
     $result->closeCursor();
 }
 
+function deleteEvent($eventId) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('DELETE FROM rdv WHERE NUMRDV = :eventId');
+    $result->execute(array(
+        'eventId' => $eventId
+    ));
+    $result->closeCursor();
+}
+
 function getEventMinute($event) {
     return date('i', strtotime($event->DATERDV));
 }
