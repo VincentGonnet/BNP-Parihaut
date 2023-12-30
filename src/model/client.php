@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 require_once 'connection.php';
 
 /**
@@ -85,5 +87,51 @@ function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneN
 
 function getFormattedClientName($client) {
     return $client->NOM . ' ' . $client->PRENOM;
+}
+/******************************************Accounts****************************************************/
+function getAccountData($clientId) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM compteclient WHERE NUMCLIENT = :clientId');
+    $result->execute(array(':clientId' => $clientId));
+
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $accounts = $result->fetchAll();
+    $result->closeCursor();
+
+    return $accounts;
+}
+
+
+function credit($ammount,$clientId,$accountType){
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('UPDATE compteclient SET SOLDE = SOLDE + :ammount WHERE NUMCLIENT = :clientId AND NOMCOMPTE = :accountType'); 
+    $result->execute(array(
+        ':clientId' => $clientId,
+        ':ammount' => $ammount,
+        ':accountType' => $accountType
+    ));
+}
+
+
+function debit($ammount,$clientId,$accountType){
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('UPDATE compteclient SET SOLDE = SOLDE - :ammount WHERE NUMCLIENT = :clientId AND NOMCOMPTE = :accountType'); 
+    $result->execute(array(
+        ':clientId' => $clientId,
+        ':ammount' => $ammount,
+        ':accountType' => $accountType
+    ));
+    
+}
+function getContractData($clientId){
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM contratclient WHERE NUMCLIENT = :clientId');
+    $result->execute(array(':clientId' => $clientId));
+
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $contract = $result->fetchAll();
+    $result->closeCursor();
+    
+    return $contract;
 }
 
