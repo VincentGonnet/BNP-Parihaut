@@ -158,11 +158,31 @@ else if (isset($_POST["submit-manage-employee"])) {
 } 
 
 //ADVISOR ACCOUNTS 
- else if(isset($_POST['edit-overdraft'])){
-    $accountName=$_POST['edit-overdraft'];
+ else if(isset($_POST['accept-overdraft'])){
+    $overdraft = $_POST['new-overdraft'];
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    CtlGetOverdraft($accountName,$idClient);
+    $accountName=$_POST['account-overdraft'];
+    CtlEditOverdraft($accountName , $idClient , $overdraft);
+    CtlGetAllAccountsClient($idClient);
+
+ } else if (isset($_POST['accept-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['new-account-overdraft'];
+    $openDate = new \DateTime();
+    $openDate = $openDate->format('Y-m-d');
+    $balance = 0.00;
+    $overdraft = $_POST['new-overdraft'];
+    CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
+    CtlGetAllAccountsClient($idClient);
+ } else if (isset($_POST['accept-delete-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['account-to-delete'];
+    $endDate=new \DateTime();
+    $endDate = $endDate->format('Y-m-d');
+    CtlCloseAccount($idClient , $accountName , $endDate);
+    CtlGetAllAccountsClient($idClient);
  }
+
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();

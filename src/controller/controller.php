@@ -238,10 +238,19 @@ function CtlGetAllAccountsClient($idClient){
     $_SESSION['client-accounts']=$accounts;
 }
 
-function CtlGetOverdraft($accountName , $idClient){
-    $overdraft= getOverdraft($accountName , $idClient);
-    $_SESSION['account-overdraft']=$overdraft;
+function CtlEditOverdraft($accountName , $idClient , $overdraft){
+    editOverdraft($accountName , $idClient , $overdraft);
 }
+
+function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdraft){
+    newAccount($idClient , $accountName , $openDate , $balance , $overdraft);
+}
+
+function CtlCloseAccount($idClient , $accountName , $endDate){
+    closeAccount($idClient , $accountName , $endDate);
+}
+
+
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
 function CtlModifyJob($employeeId, $job) {

@@ -13,16 +13,40 @@ function getAllAccountsClient($idClient){
     return $desc;
 }
 
-function getOverdraft($accountName , $idClient){
+function editOverdraft($accountName , $idClient , $overdraft){
     $connection= Connection::getInstance()->getConnection();
-    $request="select * from compteclient where NOMCOMPTE LIKE :accountName and NUMCLIENT like :idClient" ;
+    $request="UPDATE compteclient SET MONTANTDECOUVERT= :overdraft  WHERE NUMCLIENT= :idClient and NOMCOMPTE = :accountName" ;
     $prepare=$connection->prepare($request);
     $prepare->execute(array(
+        'overdraft' => $overdraft ,
         'accountName' => $accountName ,
         'idClient' => $idClient
     ));
-    $prepare->setFetchMode(PDO::FETCH_OBJ);
-    $result = $prepare->fetchall();
     $prepare->closeCursor();
-    return $result;
+}
+
+function newAccount($idClient , $accountName , $openDate , $balance , $overdraft){
+    $connection= Connection::getInstance()->getConnection();
+    $request="INSERT IGNORE INTO compteclient (NUMCLIENT , NOMCOMPTE , DATEOUVERTURE , DATEFERMETURE, SOLDE , MONTANTDECOUVERT) VALUES (:idClient , :accountName , :openDate , NULL , :balance ,:overdraft  )" ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'overdraft' => $overdraft ,
+        'accountName' => $accountName ,
+        'idClient' => $idClient ,
+        'balance' => $balance ,
+        'openDate' => $openDate
+    ));
+    $prepare->closeCursor();
+}
+
+function closeAccount($idClient , $accountName , $endDate){
+    $connection= Connection::getInstance()->getConnection();
+    $request="UPDATE compteclient SET DATEFERMETURE= :endDate  WHERE NUMCLIENT= :idClient and NOMCOMPTE = :accountName" ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'idClient' => $idClient ,
+        'accountName' => $accountName ,
+        'endDate' => $endDate
+    ));
+    $prepare->closeCursor();
 }
