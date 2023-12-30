@@ -237,6 +237,11 @@ function CtlGetAllAccountsClient($idClient){
     $accounts = getAllAccountsClient($idClient);
     $_SESSION['client-accounts']=$accounts;
 }
+
+function CtlGetOverdraft($accountName , $idClient){
+    $overdraft= getOverdraft($accountName , $idClient);
+    $_SESSION['account-overdraft']=$overdraft;
+}
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
 function CtlModifyJob($employeeId, $job) {

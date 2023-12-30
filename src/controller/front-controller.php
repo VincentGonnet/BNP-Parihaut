@@ -157,6 +157,12 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlGetAllDocuments();
 } 
 
+//ADVISOR ACCOUNTS 
+ else if(isset($_POST['edit-overdraft'])){
+    $accountName=$_POST['edit-overdraft'];
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    CtlGetOverdraft($accountName,$idClient);
+ }
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
