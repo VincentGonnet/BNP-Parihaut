@@ -271,6 +271,12 @@ function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdr
 function CtlCloseAccount($idClient , $accountName , $endDate){
     closeAccount($idClient , $accountName , $endDate);
 }
+function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType){
+    clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+function CtlDeleteClientContract($idClient,$contractType){
+    deleteClientContract($idClient,$contractType);
+}
 
 
 // DIRECTOR FUNCTIONS ---------------------------------------------------------

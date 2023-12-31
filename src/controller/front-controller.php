@@ -220,6 +220,20 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlGetAllAccountsClient($idClient);
  }
 
+//ADVISOR CONTRACTS
+else if (isset($_POST['submit-new-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $openingDate=$_POST['new-opening-date'];
+    $endDate=$_POST['new-ending-date'];
+    $price=$_POST['new-price'];
+    $contractType=$_POST['new-contract-type'];
+    CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+else if(isset($_POST['delete-client-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $contractType=$_POST['selected-contract-text'];
+    CtlDeleteClientContract($idClient,$contractType);
+}
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
