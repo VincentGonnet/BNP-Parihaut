@@ -22,6 +22,10 @@ if (!empty($_POST)) {
     if (isset($_POST['redirect-director-manage-documents'])) {
         CtlGetAllDocuments();
     }
+    if (isset($_POST['redirect-advisor-client-accounts'])) {
+        $idClient = $_SESSION['currentEvent']->NUMCLIENT;
+        CtlGetAllAccountsClient($idClient);
+    }
     }
 }
 
@@ -190,6 +194,46 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlGetAllDocuments();
 } 
 
+//ADVISOR ACCOUNTS 
+ else if(isset($_POST['accept-overdraft'])){
+    $overdraft = $_POST['new-overdraft'];
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['account-overdraft'];
+    CtlEditOverdraft($accountName , $idClient , $overdraft);
+    CtlGetAllAccountsClient($idClient);
+
+ } else if (isset($_POST['accept-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['new-account-overdraft'];
+    $openDate = new \DateTime();
+    $openDate = $openDate->format('Y-m-d');
+    $balance = 0.00;
+    $overdraft = $_POST['new-overdraft'];
+    CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
+    CtlGetAllAccountsClient($idClient);
+ } else if (isset($_POST['accept-delete-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['account-to-delete'];
+    $endDate=new \DateTime();
+    $endDate = $endDate->format('Y-m-d');
+    CtlCloseAccount($idClient , $accountName , $endDate);
+    CtlGetAllAccountsClient($idClient);
+ }
+
+//ADVISOR CONTRACTS
+else if (isset($_POST['submit-new-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $openingDate=$_POST['new-opening-date'];
+    $endDate=$_POST['new-ending-date'];
+    $price=$_POST['new-price'];
+    $contractType=$_POST['new-contract-type'];
+    CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+else if(isset($_POST['delete-client-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $contractType=$_POST['selected-contract-text'];
+    CtlDeleteClientContract($idClient,$contractType);
+}
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();

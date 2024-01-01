@@ -16,6 +16,7 @@ require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
 require_once 'model/documents.php';
+require_once 'model/client-account.php';
 
 
 
@@ -253,6 +254,30 @@ function CtlSelectEvent($eventId) {
     $_SESSION['currentEvent'] = $event;
 
 }
+
+function CtlGetAllAccountsClient($idClient){
+    $accounts = getAllAccountsClient($idClient);
+    $_SESSION['client-accounts']=$accounts;
+}
+
+function CtlEditOverdraft($accountName , $idClient , $overdraft){
+    editOverdraft($accountName , $idClient , $overdraft);
+}
+
+function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdraft){
+    newAccount($idClient , $accountName , $openDate , $balance , $overdraft);
+}
+
+function CtlCloseAccount($idClient , $accountName , $endDate){
+    closeAccount($idClient , $accountName , $endDate);
+}
+function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType){
+    clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+function CtlDeleteClientContract($idClient,$contractType){
+    deleteClientContract($idClient,$contractType);
+}
+
 
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
