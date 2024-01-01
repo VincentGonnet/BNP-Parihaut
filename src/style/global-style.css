@@ -1370,9 +1370,39 @@ svg {
 
 
 /*-----------------*/
+.contract-list-form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-template-rows:repeat(2,1fr);
+    height:100%;
+    width:100%;
+    row-gap:1%;
+    column-gap:1%;
+}
+.contract-list-form > div {
+    border:2px solid var(--primary-color);
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    height:50%;
+    width:50%;
+    background-color: var(--secondary-background-color);
+}
+.contract-list-form > div > div >div > button{
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left:28%;
+    margin-bottom:5px;
+    
+}
 
-
-#contract-page {
+/***********************/
+.contract-details-page {
     justify-content: space-between;
     background-color: var(--secondary-background-color);
     display: flex;
@@ -1381,18 +1411,18 @@ svg {
     height: 100%;
     }
 
-#contract-page > div {
+.contract-details-page > div {
     display: flex;
     flex-direction: column;
-    width: 48%;
+    width: 50%;
     margin-bottom: 15px;
     box-sizing: border-box;
     }
-#contract-page > div > p{
+.contract-details-page > div > p{
     height:2%
 }
 
-#contract-page > div >p> select {
+.contract-details-page > div > p> select {
         color:var(--text-color) ;
         border-style: none;
         background-color:#e8d2d2 ;
@@ -1402,7 +1432,7 @@ svg {
         margin-bottom: 5px;
     }
 
-#contract-page > div > p > input {
+.contract-details-page > div > p > input {
     display:flex;
     flex-direction:column;
     color: var(--text-color);
@@ -1414,15 +1444,13 @@ svg {
     margin-left:2px;
 }
 
-
-#contract-page > div > div {
+.contract-details-page > div > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-
-#contract-page> div > p > label {
+.contract-details-page  > div > p > label {
     display:flex;
     float:left;
     background-color: var(--primary-color);
@@ -1433,32 +1461,70 @@ svg {
     margin-left:5px; 
 }
 
+/*********************/
+.new-contract-page{
+justify-content: space-between;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
 
-
-#div-container {
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    grid-template-rows:repeat(2,1fr);
-    height:100%;
-    width:100%;
-    row-gap:1%;
-    column-gap:1%;
 }
-#div-container .account-div{
-    border:2px solid var(--primary-color);
-    border-radius:10px;
+.new-contract-page > div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.new-contract-page> div > p{
+        height:2%
+}
+
+.new-contract-page > div > p > label {
+    display:flex;
+    float:left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding:5px 1% 5px 2%; 
+    box-sizing: border-box; 
+    width: 45%;
+    margin-left:2px; 
+}
+
+.new-contract-page > div > p > input {
     display:flex;
     flex-direction:column;
-    justify-content:center;
-    width:50%;
-    background-color: var(--secondary-background-color);
-
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%; 
+    box-sizing: border-box; 
+    width: 45%; 
+    margin-left:2px;
 }
-#div-container .information-div{
-    padding:7% 7% 7%  7%;
-    text-align:center;
-    width:90%;
-    background-color: var(--secondary-background-color);
+
+.new-contract-page > div > p> select {
+        color:var(--text-color) ;
+        border-style: none;
+        background-color:#e8d2d2 ;
+        padding: 6px 1% 8px 2%;
+        box-sizing: border-box;
+        width: 45%;
+        margin-bottom: 5px;
+        margin-left:1px;
+}
+.new-contract-page > div > button{
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left:2px;
+    margin-bottom:5px;
 }
 
 
@@ -1843,6 +1909,7 @@ svg {
 
 
 /* ----------------------------------------------------------------------------------------------- */
+
 /*                                      ADVISOR DOCUMENTS                                          */
 /* ----------------------------------------------------------------------------------------------- */
 
@@ -1879,5 +1946,348 @@ svg {
 
 #allDocuments .advisor-documents {
     margin-right: auto;
+
+/*                                      ADVISOR ACCOUNTS                                           */
+/* ----------------------------------------------------------------------------------------------- */
+
+#allAccounts .advisor-accounts {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#allAccounts .advisor-accounts .buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+
+#allAccounts .advisor-accounts table {
+    width: 100%;
+    display: flex;
+    background-color: var(--secondary-background-color);
+    
+}
+
+#allAccounts .advisor-accounts td {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    height: 30px;
+}
+
+#allAccounts .advisor-accounts td .date{
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 30px;
+}
+
+#allAccounts .advisor-accounts td .overdraft{
+    display: flex;
+    flex-direction: row;
+
+}
+
+#allAccounts .advisor-accounts td input[type="text"] {
+    width: 160px;
+    border: none;
+    background-color: var(--secondary-background-color);
+    font-size: large;
+}
+
+#allAccounts .advisor-accounts td input[name="overdraft-title"] {
+    width: 300px;
+}
+
+#allAccounts .advisor-accounts td input[name="input-overdraft"]{
+    width: 100px;
+}
+
+
+#allAccounts .advisor-accounts td input[type="text"]:focus {
+    outline: none;
+}
+
+#allAccounts .advisor-accounts td input[type="text"]:first-child {
+    width: 100px;
+}
+
+#allAccounts .advisor-accounts button {
+    border: none;
+}
+
+#allAccounts .advisor-accounts form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#edit-overdraft-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#edit-overdraft-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#edit-overdraft-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form .inputs {
+    margin-top: 4px;
+}
+
+#edit-overdraft-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#edit-overdraft-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#edit-overdraft-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#edit-overdraft-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#edit-overdraft-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#edit-overdraft-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+#allAccounts .advisor-accounts form button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+    margin-top: 20px;
+}
+
+#allAccounts .advisor-accounts form td button {
+    height: 30px;
+    margin-top: 0px;
+}
+
+
+#delete-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#delete-modal .form-content .label-containers{
+    width: 200px;
+}
+
+#delete-modal .form-content select{
+    width: 100px;
+}
+
+
+
+#delete-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#delete-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#delete-modal form .inputs {
+    margin-top: 4px;
+}
+
+#delete-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#delete-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#delete-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#delete-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#delete-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#delete-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+
 }
 
