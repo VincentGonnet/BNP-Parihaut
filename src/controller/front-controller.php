@@ -22,9 +22,15 @@ if (!empty($_POST)) {
     if (isset($_POST['redirect-director-manage-documents'])) {
         CtlGetAllDocuments();
     }
+
+    if (isset($_POST['redirect-advisor-client-documents'])) {
+        $documentId = $_SESSION['currentEvent']->IDMOTIF;
+        CtlGetDocument($documentId);
+
     if (isset($_POST['redirect-advisor-client-accounts'])) {
         $idClient = $_SESSION['currentEvent']->NUMCLIENT;
         CtlGetAllAccountsClient($idClient);
+
     }
     }
 }
