@@ -26,6 +26,7 @@ if (!empty($_POST)) {
     if (isset($_POST['redirect-advisor-client-documents'])) {
         $documentId = $_SESSION['currentEvent']->IDMOTIF;
         CtlGetDocument($documentId);
+    }
 
     if (isset($_POST['redirect-advisor-client-accounts'])) {
         $idClient = $_SESSION['currentEvent']->NUMCLIENT;
@@ -33,6 +34,7 @@ if (!empty($_POST)) {
 
     }
     }
+    
 }
 
 if (isset($_POST['connection'])) {
@@ -154,7 +156,7 @@ else if(isset($_POST['delete-contract'])){
                 echo '<script>alert("Vous ne pouvez pas depasser votre solde. Veuillez indiquer un montant plus petit.");</script>';
             }
         }
-    echo '<script>window.location.replace("http://localhost/ProjetS3/src/");</script>';
+    
 
 } else if(isset($_POST['contract'])){
     $clientId=$_POST['client-id'];
