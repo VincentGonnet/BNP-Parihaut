@@ -1,6 +1,7 @@
 <?php
 
 
+
 function addEmployee($name , $firstname , $login , $password , $job){
     $connection= Connection::getInstance()->getConnection();
     $request="INSERT IGNORE INTO employe (NOM , PRENOM , LOGIN , MDP , CATEGORIE) VALUES ( :name , :firstname , :login , :password , :job  )" ;

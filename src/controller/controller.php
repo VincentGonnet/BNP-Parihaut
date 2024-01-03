@@ -1,4 +1,8 @@
 <?php
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'view/view.php';
 session_start();
 
@@ -11,6 +15,8 @@ require_once 'model/event.php';
 require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
+require_once 'model/documents.php';
+require_once 'model/client-account.php';
 
 
 
@@ -103,6 +109,8 @@ function CtlSelectClient($clientId) {
 }
 
 
+//DIRECTOR FUNCTIONS
+
 //AFFICHAGE COMPTES
 
 function CtlGetAllAccounts(){
@@ -151,13 +159,43 @@ function CtlDeleteAllContracts(){
     deleteAllContracts();
 }
 
+
+//AFFICHAGE MOTIF
+
+function CtlGetAllDocuments(){
+    $documentsList=getAllDocuments();
+    $_SESSION['showAllDocuments']= $documentsList;
+}
+
+function CtlDeleteDocument($DocumentID){
+    deleteDocument($DocumentID);
+}
+
+function CtlAddDocument($document , $list){
+    addDocument($document , $list);
+}
+
+function CtlEditList($document , $list , $iddoc){
+    editList($document , $list , $iddoc);
+}
+
+function CtlGetDocument($documentId){
+    $document=getDocument($documentId);
+    $_SESSION['getDoc']=$document;
+}
+
+
+
+
 //AJOUTER UN EMPLOYE
 
 function CtlAddEmployee($name , $firstname , $job , $login , $password){
     addEmployee($name , $firstname , $job , $login , $password);
 }
 
+
 /*---------Overview fonctions--*/
+
 function CtlAdvisorOfClient($clientId){
     $client = searchClientById($clientId);
     if ($client) {
@@ -171,6 +209,23 @@ function CtlAdvisorOfClient($clientId){
 
 function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
     modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+}
+
+function CtlGetAccountData($clientId){
+   getAccountData($clientId);
+}
+function CtlGetContractData($clientId){
+    getContractData($clientId);
+ }
+function CtlModifyDecouvert($decouvert,$clientId,$accountType){
+    
+    modifyDecouvert($decouvert,$clientId,$accountType);
+}
+function CtlCredit($ammount,$clientId,$accountType){
+    credit($ammount,$clientId,$accountType);
+}
+function CtlDebit($ammount,$clientId,$accountType){
+    debit($ammount,$clientId,$accountType);
 }
 
 // PLANNING FUNCTIONS ----------------------------------------------------------
@@ -199,6 +254,30 @@ function CtlSelectEvent($eventId) {
     $_SESSION['currentEvent'] = $event;
 
 }
+
+function CtlGetAllAccountsClient($idClient){
+    $accounts = getAllAccountsClient($idClient);
+    $_SESSION['client-accounts']=$accounts;
+}
+
+function CtlEditOverdraft($accountName , $idClient , $overdraft){
+    editOverdraft($accountName , $idClient , $overdraft);
+}
+
+function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdraft){
+    newAccount($idClient , $accountName , $openDate , $balance , $overdraft);
+}
+
+function CtlCloseAccount($idClient , $accountName , $endDate){
+    closeAccount($idClient , $accountName , $endDate);
+}
+function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType){
+    clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+function CtlDeleteClientContract($idClient,$contractType){
+    deleteClientContract($idClient,$contractType);
+}
+
 
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 

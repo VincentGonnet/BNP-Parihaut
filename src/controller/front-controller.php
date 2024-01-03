@@ -1,6 +1,9 @@
 <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 require_once 'controller/controller.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 if (!empty($_POST)) {
     $postKey = array_keys($_POST)[0];
@@ -8,7 +11,6 @@ if (!empty($_POST)) {
         $route = array_slice(explode('-', $postKey), 1);
         CtlChangeView(implode('-', $route));
       
-
         // additional actions on specific routes
         if (isset($_POST['redirect-director-manage-account-types'])) {
             CtlGetAllAccounts();
@@ -16,12 +18,26 @@ if (!empty($_POST)) {
         if (isset($_POST['redirect-director-manage-contract-types'])) {
             CtlGetAllContracts();
         }
+        if (isset($_POST['redirect-director-manage-documents'])) {
+            CtlGetAllDocuments();
+        }
+
+        if (isset($_POST['redirect-advisor-client-documents'])) {
+            $documentId = $_SESSION['currentEvent']->IDMOTIF;
+            CtlGetDocument($documentId);
+        }
+
+        if (isset($_POST['redirect-advisor-client-accounts'])) {
+            $idClient = $_SESSION['currentEvent']->NUMCLIENT;
+            CtlGetAllAccountsClient($idClient);
+        }
 
         // Statistics 
         if (isset($_POST['redirect-director-see-stats'])) {
             CtlLoadStats();
         }
     }
+    
 }
 
 if (isset($_POST['connection'])) {
@@ -56,12 +72,12 @@ if (isset($_POST['connection'])) {
 } 
 //MANAGE-CONTRACT-TYPES
 else if(isset($_POST['delete-contract'])){
-    if(!empty($_POST['radio-contract'])){
-        $contrat = $_POST['radio-contract'];
+        $contrat = $_POST['delete-contract'];
         CtlDeleteContract($contrat);
+        CtlGetAllContracts();
     }
-    CtlGetAllContracts();        
-} else if(isset($_POST['add-contract'])){
+            
+ else if(isset($_POST['add-contract'])){
     if(!empty($_POST['new-contract'])){
         $contrat=$_POST['new-contract'];
         CtlAddContract($contrat);
@@ -114,9 +130,44 @@ else if(isset($_POST['delete-contract'])){
     $start = date('Y-m-d H:i:s', strtotime($startDate));
     $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
     CtlAddEvent($start, $end, $reasonId);
+
+} else if (isset($_POST['account'])){
+    $clientId = $_POST['clientId'];
+    CtlGetAccountData($clientId);
+}else if (isset($_POST['submit-credit'])) {
+    $ammount=$_POST['ammount'];
+    $clientId=$_POST['client-id'];
+    $accountType=$_POST['chosen-account'];
+    CtlCredit($ammount, $clientId, $accountType);
+} else if (isset($_POST['submit-debit'])){
+    $ammount=$_POST['ammount'];
+    $clientId=$_POST['client-id'];
+    $accountType=$_POST['chosen-account'];
+    $solde=$_POST['solde'];
+    $decouvert=$_POST['decouvert'];
+    if ($accountType=='courant'){
+        if($solde-$ammount>=(-$decouvert)){
+            CtlDebit($ammount, $clientId, $accountType);
+        }else{
+            echo '<script>alert("Vous ne pouvez pas retirer ce montant. Veuillez indiquer un montant plus petit.");</script>';
+
+        }
+    }else{
+            if ($solde-$ammount>=0){
+                CtlDebit($ammount, $clientId, $accountType);
+            }else{
+                echo '<script>alert("Vous ne pouvez pas depasser votre solde. Veuillez indiquer un montant plus petit.");</script>';
+            }
+        }
+    
+
+} else if(isset($_POST['contract'])){
+    $clientId=$_POST['client-id'];
+
 } else if (isset($_POST["delete-event"])) {
     $eventId = $_POST["delete-event"];
     CtlDeleteEvent($eventId);
+
 }
 // MANAGE EMPLOYEE
 else if (isset($_POST["submit-manage-employee"])) {
@@ -135,44 +186,65 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlModifyJob($employeeId, $job);
     $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
 }
-//MANAGE-ACCOUNT-TYPES
- else if(isset($_POST['delete-account'])){
-    if(!empty($_POST['radio-account'])){
-        $compte = $_POST['radio-account'];
-        CtlDeleteAccount($compte);
-    }
-    CtlGetAllAccounts();        
-} else if(isset($_POST['add-account'])){
-    if(!empty($_POST['account'])){
-        $compte=$_POST['account'];
-        CtlAddAccount($compte);
-        CtlGetAllAccounts();  
-    }
-} else if(isset($_POST['delete-all-accounts'])){
-    CtlDeleteAllAccounts();
-    CtlGetAllAccounts();
-}
-//MANAGE-CONTRACT-TYPES
-else if(isset($_POST['delete-contract'])){
-    if(!empty($_POST['radio-contract'])){
-        $contrat = $_POST['radio-contract'];
-        CtlDeleteContract($contrat);
-    }
-    CtlGetAllContracts();        
-} else if(isset($_POST['add-contract'])){
-    if(!empty($_POST['contract'])){
-        $contrat=$_POST['contract'];
-        CtlAddContract($contrat);
-        CtlGetAllContracts();  
-    }
-} else if(isset($_POST['delete-all-contracts'])){
-    CtlDeleteAllContracts();
-    CtlGetAllContracts();
-    
 
+ 
+
+//MANAGE-DOCUMENTS
+
+  else if (isset($_POST['delete-document'])){
+    $DocumentID= $_POST['delete-document'];
+    CtlDeleteDocument($DocumentID);
+    CtlGetAllDocuments();
+
+}  else if(isset($_POST['add-document'])){
+    if(!empty($_POST['new-doc'] && !empty($_POST['new-list']))){
+        $document=$_POST['new-doc'];
+        $list=$_POST['new-list'];
+        CtlAddDocument($document , $list);
+    }
+    CtlGetAllDocuments();
 } 
 
+//ADVISOR ACCOUNTS 
+ else if(isset($_POST['accept-overdraft'])){
+    $overdraft = $_POST['new-overdraft'];
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['account-overdraft'];
+    CtlEditOverdraft($accountName , $idClient , $overdraft);
+    CtlGetAllAccountsClient($idClient);
 
+ } else if (isset($_POST['accept-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['new-account-overdraft'];
+    $openDate = new \DateTime();
+    $openDate = $openDate->format('Y-m-d');
+    $balance = 0.00;
+    $overdraft = $_POST['new-overdraft'];
+    CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
+    CtlGetAllAccountsClient($idClient);
+ } else if (isset($_POST['accept-delete-account'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $accountName=$_POST['account-to-delete'];
+    $endDate=new \DateTime();
+    $endDate = $endDate->format('Y-m-d');
+    CtlCloseAccount($idClient , $accountName , $endDate);
+    CtlGetAllAccountsClient($idClient);
+ }
+
+//ADVISOR CONTRACTS
+else if (isset($_POST['submit-new-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $openingDate=$_POST['new-opening-date'];
+    $endDate=$_POST['new-ending-date'];
+    $price=$_POST['new-price'];
+    $contractType=$_POST['new-contract-type'];
+    CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+else if(isset($_POST['delete-client-contract'])){
+    $idClient=$_SESSION['currentClient']->NUMCLIENT;
+    $contractType=$_POST['selected-contract-text'];
+    CtlDeleteClientContract($idClient,$contractType);
+}
 
 if ($_SESSION['loggedIn'] == false) {
     CtlDisplayLoginPage();
