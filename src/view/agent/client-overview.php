@@ -78,7 +78,7 @@
     
         <p>
             <label id="checked">Enregistre:</label>
-            <input name="input-checked"  for="checked" type="text" value="<?= $checked?>" readOnly>
+            <input name="input-checked" type="text" value="<?= ($checked == 1) ? 'oui' : 'non' ?>" readonly>
         </p>
 </div>
 
@@ -130,6 +130,8 @@
             input.readOnly = false;
         });
     }
+    
+    
 </script>
 
 
