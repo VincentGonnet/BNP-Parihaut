@@ -87,7 +87,7 @@
         
     <p>
         <label id="advisor">Id conseiller:</label>
-        <input class="read" name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
+        <input  name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
     </p>
 
     <p>
