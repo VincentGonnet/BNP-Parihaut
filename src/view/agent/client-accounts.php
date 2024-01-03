@@ -72,13 +72,15 @@
         <p class="p">
             <input class="radio" type="radio" name="operation" id="credit" onclick="setMax('credit')">
             <label class="label" for="credit">Créditer</label>
-
+        </p><p class="p">
             <input class="radio" type="radio" name="operation" id="debit" onclick="setMax('debit')">
             <label class="label" for="debit">Débiter</label>
         </p>
 
             <p class="p">
-                <input class="input" id="ammount" type="number" name="ammount" min="0" max="" step="10" value="0"></p>
+                <label class="label" for="ammount">Montant:</label>
+                <input class="input" id="ammount" type="number" name="ammount" min="0" max="" step="10" value="0">
+            </p>
                 <button class="button" type="submit" id="submit-operation" name="">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />

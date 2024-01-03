@@ -1360,9 +1360,10 @@ svg {
     box-sizing: border-box; 
     width: 45%;
     margin-left:5px; 
+    margin-top:2px;
 }
 .radio {
-    display: contents;
+    display: initial;
     margin-bottom: 5px;
     width:4%;
 }
