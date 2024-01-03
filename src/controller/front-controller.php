@@ -152,6 +152,7 @@ else if(isset($_POST['delete-contract'])){
             }
         }
         echo "<script>window.location.href = 'http://localhost/BNP-Parihaut/src/index.php';</script>";
+        
 } else if(isset($_POST['contract'])){
     $clientId=$_POST['client-id'];
 
