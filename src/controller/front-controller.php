@@ -11,28 +11,31 @@ if (!empty($_POST)) {
         $route = array_slice(explode('-', $postKey), 1);
         CtlChangeView(implode('-', $route));
       
+        // additional actions on specific routes
+        if (isset($_POST['redirect-director-manage-account-types'])) {
+            CtlGetAllAccounts();
+        }
+        if (isset($_POST['redirect-director-manage-contract-types'])) {
+            CtlGetAllContracts();
+        }
+        if (isset($_POST['redirect-director-manage-documents'])) {
+            CtlGetAllDocuments();
+        }
 
-    // additional actions on specific routes
-    if (isset($_POST['redirect-director-manage-account-types'])) {
-        CtlGetAllAccounts();
-    }
-    if (isset($_POST['redirect-director-manage-contract-types'])) {
-        CtlGetAllContracts();
-    }
-    if (isset($_POST['redirect-director-manage-documents'])) {
-        CtlGetAllDocuments();
-    }
+        if (isset($_POST['redirect-advisor-client-documents'])) {
+            $documentId = $_SESSION['currentEvent']->IDMOTIF;
+            CtlGetDocument($documentId);
+        }
 
-    if (isset($_POST['redirect-advisor-client-documents'])) {
-        $documentId = $_SESSION['currentEvent']->IDMOTIF;
-        CtlGetDocument($documentId);
-    }
+        if (isset($_POST['redirect-advisor-client-accounts'])) {
+            $idClient = $_SESSION['currentEvent']->NUMCLIENT;
+            CtlGetAllAccountsClient($idClient);
+        }
 
-    if (isset($_POST['redirect-advisor-client-accounts'])) {
-        $idClient = $_SESSION['currentEvent']->NUMCLIENT;
-        CtlGetAllAccountsClient($idClient);
-
-    }
+        // Statistics 
+        if (isset($_POST['redirect-director-see-stats'])) {
+            CtlLoadStats();
+        }
     }
     
 }
