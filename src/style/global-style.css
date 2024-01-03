@@ -621,7 +621,6 @@ svg {
 }
 
 #allAccounts th {
-    width: 1100px;
     background-color: var(--primary-color);
     color: white;
 }
@@ -831,7 +830,6 @@ svg {
 }
 
 #allContracts th {
-    width: 1100px;
     background-color: var(--primary-color);
     color: white;
 }
