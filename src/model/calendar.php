@@ -298,7 +298,7 @@ class Calendar {
         if ($isAdvisorPlanning) {
             $formattedDateHour = date('Y-m-d H:i', strtotime($date . ' ' . $hour . ':' . $minute));
             require 'view/components/calendar-add-event.php';
-        } else if ($_SESSION['currentPage'] != 'agent-client-appointments' && !$this->isNextHalfHourOccupied($date, $hour, $minute)) {
+        } else if (!$this->isNextHalfHourOccupied($date, $hour, $minute)) {
             $formattedDateHour = date('Y-m-d H:i', strtotime($date . ' ' . $hour . ':' . $minute));
             require 'view/components/calendar-add-event.php';
         } else {
