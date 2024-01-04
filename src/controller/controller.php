@@ -16,6 +16,7 @@ require_once 'model/employee.php';
 require_once 'controller/router.php';
 require_once 'model/employee.php';
 require_once 'model/documents.php';
+require_once 'model/client-account.php';
 
 
 
@@ -254,9 +255,47 @@ function CtlSelectEvent($eventId) {
 
 }
 
+function CtlGetAllAccountsClient($idClient){
+    $accounts = getAllAccountsClient($idClient);
+    $_SESSION['client-accounts']=$accounts;
+}
+
+function CtlEditOverdraft($accountName , $idClient , $overdraft){
+    editOverdraft($accountName , $idClient , $overdraft);
+}
+
+function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdraft){
+    newAccount($idClient , $accountName , $openDate , $balance , $overdraft);
+}
+
+function CtlCloseAccount($idClient , $accountName , $endDate){
+    closeAccount($idClient , $accountName , $endDate);
+}
+function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType){
+    clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+}
+function CtlDeleteClientContract($idClient,$contractType){
+    deleteClientContract($idClient,$contractType);
+}
+
+
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
 
 function CtlModifyJob($employeeId, $job) {
     modifyEmployeeJob($employeeId, $job);
 }
 
+function CtlLoadStats() {
+    if (empty($_SESSION['stats-contract-dates'])) {
+        $_SESSION['stats-contract-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-appointment-dates'])) {
+        $_SESSION['stats-appointment-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-clients-dates'])) {
+        $_SESSION['stats-client-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+    if (empty($_SESSION['stats-balance-dates'])) {
+        $_SESSION['stats-balance-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
+    }
+}

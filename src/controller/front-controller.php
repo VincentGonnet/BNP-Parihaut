@@ -11,22 +11,33 @@ if (!empty($_POST)) {
         $route = array_slice(explode('-', $postKey), 1);
         CtlChangeView(implode('-', $route));
       
+        // additional actions on specific routes
+        if (isset($_POST['redirect-director-manage-account-types'])) {
+            CtlGetAllAccounts();
+        }
+        if (isset($_POST['redirect-director-manage-contract-types'])) {
+            CtlGetAllContracts();
+        }
+        if (isset($_POST['redirect-director-manage-documents'])) {
+            CtlGetAllDocuments();
+        }
+      
+        if (isset($_POST['redirect-advisor-client-documents'])) {
+            $documentId = $_SESSION['currentEvent']->IDMOTIF;
+            CtlGetDocument($documentId);
+        }
 
-    // additional actions on specific routes
-    if (isset($_POST['redirect-director-manage-account-types'])) {
-        CtlGetAllAccounts();
+        if (isset($_POST['redirect-advisor-client-accounts'])) {
+            $idClient = $_SESSION['currentEvent']->NUMCLIENT;
+            CtlGetAllAccountsClient($idClient);
+        }
+
+        // Statistics 
+        if (isset($_POST['redirect-director-see-stats'])) {
+            CtlLoadStats();
+        }
     }
-    if (isset($_POST['redirect-director-manage-contract-types'])) {
-        CtlGetAllContracts();
-    }
-    if (isset($_POST['redirect-director-manage-documents'])) {
-        CtlGetAllDocuments();
-    }
-    if (isset($_POST['redirect-advisor-client-accounts'])) {
-        $idClient = $_SESSION['currentEvent']->NUMCLIENT;
-        CtlGetAllAccountsClient($idClient);
-    }
-    }
+    
 }
 
 if (isset($_POST['connection'])) {
@@ -152,7 +163,6 @@ else if(isset($_POST['delete-contract'])){
             }
         }
         echo "<script>window.location.href = 'http://localhost/BNP-Parihaut/src/index.php';</script>";
-
         
 } else if(isset($_POST['contract'])){
     $clientId=$_POST['client-id'];
