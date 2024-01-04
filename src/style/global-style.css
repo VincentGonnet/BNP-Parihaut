@@ -602,6 +602,15 @@ svg {
     color: white;
 }
 
+.reserved-time-slot svg {
+    width: 26px;
+    height: 26px;
+}
+
+.reserved-time-slot * {
+    color: #2d2d34;
+}
+
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      MANAGE ACCOUNTS                                          */
 /*-----------------------------------------------------------------------------------------------*/
@@ -2250,4 +2259,127 @@ svg {
     cursor: pointer;
     color: white;
     font-size: larger;
+}
+
+#reserve-time-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#reserve-time-modal form .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#reserve-time-modal form .form-container > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form .form-container > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#reserve-time-modal form .inputs {
+    margin-top: 4px;
+}
+
+#reserve-time-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#reserve-time-modal form .form-container input {
+    color: var(--text-color);
+}
+
+#reserve-time-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#reserve-time-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#reserve-time-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#reserve-time-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+.reserved-slot {
+    background-color: #646464 !important;
 }

@@ -46,6 +46,17 @@ function addEvent($advisorId, $clientId, $reasonId, $start, $end) {
     $result->closeCursor();
 }
 
+function reserveTimeSlot($advisorId, $start, $end) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('INSERT INTO rdv (NUMEMPLOYE, DATERDV, DATEFINRDV) VALUES (:advisorId, :start, :end)');
+    $result->execute(array(
+        'advisorId' => $advisorId,
+        'start' => $start,
+        'end' => $end
+    ));
+    $result->closeCursor();
+}
+
 function deleteEvent($eventId) {
     $connection = Connection::getInstance()->getConnection();
     $result = $connection->prepare('DELETE FROM rdv WHERE NUMRDV = :eventId');
