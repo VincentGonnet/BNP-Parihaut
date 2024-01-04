@@ -54,9 +54,9 @@ function searchClientByName($name, $firstName) {
 }
 
 
-function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId) {
+function modifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work) {
     $connection = Connection::getInstance()->getConnection();
-     $result = $connection->prepare('UPDATE client SET NOM=:name, PRENOM=:firstName, ADRESSE=:adress, NUMCLIENT=:clientId, MAIL=:mail, NUMTEL=:phoneNumber, PROFESSION=:work, SITUATION=:situation, ENREGISTRE=:checked,DATENAISSANCE=:birthday WHERE NUMCLIENT=:clientId');
+     $result = $connection->prepare('UPDATE client SET NOM=:name, PRENOM=:firstName, ADRESSE=:adress, MAIL=:mail, NUMTEL=:phoneNumber, PROFESSION=:work, SITUATION=:situation, DATENAISSANCE=:birthday WHERE NUMCLIENT=:clientId');
      $result->execute(array(
          'name' => $name,
          'firstName' => $firstName,
@@ -67,8 +67,7 @@ function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneN
          'phoneNumber' => $phoneNumber,
          'situation' => $situation,
          'work' => $work,
-         'checked' => $checked,
-         'advisorId' => $advisorId 
+          
      ));
      $result->closeCursor();
      $_SESSION['currentClient']->NOM=$name ;
@@ -80,8 +79,18 @@ function modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneN
      $_SESSION['currentClient']->NUMTEL =$phoneNumber ;
      $_SESSION['currentClient']->SITUATION =$situation ;
      $_SESSION['currentClient']->PROFESSION=$work ;
-     $_SESSION['currentClient']->ENREGISTRE=$checked ;
-     $_SESSION['currentClient']->NUMEMPLOYE=$advisorId;
+ }
+ function modifyClientAdvisor($checked,$clientId){
+    
+    
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('UPDATE client SET ENREGISTRE =:checked  WHERE NUMCLIENT=:clientId');
+    $result->execute(array(
+     'checked' =>$checked,
+     'clientId' => $clientId
+    ));
+    $result->closeCursor();
+    $_SESSION['currentClient']->ENREGISTRE=$checked;
  }
  
 

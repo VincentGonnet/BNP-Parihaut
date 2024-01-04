@@ -207,8 +207,13 @@ function CtlAdvisorOfClient($clientId){
     }
 }
 
-function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
-    modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+function CtlModifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work){
+    modifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work);
+}
+function CtlModifyClientAdvisor($checked,$clientId){
+    modifyClientAdvisor($checked,$clientId);
+    
+
 }
 
 function CtlGetAccountData($clientId){

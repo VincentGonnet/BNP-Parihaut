@@ -82,7 +82,7 @@ error_reporting(E_ALL);
     
         <p>
             <label id="checked">Enregistre:</label>
-            <input name="input-checked"  for="checked" type="text" value="<?= $checked?>" readOnly>
+            <input name="input-checked" type="text" value="<?= ($checked == 1) ? 'oui' : 'non' ?>" readonly>
         </p>
 </div>
 
@@ -91,7 +91,7 @@ error_reporting(E_ALL);
         
     <p>
         <label id="advisor">Id conseiller:</label>
-        <input class="read" name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
+        <input  name="input-advisor-id" for="advisor" type="text" value="<?= $advisorId ?>" readOnly>
     </p>
 
     <p>
@@ -134,6 +134,8 @@ error_reporting(E_ALL);
             input.readOnly = false;
         });
     }
+    
+    
 </script>
 
 

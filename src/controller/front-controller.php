@@ -103,9 +103,12 @@ else if(isset($_POST['delete-contract'])){
         $phoneNumber = $_POST['input-phone-number'] ;
         $situation = $_POST['input-situation'];
         $work = $_POST['input-work'];
-        $checked = $_POST['input-checked'];
-        $advisorId =$_POST['input-advisor-id']; 
-        CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+        CtlModifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work);
+}else if (isset($_POST['input-checked'])){
+    $checked = isset($_POST['input-checked']) ? 1 : 0;
+    $clientId =$_POST['input-client-id'];
+    CtlModifyClientAdvisor($checked,$clientId);
+
 } else if (isset($_POST['calendar-event'])) {
     $eventId = $_POST['calendar-event'];
     $event = getEventById($eventId);
