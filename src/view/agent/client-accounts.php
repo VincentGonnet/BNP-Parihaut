@@ -70,15 +70,17 @@
         <h5>Veuillez choisir une opération avant de saisir le montant</h5>
 
         <p class="p">
-            <input class="radio" type="radio" name="operation" id="credit" onclick="setMax('credit')">
+            <input class="radio" type="radio" name="operation" id="credit" onclick="setMax('credit')" required>
             <label class="label" for="credit">Créditer</label>
-
-            <input class="radio" type="radio" name="operation" id="debit" onclick="setMax('debit')">
+        </p><p class="p">
+            <input class="radio" type="radio" name="operation" id="debit" onclick="setMax('debit')" required>
             <label class="label" for="debit">Débiter</label>
         </p>
 
             <p class="p">
-                <input class="input" id="ammount" type="number" name="ammount" min="0" max="" step="10" value="0"></p>
+                <label class="label" for="ammount">Montant:</label>
+                <input class="input" id="ammount" type="number" name="ammount" min="0" max="" step="10" value=""placeHolder="00.00" required>
+            </p>
                 <button class="button" type="submit" id="submit-operation" name="">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -109,7 +111,6 @@
             ammountInput.max = "500.00";
             selectedOperationInput.name = 'submit-debit';
         }
-        alert('Veuiller verifier que vous avez bien choisi un compte et une somme avant de valider.');
     }
 
 
