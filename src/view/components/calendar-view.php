@@ -53,12 +53,12 @@
                     <div class="horizontal">
                         <input type="time" name="new-event-duration" id="new-event-duration" value="01:00" min="01:00" step="1800" readonly required>
                         <div class="arrow-container">
-                            <button type="button" onclick="incrementDuration()">
+                            <button type="button" onclick="incrementDurationNewEvent()">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                                 </svg>
                             </button>
-                            <button type="button" onclick="decrementDuration()">
+                            <button type="button" onclick="decrementDurationNewEvent()">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                 </svg>
@@ -71,6 +71,44 @@
         <div class="spacer"></div>
         <button type="submit" name="add-event" id="add-event">Valider</button>
     </form>
+</modal>
+
+<modal id="reserve-time-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h1>Se réserver un créneau</h1>
+        <div class="spacer"></div>
+        <div class="form-container">
+            <div>
+                <div class="label-containers">
+                    <p>Date</p>
+                    <p>Durée</p>
+                </div>
+                <div class="inputs">
+                    <select readonly name="reserve-time-start-time" id="reserve-time-date">
+                        <option value="" selected>Date</option>
+                    </select>
+                    <div class="horizontal">
+                        <input type="time" name="reserve-time-duration" id="reserve-time-duration" value="00:30" min="00:30" step="1800" readonly required>
+                        <div class="arrow-container">
+                            <button type="button" onclick="incrementDurationReserveTime()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+                            <button type="button" onclick="decrementDurationReserveTime()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button type="submit" name="reserve-time" id="reserve-time">Valider</button>
+    </form>
+
 </modal>
 
 <modal id="delete-event-modal">
@@ -94,8 +132,8 @@
         modal.style.pointerEvents = "auto";
         formattedDateHour = fDate;
         maxEventDuration = maxDuration;
-        console.log(formattedDateHour);
-        console.log(maxEventDuration);
+
+        document.querySelector("#calendar-modal input[type='time']").value = "01:00";
 
         document.querySelector("#new-event-start-time option").innerHTML = formattedDateHour.toString().replace('T', ' à ');
         document.querySelector("#new-event-start-time option").value = formattedDateHour;
@@ -106,7 +144,7 @@
         modal.style.pointerEvents = "none";
     }
 
-    function incrementDuration() {
+    function incrementDurationNewEvent() {
         let duration = document.querySelector("#calendar-modal input[type='time']").value;
         if (duration > maxEventDuration) {
             duration = maxEventDuration;
@@ -136,7 +174,7 @@
         document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
     }
 
-    function decrementDuration() {
+    function decrementDurationNewEvent() {
         let duration = document.querySelector("#calendar-modal input[type='time']").value;
         let durationArray = duration.split(':');
         let hours = parseInt(durationArray[0]);
@@ -162,6 +200,8 @@
             closeNewEventModal();
         } else if (event.target == deleteEventModal) {
             closeDeleteEventModal();
+        } else if (event.target == reserveTimeModal) {
+            closeReserveTimeModal();
         }
     }
 
@@ -176,6 +216,76 @@
     function closeDeleteEventModal() {
         deleteEventModal.style.opacity = 0;
         deleteEventModal.style.pointerEvents = "none";
+    }
+
+    let reserveTimeModal = document.getElementById('reserve-time-modal');
+
+    function openReserveTimeModal($date, $timeUntilNextEvent) {
+        reserveTimeModal.style.opacity = 1;
+        reserveTimeModal.style.pointerEvents = "auto";
+
+        formattedDateHour = $date;
+        maxEventDuration = $timeUntilNextEvent;
+
+        reserveTimeModal.querySelector("#reserve-time-modal input[type='time']").value = "00:30";
+
+        reserveTimeModal.querySelector("#reserve-time-date option").value = $date;
+        reserveTimeModal.querySelector("#reserve-time-date option").innerHTML = $date.toString().replace('T', ' à ');
+    }
+
+    function closeReserveTimeModal() {
+        reserveTimeModal.style.opacity = 0;
+        reserveTimeModal.style.pointerEvents = "none";
+    }
+
+    function incrementDurationReserveTime() {
+        let duration = document.querySelector("#reserve-time-modal input[type='time']").value;
+        if (duration > maxEventDuration) {
+            duration = maxEventDuration;
+            document.querySelector("#reserve-time-modal input[type='time']").value = duration;
+            return;
+        }
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        let maxMinutes = parseInt(maxEventDuration.split(':')[1]);
+        let maxHours = parseInt(maxEventDuration.split(':')[0]);
+        if (hours == maxHours && minutes == maxMinutes) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+            hours++;
+        } else {
+            minutes = 30;
+        }
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes == 0) {
+            minutes = "00";
+        }
+        document.querySelector("#reserve-time-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function decrementDurationReserveTime() {
+        let duration = document.querySelector("#reserve-time-modal input[type='time']").value;
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        if (hours == 0 && minutes == 30) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+        } else {
+            minutes = 30;
+            hours--;
+        }
+
+        if (hours < 10) hours = "0" + hours;
+        if (minutes == 0) minutes = "00";
+
+        document.querySelector("#reserve-time-modal input[type='time']").value = hours + ":" + minutes;
     }
 
 </script>

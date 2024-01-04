@@ -109,8 +109,6 @@ function CtlSelectClient($clientId) {
 }
 
 
-//DIRECTOR FUNCTIONS
-
 //AFFICHAGE COMPTES
 
 function CtlGetAllAccounts(){
@@ -245,6 +243,11 @@ function CtlAddEvent($start, $end, $reasonId) {
 
 function CtlDeleteEvent($eventId) {
     deleteEvent($eventId);
+}
+
+function CtlReserveTimeSlot($start, $end) {
+    $employee = $_SESSION['loggedInUser'];
+    reserveTimeSlot($employee->NUMEMPLOYE, $start, $end);
 }
 
 // ADVISOR FUNCTIONS ----------------------------------------------------------
