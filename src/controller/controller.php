@@ -307,3 +307,12 @@ function CtlLoadStats() {
         $_SESSION['stats-balance-dates'] = [date('Y-m-d'), date('Y-m-d', strtotime('-1 month'))];
     }
 }
+
+// ADD CLIENT FUNCTIONS --------------------------------------------------------
+
+function CtlAddNewClient($name, $firstName, $email, $phone, $street, $city, $zip,$country, $advisorId,$situation,$work,$birthday) {
+    $address = $street . ', ' . $zip . ' ' . $city . ', ' . $country;
+    $newClientId = addNewClient($name, $firstName, $email, $phone, $address, $advisorId,$situation,$work,$birthday);
+    $_SESSION['currentClient'] = searchClientById($newClientId);
+    $_SESSION['currentPage'] = 'agent-client-appointments';
+}

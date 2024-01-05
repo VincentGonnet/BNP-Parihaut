@@ -164,3 +164,22 @@ function getAllClientsBeforeDate($date) {
 
     return $clients;
 }
+
+function addNewClient($name, $firstName, $email, $phone, $address, $advisorId,$situation,$work,$birthday) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = $connection->prepare("INSERT INTO client (NOM, PRENOM, ADRESSE, MAIL, NUMTEL, NUMEMPLOYE, SITUATION, PROFESSION, DATENAISSANCE, ENREGISTRE) VALUES (:name, :firstName, :address, :email, :phone, :advisorId, :situation, :work, :birthday, 1)");
+    $request->execute(array(
+        'name' => $name,
+        'firstName' => $firstName,
+        'address' => $address,
+        'email' => $email,
+        'phone' => $phone,
+        'advisorId' => $advisorId,
+        'situation' => $situation,
+        'work' => $work,
+        'birthday' => $birthday
+    ));
+    $request->closeCursor();
+
+    return $connection->lastInsertId();
+}

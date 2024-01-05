@@ -193,10 +193,7 @@ else if (isset($_POST["submit-manage-employee"])) {
     $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
 }
 
- 
-
 //MANAGE-DOCUMENTS
-
   else if (isset($_POST['delete-document'])){
     $DocumentID= $_POST['delete-document'];
     CtlDeleteDocument($DocumentID);
@@ -210,7 +207,6 @@ else if (isset($_POST["submit-manage-employee"])) {
     }
     CtlGetAllDocuments();
 } 
-
 //ADVISOR ACCOUNTS 
  else if(isset($_POST['accept-overdraft'])){
     $overdraft = $_POST['new-overdraft'];
@@ -250,6 +246,23 @@ else if(isset($_POST['delete-client-contract'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
     $contractType=$_POST['selected-contract-text'];
     CtlDeleteClientContract($idClient,$contractType);
+}
+
+// ADD NEW CLIENT
+else if(isset($_POST['add-new-client'])){
+    $name=$_POST['name'];
+    $firstname=$_POST['firstname'];
+    $birthday=$_POST['birthday'];
+    $email=$_POST['email'];
+    $phone=$_POST['phone'];
+    $street=$_POST['street'];
+    $city=$_POST['city'];
+    $zip=$_POST['zip'];
+    $country=$_POST['country'];
+    $advisorId=$_POST['advisor'];
+    $situation=$_POST['situation'];
+    $work=$_POST['work'];
+    CtlAddNewClient($name,$firstname,$email,$phone,$street,$city,$zip,$country,$advisorId,$situation,$work,$birthday);
 }
 // RESERVE TIME SLOT
 else if (isset($_POST['reserve-time'])) {

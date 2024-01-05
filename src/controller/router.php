@@ -21,6 +21,8 @@ function getRouteTitle($routeName) {
             return "Contrats";
         case 'agent-client-appointments':
             return "Rendez-vous";
+        case 'agent-new-client':
+            return "Ajouter un client";
 
         case 'advisor-planning':
             return "Planning";
