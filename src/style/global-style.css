@@ -292,6 +292,19 @@ svg {
     color: white;
 }
 
+#search-client th:first-child {
+    width: 18px !important;
+}
+
+#search-client th:nth-child(2),
+#search-client th:nth-child(3) {
+    width: 20% !important;
+}
+
+#search-client th:last-child {
+    width: 35px !important;
+}
+
 #search-client td > button {
     border: none;
     background-color: transparent;
