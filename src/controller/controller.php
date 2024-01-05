@@ -219,10 +219,6 @@ function CtlGetAccountData($clientId){
 }
 function CtlGetContractData($clientId){
     getContractData($clientId);
- }
-function CtlModifyDecouvert($decouvert,$clientId,$accountType){
-    
-    modifyDecouvert($decouvert,$clientId,$accountType);
 }
 function CtlCredit($ammount,$clientId,$accountType){
     credit($ammount,$clientId,$accountType);
