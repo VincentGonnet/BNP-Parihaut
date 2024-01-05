@@ -60,3 +60,38 @@ function editList($document , $list , $iddoc){
     $prepare->closeCursor();
 }
 
+/**
+ * This function returns an array of strings containing the documents required for a given reason.
+ * @param $reasonId
+ * @return array|null
+ */
+function getDocumentsAsArray($reasonId) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM motif WHERE IDMOTIF = :reasonId LIMIT 1');
+    $result->execute(array(
+        'reasonId' => $reasonId
+    ));
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $reason = $result->fetch();
+    $result->closeCursor();
+
+    if(empty($reason)) {
+        return null;
+    }
+
+    $documents = array();
+
+    if ($reason->LISTEPIECES != null) {
+        $documents = explode(',', $reason->LISTEPIECES);
+    } else {
+        return null;
+    }
+
+    // format so that the first letter is uppercase and the rest is lowercase
+    foreach ($documents as $key => $document) {
+        $documents[$key] = ucfirst(mb_strtolower($document));
+    }
+
+    return $documents;
+}
+
