@@ -313,7 +313,6 @@ svg {
 
 #overview {
     justify-content: space-between;
-    background-color: var(--secondary-background-color);
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -1390,7 +1389,7 @@ svg {
 /***********************/
 .contract-details-page {
     justify-content: space-between;
-    background-color: var(--secondary-background-color);
+   
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -1463,53 +1462,21 @@ svg {
     margin-bottom: 15px;
     box-sizing: border-box;
 }
+#div-container .account-div{
+    border:2px solid var(--primary-color);
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:50%;
+    background-color: var(--secondary-background-color);
 
-.new-contract-page > div > p {
-    height: 2%;
 }
-
-.new-contract-page > div > p > label {
-    display: flex;
-    float: left;
-    background-color: var(--primary-color);
-    color: #120909;
-    padding: 5px 1% 5px 2%;
-    box-sizing: border-box;
-    width: 45%;
-    margin-left: 2px;
-}
-
-.new-contract-page > div > p > input {
-    display: flex;
-    flex-direction: column;
-    color: var(--text-color);
-    border-style: none;
-    background-color: #e8d2d2;
-    padding: 6px 1% 8px 2%;
-    box-sizing: border-box;
-    width: 45%;
-    margin-left: 2px;
-}
-
-.new-contract-page > div > p > select {
-    color: var(--text-color);
-    border-style: none;
-    background-color: #e8d2d2;
-    padding: 6px 1% 8px 2%;
-    box-sizing: border-box;
-    width: 45%;
-    margin-bottom: 5px;
-    margin-left: 1px;
-}
-.new-contract-page > div > button {
-    background-color: #e8d2d2;
-    width: 45%;
-    padding: 6px 1% 5px 2%;
-    margin-top: 2%;
-    display: flex;
-    flex-direction: row;
-    margin-left: 2px;
-    margin-bottom: 5px;
+#div-container .information-div{
+    padding:7% 7% 7%  7%;
+    text-align:center;
+    width:90%;
+    background-color: var(--secondary-background-color);
 }
 
 #delete-event-modal {
