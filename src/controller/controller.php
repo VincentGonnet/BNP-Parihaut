@@ -109,8 +109,6 @@ function CtlSelectClient($clientId) {
 }
 
 
-//DIRECTOR FUNCTIONS
-
 //AFFICHAGE COMPTES
 
 function CtlGetAllAccounts(){
@@ -207,8 +205,13 @@ function CtlAdvisorOfClient($clientId){
     }
 }
 
-function CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId){
-    modifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+function CtlModifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work){
+    modifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work);
+}
+function CtlModifyClientAdvisor($checked,$clientId){
+    modifyClientAdvisor($checked,$clientId);
+    
+
 }
 
 function CtlGetAccountData($clientId){
@@ -245,6 +248,11 @@ function CtlAddEvent($start, $end, $reasonId) {
 
 function CtlDeleteEvent($eventId) {
     deleteEvent($eventId);
+}
+
+function CtlReserveTimeSlot($start, $end) {
+    $employee = $_SESSION['loggedInUser'];
+    reserveTimeSlot($employee->NUMEMPLOYE, $start, $end);
 }
 
 // ADVISOR FUNCTIONS ----------------------------------------------------------

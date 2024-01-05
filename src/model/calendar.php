@@ -224,7 +224,18 @@ class Calendar {
 
             // check if displaying an event cell, else display an empty cell if not occupied
             if (in_array([$date, $hour, $minute], $this->eventCells) && !in_array([$date, $hour, $minute], $this->occupiedCells)) {
-                $event = $this->displayedEvents[$date][0];
+                // search among all events of the day for the event that starts at this hour and minute
+                $event = null;
+                foreach ($this->displayedEvents[$date] as $e) {
+                    if (getEventHour($e) == $hour && getEventMinute($e) == $minute) {
+                        $event = $e;
+                        break;
+                    }
+                }
+                if ($event == null) {
+                    throw new Exception('Event not found');
+                }
+
                 $eventStart = strtotime($event->DATERDV);
                 $eventEnd = strtotime($event->DATEFINRDV);
                 $eventDuration = ($eventEnd - $eventStart) / 60;
@@ -236,7 +247,11 @@ class Calendar {
                     $this->occupiedCells[] = [$date, $hour, $minute];
                 }
 
-                require 'view/components/calendar-event.php';
+                if (empty($event->NUMCLIENT)) {
+                    require 'view/components/calendar-reserved-slot.php';
+                } else {
+                    require 'view/components/calendar-event.php';
+                }
             } else if (!in_array([$date, $hour, $minute], $this->occupiedCells)) {
                 $this->displayEmptyCell($date, $hour, $minute);
                 $this->occupiedCells[] = [$date, $hour, $minute];
@@ -279,9 +294,11 @@ class Calendar {
      * @return void
      */
     private function displayEmptyCell($date, $hour, $minute) {
-        if ($_SESSION['currentPage'] == 'advisor-planning') {
-            echo "<td></td>";
-        } else if ($_SESSION['currentPage'] != 'agent-client-appointments' || !$this->isNextHalfHourOccupied($date, $hour, $minute)) {
+        $isAdvisorPlanning = $_SESSION['currentPage'] == 'advisor-planning';
+        if ($isAdvisorPlanning) {
+            $formattedDateHour = date('Y-m-d H:i', strtotime($date . ' ' . $hour . ':' . $minute));
+            require 'view/components/calendar-add-event.php';
+        } else if (!$this->isNextHalfHourOccupied($date, $hour, $minute)) {
             $formattedDateHour = date('Y-m-d H:i', strtotime($date . ' ' . $hour . ':' . $minute));
             require 'view/components/calendar-add-event.php';
         } else {
@@ -316,12 +333,21 @@ class Calendar {
             return $timeToNextEvent;
         }
 
+        if ($hour == 17 && $minute == 30) {
+            return "00:30";
+        }
+
         while ($hour < 18) {
             if (in_array([$date, $hour, $minute], $this->eventCells)) {
-                return date('h:i' ,strtotime($date . ' ' . $hour-1 . ':' . $minute) - $initialTimeStamp);
+                return date('H:i' ,strtotime($date . ' ' . $hour-1 . ':' . $minute) - $initialTimeStamp);
             }
-            $minute = $minute == 30 ? 0 : 30;
-            $hour = $minute == 0 ? $hour : $hour + 1;
+            
+            if ($minute == 30) {
+                $minute = 0;
+                $hour++;
+            } else {
+                $minute = 30;
+            }
         }
 
         return $timeToNextEvent;

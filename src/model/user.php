@@ -25,6 +25,11 @@ function logIn($login, $password) {
 
     $_SESSION['loggedIn'] = true; // Set the loggedIn flag to true in the session
     $_SESSION['loggedInUser'] = $user; // Store the user in the session
+
+    if ($user->CATEGORIE == "advisor") {
+        $_SESSION['advisorToViewPlanning'] = $user;
+    }
+
     return $user;
 
 

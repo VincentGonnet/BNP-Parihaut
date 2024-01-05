@@ -103,9 +103,12 @@ else if(isset($_POST['delete-contract'])){
         $phoneNumber = $_POST['input-phone-number'] ;
         $situation = $_POST['input-situation'];
         $work = $_POST['input-work'];
-        $checked = $_POST['input-checked'];
-        $advisorId =$_POST['input-advisor-id']; 
-        CtlModifyClient($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work,$checked,$advisorId);
+        CtlModifyClientAgent($name,$firstName,$clientId,$adress,$birthday,$mail,$phoneNumber,$situation,$work);
+}else if (isset($_POST['input-checked'])){
+    $checked = isset($_POST['input-checked']) ? 1 : 0;
+    $clientId =$_POST['input-client-id'];
+    CtlModifyClientAdvisor($checked,$clientId);
+
 } else if (isset($_POST['calendar-event'])) {
     $eventId = $_POST['calendar-event'];
     $event = getEventById($eventId);
@@ -247,6 +250,14 @@ else if(isset($_POST['delete-client-contract'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
     $contractType=$_POST['selected-contract-text'];
     CtlDeleteClientContract($idClient,$contractType);
+}
+// RESERVE TIME SLOT
+else if (isset($_POST['reserve-time'])) {
+    $startDate = $_POST["reserve-time-start-time"];
+    $duration = $_POST["reserve-time-duration"];
+    $start = date('Y-m-d H:i:s', strtotime($startDate));
+    $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
+    CtlReserveTimeSlot($start, $end);
 }
 
 if ($_SESSION['loggedIn'] == false) {

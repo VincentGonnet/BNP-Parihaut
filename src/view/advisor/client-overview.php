@@ -78,7 +78,7 @@
     
         <p>
             <label id="checked">Enregistre:</label>
-            <input name="input-checked"  for="checked" type="text" value="<?= $checked?>" readOnly>
+            <input id="checked" name="input-checked" type="checkbox" onchange="submitForm()" value="" <?= ($checked == 1) ? 'checked disabled' : '' ?> onclick="this.form.submit()"> 
         </p>
 </div>
 
