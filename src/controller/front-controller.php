@@ -247,6 +247,7 @@ else if(isset($_POST['delete-client-contract'])){
     $contractType=$_POST['selected-contract-text'];
     CtlDeleteClientContract($idClient,$contractType);
 }
+
 // ADD NEW CLIENT
 else if(isset($_POST['add-new-client'])){
     $name=$_POST['name'];
@@ -262,6 +263,14 @@ else if(isset($_POST['add-new-client'])){
     $situation=$_POST['situation'];
     $work=$_POST['work'];
     CtlAddNewClient($name,$firstname,$email,$phone,$street,$city,$zip,$country,$advisorId,$situation,$work,$birthday);
+}
+// RESERVE TIME SLOT
+else if (isset($_POST['reserve-time'])) {
+    $startDate = $_POST["reserve-time-start-time"];
+    $duration = $_POST["reserve-time-duration"];
+    $start = date('Y-m-d H:i:s', strtotime($startDate));
+    $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
+    CtlReserveTimeSlot($start, $end);
 }
 
 if ($_SESSION['loggedIn'] == false) {
