@@ -1296,7 +1296,7 @@ svg {
 .account-list-form #div-container {
     display: grid;
 
-    height: 60%;
+    height: 30%;
     width: 70%;
     row-gap: 1%;
     column-gap: 1%;
@@ -1483,6 +1483,7 @@ svg {
     justify-content:center;
     width:50%;
     background-color: var(--secondary-background-color);
+    
 
 }
 #div-container .information-div{

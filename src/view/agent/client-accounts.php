@@ -127,7 +127,11 @@
     function switchForms(selectedAccount, solde, decouvert) {
         document.getElementById('selected-account-text').value = selectedAccount;
         document.getElementById('solde').value = solde;
+        if (selectedAccount==="Courant"){
         document.getElementById('decouvert').value = decouvert;
+        }else{
+            document.getElementById('decouvert').value = '0';
+        }
         document.getElementById('chosen-account').value = selectedAccount;
 
         var form1 = document.querySelector('.account-list-form');
