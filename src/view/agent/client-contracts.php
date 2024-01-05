@@ -9,12 +9,11 @@
         if (isset($_SESSION['currentClient'])) { 
             $clientId = $_SESSION['currentClient']->NUMCLIENT;
             $contracts = getContractData($clientId);
-    ?>
-    <div id="div-container">
-        <?php
-        if (empty($contracts)) {
-            echo '<p>Aucun contrat n\'est disponible pour ce client.</p>';
-        } else {
+            if (empty($contracts)) {
+                echo '<p>Aucun contrat n\'est disponible pour ce client.</p>';
+            } 
+        else {
+            echo '<div id="div-container">';
             foreach ($contracts as $contract) {
                 $optionValue = $contract->NOMCONTRAT;
                 echo '<div class="contract-div">';
