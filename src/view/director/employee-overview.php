@@ -3,6 +3,8 @@
     header('Location: index.php');
 } else {
     $employee = $_SESSION['employeeToManage'];
+    echo '<input type="hidden" id="employee-to-manage" value="' . $employee->CATEGORIE . '">';
+
 } ?>
 <div id="employee-overview">
     <div class="content">
@@ -44,8 +46,18 @@
         </form>
     </div>
 </div>
-
-<script>
+<?php 
+            $allEmploye=getAllEmployees();
+            $directorCount=0;
+            foreach ($allEmploye as $employee){
+                if ($employee->CATEGORIE =='director'){
+                    $directorCount++;
+                }
+            }
+            echo $directorCount;
+            ?>
+        <input type="hidden" id="director-count"  value="<?php echo $directorCount; ?>">
+    <script>
     const loginInfos = document.querySelector('.login-infos');
     const modifyLoginInfosBtn = document.querySelector('#modify-login-infos');
     const saveLoginInfosBtn = document.querySelector('#save-login-infos');
@@ -98,14 +110,22 @@
     let previousJob = '';
 
     function modifyGeneralInfos() {
-        generalInfos.querySelector('#job').removeAttribute('disabled');
+        var directorCount = document.getElementById('director-count').value;
+        var employee = document.getElementById('employee-to-manage').value;
+        if (employee === "director" && directorCount === "1") {
+            alert("Veuillez choisir un autre directeur avant de modifier.");
+            return;
+        }else{
+            generalInfos.querySelector('#job').removeAttribute('disabled');
 
-        previousJob = generalInfos.querySelector('#job').value;
-        modifyGeneralInfosBtn.style.display = 'none';
-        saveGeneralInfosBtn.style.display = 'inline-block';
-        cancelGeneralInfosBtn.style.display = 'inline-block';
+            previousJob = generalInfos.querySelector('#job').value;
+            modifyGeneralInfosBtn.style.display = 'none';
+            saveGeneralInfosBtn.style.display = 'inline-block';
+            cancelGeneralInfosBtn.style.display = 'inline-block';
+        
+        
     }
-
+}
     function saveGeneralInfos() {
         generalInfos.querySelector('#job').setAttribute('disabled', '');
         modifyGeneralInfosBtn.style.display = 'inline-block';
