@@ -602,6 +602,15 @@ svg {
     color: white;
 }
 
+.reserved-time-slot svg {
+    width: 26px;
+    height: 26px;
+}
+
+.reserved-time-slot * {
+    color: #2d2d34;
+}
+
 /*-----------------------------------------------------------------------------------------------*/
 /*                                      MANAGE ACCOUNTS                                          */
 /*-----------------------------------------------------------------------------------------------*/
@@ -621,6 +630,7 @@ svg {
 }
 
 #allAccounts th {
+    width: 1500px;
     background-color: var(--primary-color);
     color: white;
 }
@@ -632,8 +642,6 @@ svg {
     flex-direction: column;
 }
 
-
-
 #allAccounts form {
     width: 100%;
 }
@@ -644,14 +652,14 @@ svg {
     flex-direction: row;
 }
 
-#allAccounts .account input{
+#allAccounts .account input {
     border: none;
     background-color: var(--secondary-background-color);
     width: 95%;
     font-size: medium;
 }
 
-#allAccounts .account input:focus{
+#allAccounts .account input:focus {
     outline: none;
 }
 
@@ -662,11 +670,9 @@ svg {
     bottom: 3px;
 }
 
-#allAccounts .account .buttons button{
+#allAccounts .account .buttons button {
     border: none;
-    
 }
-
 
 #allAccounts .edit-accounts {
     display: flex;
@@ -694,7 +700,7 @@ svg {
     width: 10px;
 }
 
-#add-contract-modal {
+#add-account-modal {
     display: flex;
     width: 100%;
     height: 100%;
@@ -858,7 +864,7 @@ svg {
     flex-direction: row;
 }
 
-#allContracts .contract input:focus{
+#allContracts .contract input:focus {
     outline: none;
 }
 
@@ -869,9 +875,8 @@ svg {
     bottom: 3px;
 }
 
-#allContracts .contract .buttons button{
+#allContracts .contract .buttons button {
     border: none;
-    
 }
 
 #allContracts .edit-contracts {
@@ -1277,6 +1282,243 @@ svg {
     padding: 0;
 }
 
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      Account-contract-CLIENT                                          */
+/*-----------------------------------------------------------------------------------------------*/
+.account-list-form {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    height: 100%;
+}
+
+.account-list-form #div-container {
+    display: grid;
+
+    height: 60%;
+    width: 70%;
+    row-gap: 1%;
+    column-gap: 1%;
+}
+.p {
+    height: 2%;
+}
+
+#div-container .account-div {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    background-color: var(--secondary-background-color);
+}
+#div-container .information-div {
+    padding: 7% 7% 7% 7%;
+    text-align: center;
+    background-color: var(--secondary-background-color);
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left: 5px;
+}
+.input[type="number"] {
+    margin-top: 10%;
+}
+
+.button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2px;
+    margin-bottom: 5px;
+}
+
+.label {
+    display: flex;
+    float: left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding: 5px 1% 5px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left:5px; 
+    margin-top:2px;
+}
+.radio {
+    display: initial;
+    margin-bottom: 5px;
+    width: 4%;
+}
+
+/*-----------------*/
+.contract-list-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+    width: 100%;
+    row-gap: 1%;
+    column-gap: 1%;
+}
+.contract-list-form > div {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 50%;
+    background-color: var(--secondary-background-color);
+}
+.contract-list-form > div > div > div > button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 28%;
+    margin-bottom: 5px;
+}
+
+/***********************/
+.contract-details-page {
+    justify-content: space-between;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.contract-details-page > div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+.contract-details-page > div > p {
+    height: 2%;
+}
+
+.contract-details-page > div > p > select {
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-bottom: 5px;
+}
+
+.contract-details-page > div > p > input {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left: 2px;
+}
+
+.contract-details-page > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contract-details-page > div > p > label {
+    display: flex;
+    float: left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding: 5px 1% 5px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left: 5px;
+}
+
+/*********************/
+.new-contract-page {
+    justify-content: space-between;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+.new-contract-page > div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.new-contract-page > div > p {
+    height: 2%;
+}
+
+.new-contract-page > div > p > label {
+    display: flex;
+    float: left;
+    background-color: var(--primary-color);
+    color: #120909;
+    padding: 5px 1% 5px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left: 2px;
+}
+
+.new-contract-page > div > p > input {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-left: 2px;
+}
+
+.new-contract-page > div > p > select {
+    color: var(--text-color);
+    border-style: none;
+    background-color: #e8d2d2;
+    padding: 6px 1% 8px 2%;
+    box-sizing: border-box;
+    width: 45%;
+    margin-bottom: 5px;
+    margin-left: 1px;
+}
+.new-contract-page > div > button {
+    background-color: #e8d2d2;
+    width: 45%;
+    padding: 6px 1% 5px 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2px;
+    margin-bottom: 5px;
+}
+
 #delete-event-modal {
     display: flex;
     width: 100%;
@@ -1430,4 +1672,712 @@ svg {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "general-infos general-infos";
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                      MANAGE DOCUMENTS                                         */
+/*-----------------------------------------------------------------------------------------------*/
+
+#allDocuments {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allDocuments .showDocuments {
+    background-color: var(--background-color);
+    width: 100%;
+}
+
+#allDocuments th {
+    width: 1000px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#allDocuments th:first-child {
+    width: 300px;
+}
+
+#allDocuments table {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#allDocuments table td input {
+    border: none;
+    width: 95%;
+    font-size: medium;
+    background-color: var(--secondary-background-color);
+}
+
+#allDocuments form {
+    width: 100%;
+}
+
+#allDocuments .account {
+    margin-top: 20px;
+}
+
+#allDocuments .edit-documents-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 100px;
+}
+
+#allDocuments .edit-documents-list button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+}
+
+#allDocuments .edit-documents-list input {
+    height: 40px;
+    font-size: large;
+}
+
+#allDocuments .space {
+    width: 10px;
+}
+
+#allDocuments .add-delete {
+    display: flex;
+    flex-direction: row;
+}
+
+#allDocuments .edit-list-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#allDocuments .document button {
+    border: none;
+    color: var(--primary-color);
+}
+
+#add-doc-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#add-doc-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add-doc-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#add-doc-modal form .inputs {
+    margin-top: 4px;
+}
+
+#add-doc-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#add-doc-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#add-doc-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#add-doc-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#add-doc-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#add-doc-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-doc-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+
+/*                                      ADVISOR DOCUMENTS                                          */
+/* ----------------------------------------------------------------------------------------------- */
+
+#allDocuments #list-name {
+    opacity: 0;
+}
+
+#allDocuments .advisor-documents th {
+    width: 400px;
+    height: 50px;
+}
+
+#allDocuments .advisor-documents td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    margin-top: 15px;
+
+    font-size: large;
+
+    width: 100%;
+}
+
+#allDocuments .advisor-documents td input[type="checkbox"] {
+    height: 20px;
+    width: 30px;
+    margin-left: auto;
+}
+
+#allDocuments .advisor-documents {
+    margin-right: auto;
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      ADVISOR ACCOUNTS                                           */
+/* ----------------------------------------------------------------------------------------------- */
+
+#allAccounts .advisor-accounts {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#allAccounts .advisor-accounts .buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+#allAccounts .advisor-accounts table {
+    width: 100%;
+    display: flex;
+    background-color: var(--secondary-background-color);
+}
+
+#allAccounts .advisor-accounts td {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    height: 30px;
+}
+
+#allAccounts .advisor-accounts td .date {
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 30px;
+}
+
+#allAccounts .advisor-accounts td .overdraft {
+    display: flex;
+    flex-direction: row;
+}
+
+#allAccounts .advisor-accounts td input[type="text"] {
+    width: 160px;
+    border: none;
+    background-color: var(--secondary-background-color);
+    font-size: large;
+}
+
+#allAccounts .advisor-accounts td input[name="overdraft-title"] {
+    width: 300px;
+}
+
+#allAccounts .advisor-accounts td input[name="input-overdraft"] {
+    width: 100px;
+}
+
+#allAccounts .advisor-accounts td input[type="text"]:focus {
+    outline: none;
+}
+
+#allAccounts .advisor-accounts td input[type="text"]:first-child {
+    width: 100px;
+}
+
+#allAccounts .advisor-accounts button {
+    border: none;
+}
+
+#allAccounts .advisor-accounts form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit-overdraft-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#edit-overdraft-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#edit-overdraft-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form .inputs {
+    margin-top: 4px;
+}
+
+#edit-overdraft-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#edit-overdraft-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#edit-overdraft-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#edit-overdraft-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#edit-overdraft-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#edit-overdraft-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-overdraft-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+#allAccounts .advisor-accounts form button {
+    width: 140px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    border-color: var(--primary-color);
+    margin-top: 20px;
+}
+
+#allAccounts .advisor-accounts form td button {
+    height: 30px;
+    margin-top: 0px;
+}
+
+#delete-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#delete-modal .form-content .label-containers {
+    width: 200px;
+}
+
+#delete-modal .form-content select {
+    width: 100px;
+}
+
+#delete-modal form .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#delete-modal form .form-content > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form .form-content > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#delete-modal form .inputs {
+    margin-top: 4px;
+}
+
+#delete-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#delete-modal form .form-content input {
+    color: var(--text-color);
+}
+
+#delete-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#delete-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#delete-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#delete-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#delete-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+#reserve-time-modal {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    pointer-events: none;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 468px;
+    height: 400px;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#reserve-time-modal form .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#reserve-time-modal form .form-container > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form .form-container > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#reserve-time-modal form .inputs {
+    margin-top: 4px;
+}
+
+#reserve-time-modal form .inputs > * {
+    margin: 14px 30px;
+}
+
+#reserve-time-modal form .form-container input {
+    color: var(--text-color);
+}
+
+#reserve-time-modal .arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal .arrow-container button {
+    border: none;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    width: 15px;
+    /* height: 10px; */
+}
+
+#reserve-time-modal .arrow-container svg {
+    color: var(--text-color);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+#reserve-time-modal .label-containers p {
+    margin: 15px;
+    margin-left: 0;
+    font-size: large;
+}
+
+#reserve-time-modal .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#reserve-time-modal form > button {
+    margin-bottom: 37px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    font-size: larger;
+}
+
+.reserved-slot {
+    background-color: #646464 !important;
 }

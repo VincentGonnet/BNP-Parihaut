@@ -56,3 +56,29 @@ function deleteAllContracts(){
     $result->closeCursor();
 }
 
+function clientNewContract($idClient, $openingDate, $endDate, $price, $contractType) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = "INSERT INTO contratclient (NOMCONTRAT, NUMCLIENT, DATEFERMETURE, DATEOUVERTURECONTRAT, TARIFMENSUEL) 
+                VALUES (:nomContrat, :idClient, :endDate, :openingDate, :price)";
+    $prepare = $connection->prepare($request);
+    $prepare->execute(array(
+        'nomContrat' => $contractType,
+        'idClient' => $idClient,
+        'endDate' => empty($endDate) ? null : $endDate, // Utilisez NULL si $endDate est vide, sinon utilisez la valeur
+        'openingDate' => $openingDate,
+        'price' => $price,
+    ));
+    $prepare->closeCursor();
+}
+
+function deleteClientContract($idClient, $contractType) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = "DELETE FROM contratclient WHERE NUMCLIENT = :idClient AND NOMCONTRAT = :contractType";  
+    $prepare = $connection->prepare($request);
+    $prepare->execute(array(
+        'idClient' => $idClient,
+        'contractType' => $contractType
+    ));
+    
+    $prepare->closeCursor();
+}

@@ -46,6 +46,17 @@ function addEvent($advisorId, $clientId, $reasonId, $start, $end) {
     $result->closeCursor();
 }
 
+function reserveTimeSlot($advisorId, $start, $end) {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('INSERT INTO rdv (NUMEMPLOYE, DATERDV, DATEFINRDV) VALUES (:advisorId, :start, :end)');
+    $result->execute(array(
+        'advisorId' => $advisorId,
+        'start' => $start,
+        'end' => $end
+    ));
+    $result->closeCursor();
+}
+
 function deleteEvent($eventId) {
     $connection = Connection::getInstance()->getConnection();
     $result = $connection->prepare('DELETE FROM rdv WHERE NUMRDV = :eventId');
@@ -73,5 +84,26 @@ function getEventMonth($event) {
 
 function getEventYear($event) {
     return date('Y', strtotime($event->DATERDV));
+}
+
+function getAllEventsBeforeDate($date) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = $connection->prepare("SELECT * FROM rdv WHERE DATERDV < :date");
+    $request->execute(array(
+        'date' => $date
+    ));
+    $request->setFetchMode(PDO::FETCH_OBJ);
+    $events = $request->fetchAll();
+    $request->closeCursor();
+
+    if(empty($events)) {
+        return null;
+    }
+
+    if(!is_array($events)) {
+        $events = array($events);
+    }
+
+    return $events;
 }
 
