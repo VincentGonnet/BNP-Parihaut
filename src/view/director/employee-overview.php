@@ -54,7 +54,6 @@
                     $directorCount++;
                 }
             }
-            echo $directorCount;
             ?>
         <input type="hidden" id="director-count"  value="<?php echo $directorCount; ?>">
     <script>
