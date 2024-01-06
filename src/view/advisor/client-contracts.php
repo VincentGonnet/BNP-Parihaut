@@ -8,6 +8,9 @@
             $clientId = $_SESSION['currentClient']->NUMCLIENT;
             $contracts = getContractData($clientId);
     ?>
+    <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
+        <?php endif; ?>
         <?php
             foreach ($contracts as $contract) {
                 $optionValue = $contract->NOMCONTRAT;
@@ -30,7 +33,7 @@
         ?>
         
         <p>
-        <button class="button" type="button" onclick="addNewContract()">
+        <button class="button" type="button" id="add-delete" onclick="addNewContract()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -79,7 +82,7 @@
         <input type="hidden" name="client-id" value="<?php echo $clientId; ?>">
         <input type="hidden" name="chosen-contract" id="chosen-contract" value="">
 
-        <button class="button" type="submit" name="delete-client-contract" onClick="confirmation()" >
+        <button class="button" type="submit" name="delete-client-contract" id="add-delete" onClick="confirmation()" >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -184,3 +187,13 @@
         alert("Apres cette operation le contrat courant sera resilie.Voulez vous vraiment le supprimer?");
     }
 </script>
+
+<?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+    <script>
+        var buttons = document.querySelectorAll("#add-delete");
+        buttons.forEach(function(button){
+            button.style.backgroundColor = 'grey';
+            button.onclick = null;
+        })
+    </script>
+<?php endif; ?>

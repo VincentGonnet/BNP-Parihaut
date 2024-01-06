@@ -254,23 +254,44 @@ else if (isset($_POST["submit-manage-employee"])) {
                 CtlCloseAccount($idClient , $accountName , $endDate);
                 CtlGetAllAccountsClient($idClient);
             }
+            else{
+                echo '<script>alert("Vous ne pouvez pas fermer ce compte. Vérifiez que vous avez choisi le bon.");</script>';
+            }
         }
     }
  }
 
 //ADVISOR CONTRACTS
 else if (isset($_POST['submit-new-contract'])){
-    $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $openingDate=$_POST['new-opening-date'];
-    $endDate=$_POST['new-ending-date'];
-    $price=$_POST['new-price'];
-    $contractType=$_POST['new-contract-type'];
-    CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+    $documentId = $_SESSION['currentEvent']->IDMOTIF;
+    CtlGetDocument($documentId);
+    if (isset($_SESSION['getDoc'])){
+        if ( $_POST['new-contract-type'] == $_SESSION['getDoc']->LIBELLEMOTIF){
+            $idClient=$_SESSION['currentClient']->NUMCLIENT;
+            $openingDate=$_POST['new-opening-date'];
+            $endDate=$_POST['new-ending-date'];
+            $price=$_POST['new-price'];
+            $contractType=$_POST['new-contract-type'];
+            CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
+            }
+            else{
+                echo '<script>alert("Vous ne pouvez pas souscrire un client à ce contrat. Vérifiez que vous avez choisi le bon.");</script>';
+            }
+    }
 }
 else if(isset($_POST['delete-client-contract'])){
-    $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $contractType=$_POST['selected-contract-text'];
-    CtlDeleteClientContract($idClient,$contractType);
+    $documentId = $_SESSION['currentEvent']->IDMOTIF;
+    CtlGetDocument($documentId);
+    if (isset($_SESSION['getDoc'])){
+        if ( $_POST['selected-contract-text'] == $_SESSION['getDoc']->LIBELLEMOTIF){
+            $idClient=$_SESSION['currentClient']->NUMCLIENT;
+            $contractType=$_POST['selected-contract-text'];
+            CtlDeleteClientContract($idClient,$contractType);
+        }
+            else{
+                echo '<script>alert("Vous ne pouvez pas résilier ce contrat. Vérifiez que vous avez choisi le bon.");</script>';
+            }
+    }
 }
 // RESERVE TIME SLOT
 else if (isset($_POST['reserve-time'])) {
