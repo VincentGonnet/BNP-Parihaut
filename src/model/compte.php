@@ -39,12 +39,13 @@ function deleteAccount($accountName){
 
 
 
-function addAccount($accountName){
+function addAccount($accountName,$overdraft){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO compte (NOMCOMPTE) VALUES ( :accountName)" ;
+    $request="INSERT IGNORE INTO compte (NOMCOMPTE,AVOIRDECOUVERT) VALUES ( :accountName, :overdraft)" ;
     $prepare=$connection->prepare($request);
     $prepare->execute(array(
-        'accountName' => $accountName
+        'accountName' => $accountName,
+        'overdraft' => $overdraft
     ));
     $prepare->closeCursor();
 }

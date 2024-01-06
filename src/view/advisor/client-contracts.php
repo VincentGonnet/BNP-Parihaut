@@ -98,8 +98,8 @@
             ?>
         <h5>Veuillez remplir les champs suivants:</h5>
         <p>
-            <label  for="new-contract-type">Type du contrat:</label>
-            <select id="new-contract-type" name="new-contract-type">
+            <label class="label" for="new-contract-type">Type du contrat:</label>
+            <select id="new-contract-type" name="new-contract-type" style="width:45%;background:#e8d2d2;padding: 6px 1% 6px 1%;margin-top:2px;">
                 <?php 
                     foreach ($allContract as $contractOption) {
                         $clientHasContract = false;
@@ -122,21 +122,21 @@
         </p>
 
         <p>
-            <label for="new-opening-date">Date d'ouverture:</label>
-            <input  id="new-opening-date" placeHolder="aaaa-mm-jj" name="new-opening-date" value="" type="text">
+            <label class="label" for="new-opening-date">Date d'ouverture:</label>
+            <input class="input" id="new-opening-date" placeHolder="aaaa-mm-jj" name="new-opening-date" value="" type="text" style="margin-top:2px;">
         </p>
 
         <p>
-            <label  for="new-closing-date">Date de fermeture:</label>
-            <input  id="new-closing-date" placeHolder="aaaa-mm-jj" name="new-ending-date" value=""  type="text">
+            <label  class="label" for="new-closing-date">Date de fermeture:</label>
+            <input  class="input" id="new-closing-date" placeHolder="aaaa-mm-jj" name="new-ending-date" value=""  type="text" style="margin-top:2px;">
         </p>
 
         <p>
-            <label  for="new-price">Tarifs mensuel:</label>
-            <input  id="new-price" name="new-price" placeHolder="000.00" type="text" required>
+            <label  class="label" for="new-price">Tarifs mensuel:</label>
+            <input  class="input" id="new-price" name="new-price" placeHolder="000.00" type="text" style="margin-top:2px;" required>
         </p>
 
-        <button  type="submit" name="submit-new-contract">
+        <button  class="button" type="submit" name="submit-new-contract">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>

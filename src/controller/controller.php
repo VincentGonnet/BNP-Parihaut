@@ -125,8 +125,8 @@ function CtlDeleteAccount($accountName){
     deleteAccount($accountName);
 }
 
-function CtlAddAccount($accountName){
-    addAccount($accountName);
+function CtlAddAccount($accountName,$overdraft){
+    addAccount($accountName,$overdraft);
 }
 
 function CtlDeleteAllAccounts(){
