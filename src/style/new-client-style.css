@@ -1,0 +1,92 @@
+:root {
+    --background-color: #f5f5f5;
+    --text-color: #120909;
+    --secondary-background-color: #f3efef;
+    --primary-color: #b36064;
+    --secondary-color: #d4c0a5;
+    --accent-color: #f64343;
+}
+
+#add-new-client form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+#add-new-client fieldset {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 2fr 2fr;
+    grid-gap: 0.5rem;
+
+    padding: 15px;
+    margin: 15px;
+
+    background-color: var(--secondary-background-color);
+
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+#add-new-client fieldset legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#add-new-client input[type="submit"] {
+    margin: 15px;
+    padding: 5px 10px;
+
+    height: 2rem;
+    width: 6rem;
+
+    background-color: var(--primary-color);
+    color: var(--secondary-background-color);
+    font-size: large;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    box-shadow: 0 0 1px var(--primary-color);
+
+    transition: all 0.1s ease-in-out;
+}
+
+#add-new-client input[type="submit"]:focus {
+    box-shadow: 0 0 2px var(--primary-color);
+    transform: translateY(2px);
+}
+
+#add-new-client input[type="text"],
+#add-new-client input[type="number"],
+#add-new-client input[type="tel"],
+#add-new-client input[type="email"],
+#add-new-client input[type="date"] {
+    padding: 3px;
+
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+
+    height: 1.5rem;
+}
+
+#add-new-client input[type="number"] {
+    width: 4rem;
+}
+
+#add-new-client input[type="date"] {
+    width: 7.2rem;
+}
+
+#add-new-client select {
+    padding: 3px;
+
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    background-color: white;
+
+    height: 1.5rem;
+}

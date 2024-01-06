@@ -2,19 +2,29 @@
 
 
 
-function addEmployee($name , $firstname , $login , $password , $job){
-    $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO employe (NOM , PRENOM , LOGIN , MDP , CATEGORIE) VALUES ( :name , :firstname , :login , :password , :job  )" ;
-    $prepare=$connection->prepare($request);
-    $prepare->execute(array(
-        'name' => $name ,
-        'firstname' => $firstname ,
-        'login' => $login ,
-        'password' => $password ,
+function addEmployee($name, $firstname, $login, $password, $job) {
+    $connection = Connection::getInstance()->getConnection();
+    $testResult = $connection->prepare("SELECT COUNT(*) FROM employe WHERE LOGIN = :login");
+    $testResult->execute(['login' => $login]);
+
+    if ($testResult->fetchColumn() > 0) {
+        echo '<script>  alert("Le login existe déjà. Veuillez choisir un autre login.");
+                        window.location.href = "http://localhost/BNP-Parihaut/src/index.php";
+                </script>';
+        return;
+    }
+
+    $result = $connection->prepare("INSERT INTO employe (NOM, PRENOM, LOGIN, MDP, CATEGORIE) VALUES (:name, :firstname, :login, :password, :job)");
+    $result->execute([
+        'name' => $name,
+        'firstname' => $firstname,
+        'login' => $login,
+        'password' => $password,
         'job' => $job
-    ));
-    $prepare->closeCursor();
+    ]);
+    $result->closeCursor();
 }
+
 
 function getEmployeeById($employeeId) {
     $connection = Connection::getInstance()->getConnection();
@@ -94,3 +104,4 @@ function modifyEmployeeJob($employeeId, $job) {
     ));
     $result->closeCursor();
 }
+

@@ -3,7 +3,7 @@
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <table> 
                 <tr>
-                    <th>
+                    <th style="width: 1500px;">
                         Type de contrat
                     </th>
 
