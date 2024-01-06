@@ -11,7 +11,7 @@
                         <tr>
                             <td>
                                 <label for="<?php echo $document; ?>"><?php echo $document; ?></label>
-                                <input type="checkbox" id="<?php echo $document; ?>" name="<?php echo $document; ?>" onclick="SaveCheckState()">
+                                <input type="checkbox" id="<?php echo $document; ?>" name="<?php echo $document; ?>" <?= (isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true) ? "checked" : "unchecked" ?> onclick="SaveCheckState()">
                             </td>
                         </tr>
                     <?php endforeach ?>
