@@ -46,6 +46,8 @@ if (isset($_POST['connection'])) {
     CtlLogin($login, $password);
 } else if (isset($_POST['logout'])) {
     CtlLogout();
+} else if (isset($_POST['my-infos'])) {
+    CtlChangeView("all-user-infos");
 } else if (isset($_POST['agent-search-client-by-id'])) {
     $clientId = $_POST['client-id'];
     CtlSearchClientById($clientId);
@@ -194,10 +196,7 @@ else if (isset($_POST["submit-manage-employee"])) {
     $_SESSION['employeeToManage'] = getEmployeeById($employeeId);
 }
 
- 
-
 //MANAGE-DOCUMENTS
-
   else if (isset($_POST['delete-document'])){
     $DocumentID= $_POST['delete-document'];
     CtlDeleteDocument($DocumentID);
@@ -211,7 +210,6 @@ else if (isset($_POST["submit-manage-employee"])) {
     }
     CtlGetAllDocuments();
 } 
-
 //ADVISOR ACCOUNTS 
  else if(isset($_POST['accept-overdraft'])){
     $overdraft = $_POST['new-overdraft'];
@@ -252,6 +250,23 @@ else if(isset($_POST['delete-client-contract'])){
     $contractType=$_POST['selected-contract-text'];
     CtlDeleteClientContract($idClient,$contractType);
 }
+
+// ADD NEW CLIENT
+else if(isset($_POST['add-new-client'])){
+    $name=$_POST['name'];
+    $firstname=$_POST['firstname'];
+    $birthday=$_POST['birthday'];
+    $email=$_POST['email'];
+    $phone=$_POST['phone'];
+    $street=$_POST['street'];
+    $city=$_POST['city'];
+    $zip=$_POST['zip'];
+    $country=$_POST['country'];
+    $advisorId=$_POST['advisor'];
+    $situation=$_POST['situation'];
+    $work=$_POST['work'];
+    CtlAddNewClient($name,$firstname,$email,$phone,$street,$city,$zip,$country,$advisorId,$situation,$work,$birthday);
+}
 // RESERVE TIME SLOT
 else if (isset($_POST['reserve-time'])) {
     $startDate = $_POST["reserve-time-start-time"];
@@ -259,6 +274,14 @@ else if (isset($_POST['reserve-time'])) {
     $start = date('Y-m-d H:i:s', strtotime($startDate));
     $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
     CtlReserveTimeSlot($start, $end);
+}
+// MY INFOS
+else if (isset($_POST["modify-my-infos"])) {
+    $employeeId = $_SESSION['loggedInUser']->NUMEMPLOYE;
+    $login = $_SESSION['loggedInUser']->LOGIN;
+    $password = $_POST["password"];
+    CtlModifyCredentials($employeeId, $login, $password);
+    $_SESSION['loggedInUser'] = getEmployeeById($employeeId);
 }
 
 if ($_SESSION['loggedIn'] == false) {

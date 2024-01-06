@@ -25,6 +25,7 @@ function addEmployee($name, $firstname, $login, $password, $job) {
     $result->closeCursor();
 }
 
+
 function getEmployeeById($employeeId) {
     $connection = Connection::getInstance()->getConnection();
     $result = $connection->prepare('SELECT * FROM employe WHERE NUMEMPLOYE = :employeeId LIMIT 1');
@@ -103,3 +104,4 @@ function modifyEmployeeJob($employeeId, $job) {
     ));
     $result->closeCursor();
 }
+
