@@ -220,37 +220,42 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlGetAllAccountsClient($idClient);
 
  } else if (isset($_POST['accept-account'])){
-    echo "test1";
     $documentId = $_SESSION['currentEvent']->IDMOTIF;
     CtlGetDocument($documentId);
-    if (isset($_SESSION['checkboxesState']) && isset($_SESSION['getDoc'])){
-        echo "test2";
-        foreach ($_SESSION['getDoc'] as $line){
-            if ($_SESSION['checkboxesState']  && $_POST['new-account-overdraft'] == $line->LIBELLEMOTIF){
-                echo "test3";
-                $idClient=$_SESSION['currentClient']->NUMCLIENT;
-                $accountName=$_POST['new-account-overdraft'];
-                $openDate = new \DateTime();
-                $openDate = $openDate->format('Y-m-d');
-                $balance = 0.00;
-                $overdraft = $_POST['new-overdraft'];
-                CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
-                CtlGetAllAccountsClient($idClient);
+    if (isset($_SESSION['getDoc'])){
+        if ( $_POST['new-account-overdraft'] == $_SESSION['getDoc']->LIBELLEMOTIF){
+            $idClient=$_SESSION['currentClient']->NUMCLIENT;
+            $accountName=$_POST['new-account-overdraft'];
+            $openDate = new \DateTime();
+            $openDate = $openDate->format('Y-m-d');
+            $balance = 0.00;
+            $overdraft = $_POST['new-overdraft'];
+            CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
+            CtlGetAllAccountsClient($idClient);
             }
             else{
-                echo '<script>alert("Vous ne possédez pas les pièces justificatives nécessaires pour cette action.");</script>';
+                echo '<script>alert("Vous ne pouvez pas ouvrir ce compte. Vérifiez que vous avez choisi le bon.");</script>';
             }
         }
         
+        
       }  
         
- } else if (isset($_POST['accept-delete-account'])){
-    $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $accountName=$_POST['account-to-delete'];
-    $endDate=new \DateTime();
-    $endDate = $endDate->format('Y-m-d');
-    CtlCloseAccount($idClient , $accountName , $endDate);
-    CtlGetAllAccountsClient($idClient);
+  else if (isset($_POST['accept-delete-account'])){
+    $documentId = $_SESSION['currentEvent']->IDMOTIF;
+    CtlGetDocument($documentId);
+    if (isset($_SESSION['getDoc'])){
+        foreach ($_SESSION['getDoc'] as $line){
+            if ( $_POST['account-to-delete'] == $line->LIBELLEMOTIF){
+                $idClient=$_SESSION['currentClient']->NUMCLIENT;
+                $accountName=$_POST['account-to-delete'];
+                $endDate=new \DateTime();
+                $endDate = $endDate->format('Y-m-d');
+                CtlCloseAccount($idClient , $accountName , $endDate);
+                CtlGetAllAccountsClient($idClient);
+            }
+        }
+    }
  }
 
 //ADVISOR CONTRACTS

@@ -1,6 +1,9 @@
 <div id="allAccounts">
     <div class="advisor-accounts">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
+        <?php endif; ?>
             <table> 
                 <tr>
                     <th>
@@ -32,11 +35,11 @@
                     Modifier le découvert d'un compte
                 </button>
                 <div class="space"></div>
-                <button name="new-account"  onclick="openAccountModal(); return false;">
+                <button name="new-account"  id ="add-delete" onclick="openAccountModal(); return false;">
                     Ouvrir un nouveau compte
                 </button>
                 <div class="space"></div>
-                <button name="delete-client-account" onclick="openDeleteModal(); return false;">
+                <button name="delete-client-account" id ="add-delete" onclick="openDeleteModal(); return false;">
                     Fermer un compte 
                 </button>
             </div>
@@ -177,3 +180,13 @@ window.onclick = function(event) {
 }
 
 </script>
+
+<?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+    <script>
+        var buttons = document.querySelectorAll("#add-delete");
+        buttons.forEach(function(button){
+            button.style.backgroundColor = 'grey';
+            button.onclick = null;
+        })
+    </script>
+<?php endif; ?>

@@ -28,7 +28,6 @@
         var checkboxes = document.querySelectorAll('#allDocuments table input[type="checkbox"]');
         var fullchecked = true;
         checkboxes.forEach((checkbox) => {
-            localStorage.setItem(checkbox.id , checkbox.checked);
             if (!checkbox.checked){
                 fullchecked = false;
             }     
