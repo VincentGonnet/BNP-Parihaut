@@ -104,3 +104,4 @@ function modifyEmployeeJob($employeeId, $job) {
     ));
     $result->closeCursor();
 }
+
