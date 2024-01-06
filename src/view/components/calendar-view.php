@@ -119,13 +119,34 @@
             <button onclick="closeDeleteEventModal()" type="button">Non</button>
         </div>
     </form>
-
 </modal>
 
+<!-- If an event was just added, it will display this modal. -->
+<?php if(isset($_POST['add-event']) && isset($_POST['new-event-reason'])): ?>
+    <modal id="new-event-documents-modal">
+        <div>
+            <h1 style="margin: 0;">Justificatifs nécessaires</h1>
+            <div>
+                <p>Motif : <?= getReasonById($_POST['new-event-reason'])->LIBELLEMOTIF ?></p>
+                <ul>
+                    <?php foreach (getDocumentsAsArray($reason->IDMOTIF) as $document): ?>
+                        <li><?= $document ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <button class="red-button" onclick="closeNewEventDocumentsModal()" type="button">
+                Fermer
+            </button>        
+        </div>
+    </modal>
+<?php endif; ?>
+        
 <script>
     let modal = document.getElementById('calendar-modal');
     let formattedDateHour = "";
     let maxEventDuration = "";
+
+    let newEventDocumentsModal = document.getElementById('new-event-documents-modal');
 
     function openNewEventModal(fDate, maxDuration) {
         modal.style.opacity = 1;
@@ -196,7 +217,10 @@
 
     // click anywhere outside the modal to close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target == newEventDocumentsModal) {
+            console.log("newEventDocumentsModal");
+            closeNewEventDocumentsModal();
+        } else if (event.target == modal) {
             closeNewEventModal();
         } else if (event.target == deleteEventModal) {
             closeDeleteEventModal();
@@ -286,6 +310,11 @@
         if (minutes == 0) minutes = "00";
 
         document.querySelector("#reserve-time-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function closeNewEventDocumentsModal() {
+        newEventDocumentsModal.style.opacity = 0;
+        newEventDocumentsModal.style.pointerEvents = "none";
     }
 
 </script>

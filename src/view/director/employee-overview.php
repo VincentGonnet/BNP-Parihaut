@@ -3,49 +3,66 @@
     header('Location: index.php');
 } else {
     $employee = $_SESSION['employeeToManage'];
+    echo '<input type="hidden" id="employee-to-manage" value="' . $employee->CATEGORIE . '">';
+
 } ?>
 <div id="employee-overview">
     <div class="content">
-        <h1>Informations de connection</h1>
         <form class="login-infos" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <label for="login">Identifiant</label>
-            <input type="text" name="login" id="login" value="<?php echo $employee->LOGIN; ?>" readonly required>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" value="<?php echo $employee->MDP; ?>" readonly required>
-            <button type="button" id="modify-login-infos" onclick="modifyLoginInfos()">
+            <fieldset>
+                <legend>Informations de connection</legend>
+                
+                <label for="login">Identifiant</label>
+                <input type="text" style="margin-bottom: 10px;" name="login" id="login" value="<?php echo $employee->LOGIN; ?>" readonly required>
+                
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" value="<?php echo $employee->MDP; ?>" readonly required>
+            </fieldset>          
+            <button class="red-button" type="button" id="modify-login-infos" onclick="modifyLoginInfos()">
                 Modifier
             </button>
-            <button type="submit" id="save-login-infos" name="modify-login-infos" style="display: none;">
+            <button class="red-button" type="submit" id="save-login-infos" name="modify-login-infos" style="display: none;">
                 Sauvegarder
             </button>
-            <button type="button" id="cancel-login-infos" onclick="cancelLoginInfos()" style="display: none;">
+            <button class="red-button" type="button" id="cancel-login-infos" onclick="cancelLoginInfos()" style="display: none;">
                 Annuler
             </button>
         </form>
-        <h1>Informations générales</h1>
         <form class="general-infos" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <p>Numéro de l'employé</p>
-            <p><?= $employee->NUMEMPLOYE ?></p>
-            <label for="job">Poste</label>
-            <select name="job" id="job" disabled>
-                <option value="agent" <?php if ($employee->CATEGORIE == 'agent') echo 'selected'; ?>>Agent</option>
-                <option value="advisor" <?php if ($employee->CATEGORIE == 'advisor') echo 'selected'; ?>>Conseiller</option>
-                <option value="director" <?php if ($employee->CATEGORIE == 'director') echo 'selected'; ?>>Directeur</option>
-            </select>
-            <button type="button" id="modify-general-infos" onclick="modifyGeneralInfos()">
+            <fieldset>
+                <legend>Informations générales</legend>
+                <p>Numéro de l'employé</p>
+                <p><?= $employee->NUMEMPLOYE ?></p>
+                <label for="job">Poste</label>
+                <select name="job" id="job" disabled>
+                    <option value="agent" <?php if ($employee->CATEGORIE == 'agent') echo 'selected'; ?>>Agent</option>
+                    <option value="advisor" <?php if ($employee->CATEGORIE == 'advisor') echo 'selected'; ?>>Conseiller</option>
+                    <option value="director" <?php if ($employee->CATEGORIE == 'director') echo 'selected'; ?>>Directeur</option>
+                </select>
+            </fieldset>
+            <button class="red-button" type="button" id="modify-general-infos" onclick="modifyGeneralInfos()">
                 Modifier
             </button>
-            <button type="submit" id="save-general-infos" name="modify-general-infos" style="display: none;">
+            <button class="red-button" type="submit" id="save-general-infos" name="modify-general-infos" style="display: none;">
                 Sauvegarder
             </button>
-            <button type="button" id="cancel-general-infos" onclick="cancelGeneralInfos()" style="display: none;">
+            <button  class="red-button" type="button" id="cancel-general-infos" onclick="cancelGeneralInfos()" style="display: none;">
                 Annuler
             </button>
         </form>
     </div>
 </div>
-
-<script>
+<?php 
+            $allEmploye=getAllEmployees();
+            $directorCount=0;
+            foreach ($allEmploye as $employee){
+                if ($employee->CATEGORIE =='director'){
+                    $directorCount++;
+                }
+            }
+            ?>
+        <input type="hidden" id="director-count"  value="<?php echo $directorCount; ?>">
+    <script>
     const loginInfos = document.querySelector('.login-infos');
     const modifyLoginInfosBtn = document.querySelector('#modify-login-infos');
     const saveLoginInfosBtn = document.querySelector('#save-login-infos');
@@ -98,14 +115,22 @@
     let previousJob = '';
 
     function modifyGeneralInfos() {
-        generalInfos.querySelector('#job').removeAttribute('disabled');
+        var directorCount = document.getElementById('director-count').value;
+        var employee = document.getElementById('employee-to-manage').value;
+        if (employee === "director" && directorCount === "1") {
+            alert("Veuillez choisir un autre directeur avant de modifier.");
+            return;
+        }else{
+            generalInfos.querySelector('#job').removeAttribute('disabled');
 
-        previousJob = generalInfos.querySelector('#job').value;
-        modifyGeneralInfosBtn.style.display = 'none';
-        saveGeneralInfosBtn.style.display = 'inline-block';
-        cancelGeneralInfosBtn.style.display = 'inline-block';
+            previousJob = generalInfos.querySelector('#job').value;
+            modifyGeneralInfosBtn.style.display = 'none';
+            saveGeneralInfosBtn.style.display = 'inline-block';
+            cancelGeneralInfosBtn.style.display = 'inline-block';
+        
+        
     }
-
+}
     function saveGeneralInfos() {
         generalInfos.querySelector('#job').setAttribute('disabled', '');
         modifyGeneralInfosBtn.style.display = 'inline-block';
