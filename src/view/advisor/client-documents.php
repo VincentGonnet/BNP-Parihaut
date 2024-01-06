@@ -38,6 +38,8 @@
         xhr.withCredentials = true;
         xhr.send(null);
     }
+
+    addEventListener("load", SaveCheckState());
 </script>
 
 
