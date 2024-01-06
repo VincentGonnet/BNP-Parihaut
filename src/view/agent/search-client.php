@@ -46,7 +46,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Numéro de client</th>
+                        <th>ID</th>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Adresse</th>
