@@ -185,6 +185,7 @@ function CtlGetDocument($documentId){
 
 
 
+
 //AJOUTER UN EMPLOYE
 
 function CtlAddEmployee($name , $firstname , $job , $login , $password){

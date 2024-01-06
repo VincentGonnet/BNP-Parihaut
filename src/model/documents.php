@@ -60,3 +60,6 @@ function editList($document , $list , $iddoc){
     $prepare->closeCursor();
 }
 
+function allDocsChecked(){
+    return true;
+}

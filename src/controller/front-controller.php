@@ -220,14 +220,30 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlGetAllAccountsClient($idClient);
 
  } else if (isset($_POST['accept-account'])){
-    $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $accountName=$_POST['new-account-overdraft'];
-    $openDate = new \DateTime();
-    $openDate = $openDate->format('Y-m-d');
-    $balance = 0.00;
-    $overdraft = $_POST['new-overdraft'];
-    CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
-    CtlGetAllAccountsClient($idClient);
+    echo "test1";
+    $documentId = $_SESSION['currentEvent']->IDMOTIF;
+    CtlGetDocument($documentId);
+    if (isset($_SESSION['checkboxesState']) && isset($_SESSION['getDoc'])){
+        echo "test2";
+        foreach ($_SESSION['getDoc'] as $line){
+            if ($_SESSION['checkboxesState']  && $_POST['new-account-overdraft'] == $line->LIBELLEMOTIF){
+                echo "test3";
+                $idClient=$_SESSION['currentClient']->NUMCLIENT;
+                $accountName=$_POST['new-account-overdraft'];
+                $openDate = new \DateTime();
+                $openDate = $openDate->format('Y-m-d');
+                $balance = 0.00;
+                $overdraft = $_POST['new-overdraft'];
+                CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
+                CtlGetAllAccountsClient($idClient);
+            }
+            else{
+                echo '<script>alert("Vous ne possédez pas les pièces justificatives nécessaires pour cette action.");</script>';
+            }
+        }
+        
+      }  
+        
  } else if (isset($_POST['accept-delete-account'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
     $accountName=$_POST['account-to-delete'];
