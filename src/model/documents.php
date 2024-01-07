@@ -35,6 +35,49 @@ function getDocument($documentId){
     return $desc;
 }
 
+function getDocumentByName($documentName){
+    $connection= Connection::getInstance()->getConnection();
+    $request="select * from motif where LIBELLEMOTIF LIKE :documentName LIMIT 1";
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'documentName' => $documentName
+    ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $desc = $prepare->fetchall();
+    $prepare->closeCursor();
+
+    if (empty($desc)){
+        return null;
+    }
+
+    if (is_array($desc)){
+        $desc = $desc[0];
+    }
+
+    return $desc;
+}
+
+function deleteDocumentByName($documentName){
+    $connection= Connection::getInstance()->getConnection();
+    $request="delete from motif where LIBELLEMOTIF LIKE :documentName";
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'documentName' => $documentName
+    ));
+    $prepare->closeCursor();
+}
+
+function modifyDocumentByName($documentName,$documentList){
+    $connection= Connection::getInstance()->getConnection();
+    $request="UPDATE motif SET LISTEPIECES= :documentList WHERE LIBELLEMOTIF= :documentName" ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'documentName' => $documentName ,
+        'documentList' => $documentList
+    ));
+    $prepare->closeCursor();
+}
+
 
 function deleteDocument($DocumentID){
     $connection= Connection::getInstance()->getConnection();
@@ -95,7 +138,7 @@ function getDocumentsAsArray($reasonId) {
 
     $documents = array();
 
-    if ($reason->LISTEPIECES != null) {
+    if (!empty($reason->LISTEPIECES)) {
         $documents = explode(',', $reason->LISTEPIECES);
     } else {
         return null;

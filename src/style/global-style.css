@@ -1798,8 +1798,8 @@ svg {
     align-items: center;
     justify-content: center;
 
-    width: 468px;
-    height: 400px;
+    width: 668px;
+    height: 500px;
 
     background-color: var(--secondary-background-color);
     border-radius: 5px;
@@ -1957,8 +1957,8 @@ svg {
     height: 30px;
 }
 
-h4{
-    color :red;
+h4 {
+    color: red;
 }
 
 #allAccounts .advisor-accounts td .date {
