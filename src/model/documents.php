@@ -15,7 +15,7 @@ function getAllDocuments(){
 
 function getDocument($documentId){
     $connection= Connection::getInstance()->getConnection();
-    $request="select * from motif where IDMOTIF LIKE :documentId";
+    $request="select * from motif where IDMOTIF LIKE :documentId LIMIT 1";
     $prepare=$connection->prepare($request);
     $prepare->execute(array(
         'documentId' => $documentId
@@ -23,6 +23,15 @@ function getDocument($documentId){
     $prepare->setFetchMode(PDO::FETCH_OBJ);
     $desc = $prepare->fetchall();
     $prepare->closeCursor();
+
+    if (empty($desc)){
+        return null;
+    }
+
+    if (is_array($desc)){
+        $desc = $desc[0];
+    }
+
     return $desc;
 }
 
@@ -60,6 +69,11 @@ function editList($document , $list , $iddoc){
     $prepare->closeCursor();
 }
 
+
+function allDocsChecked(){
+    return true;
+}
+
 /**
  * This function returns an array of strings containing the documents required for a given reason.
  * @param $reasonId
@@ -94,4 +108,5 @@ function getDocumentsAsArray($reasonId) {
 
     return $documents;
 }
+
 

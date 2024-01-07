@@ -1,6 +1,21 @@
 <div id="allAccounts">
     <div class="advisor-accounts">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
+        <?php endif; ?>
+        <?php if(isset($_SESSION['getDoc'])) : ?>
+            <?php $present = false; ?>
+            <?php foreach(getAllAccounts() as $line) : ?>
+                <?php if($line->NOMCOMPTE == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
+                    <?php $present = true; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if(!$present) : ?>
+                <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
+            <?php endif; ?>
+        <?php endif; ?>
+                
             <table> 
                 <tr>
                     <th>
@@ -32,11 +47,11 @@
                     Modifier le découvert d'un compte
                 </button>
                 <div class="space"></div>
-                <button name="new-account"  onclick="openAccountModal(); return false;">
+                <button name="new-account"  id ="add-delete" onclick="openAccountModal(); return false;">
                     Ouvrir un nouveau compte
                 </button>
                 <div class="space"></div>
-                <button name="delete-client-account" onclick="openDeleteModal(); return false;">
+                <button name="delete-client-account" id ="add-delete" onclick="openDeleteModal(); return false;">
                     Fermer un compte 
                 </button>
             </div>
@@ -89,6 +104,11 @@
                     <p class="modifiable" >Montant du découvert : </p>
                 </div>
                 <div class="inputs">
+
+                    <?php if(isset($_SESSION['getDoc'])) : ?>
+                        <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
+                    <?php endif ?>
+
                     <select name="new-account-overdraft" id="new-account-overdraft" onChange="saveSelectedAccountType()">
                         <option selected disabled>Selectionnez un compte</option>
                         <?php foreach(getAllAccounts() as $line) : ?>
@@ -96,6 +116,7 @@
                         <?php endforeach ?>
                     </select>
                     <input type="hidden" name="selected-account-type" id="selected-account-type" value="">
+
                     <div class="horizontal">
                         <input  class="modifiable" id="new-overdraft" type="number" name="new-overdraft" value="" >
                     </div>
@@ -118,11 +139,8 @@
                     <p>Nom du compte : </p>
                 </div>
                 <div class="inputs">
-                    <select name="account-to-delete" id="account-to-delete">
-                        <?php if(isset($_SESSION['client-accounts'])) : ?>
-                            <?php foreach($_SESSION['client-accounts'] as $line) : ?>
-                                <option value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-                            <?php endforeach ?>
+                        <?php if(isset($_SESSION['getDoc'])) : ?>
+                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
                         <?php endif ?>
                     </select>
                 </div>
@@ -196,3 +214,13 @@ function saveSelectedAccountType() {
 }
 
 </script>
+
+<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+    <script>
+        var buttons = document.querySelectorAll("#add-delete");
+        buttons.forEach(function(button){
+            button.style.backgroundColor = 'grey';
+            button.onclick = null;
+        })
+    </script>
+<?php endif; ?>

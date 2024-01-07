@@ -1957,6 +1957,10 @@ svg {
     height: 30px;
 }
 
+h4{
+    color :red;
+}
+
 #allAccounts .advisor-accounts td .date {
     display: flex;
     flex-direction: row;

@@ -227,14 +227,20 @@ else if (isset($_POST["submit-manage-employee"])) {
     $overdraft = $_POST['new-overdraft'];
     CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
     CtlGetAllAccountsClient($idClient);
- } else if (isset($_POST['accept-delete-account'])){
+    }
+            
+        
+        
+
+        
+  else if (isset($_POST['accept-delete-account'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
     $accountName=$_POST['account-to-delete'];
     $endDate=new \DateTime();
     $endDate = $endDate->format('Y-m-d');
     CtlCloseAccount($idClient , $accountName , $endDate);
     CtlGetAllAccountsClient($idClient);
- }
+            }
 
 //ADVISOR CONTRACTS
 else if (isset($_POST['submit-new-contract'])){
@@ -244,12 +250,13 @@ else if (isset($_POST['submit-new-contract'])){
     $price=$_POST['new-price'];
     $contractType=$_POST['new-contract-type'];
     CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
-}
+        }
+     
 else if(isset($_POST['delete-client-contract'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
     $contractType=$_POST['selected-contract-text'];
     CtlDeleteClientContract($idClient,$contractType);
-}
+        }
 
 // ADD NEW CLIENT
 else if(isset($_POST['add-new-client'])){

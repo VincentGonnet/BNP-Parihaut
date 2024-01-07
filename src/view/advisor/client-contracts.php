@@ -8,6 +8,21 @@
             $clientId = $_SESSION['currentClient']->NUMCLIENT;
             $contracts = getContractData($clientId);
     ?>
+    <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+        <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
+    <?php endif; ?>
+    <?php if(isset($_SESSION['getDoc'])) : ?>
+        <?php $present = false; ?>
+        <?php foreach(getAllContracts() as $line) : ?>
+            <?php if($line->NOMCONTRAT == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
+                <?php $present = true; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php if(!$present) : ?>
+            <h4>Attention le rendez-vous ne concerne pas de contrat. Certaines actions sont par conséquent bloquées.</h4>
+        <?php endif; ?>
+    <?php endif; ?>
         <?php
             foreach ($contracts as $contract) {
                 $optionValue = $contract->NOMCONTRAT;
@@ -16,7 +31,7 @@
                 echo '<div class="information-div">';
                 echo '<p>Type de contrat:' . $optionValue . '</p>';
                 echo '<p>Date d\'ouverture:' . $contract->DATEOUVERTURECONTRAT . '</p>';
-                echo '<button type="button" onclick="switchForms(\'' . $optionValue . '\', \'' . $contract->DATEOUVERTURECONTRAT . '\', \'' . ($contract->DATEFERMETURE ? $contract->DATEFERMETURE : 'Indéterminée') . '\', \'' . $contract->TARIFMENSUEL . '\')">
+                echo '<button type="button" id="add-delete" onclick="switchForms(\'' . $optionValue . '\', \'' . $contract->DATEOUVERTURECONTRAT . '\', \'' . ($contract->DATEFERMETURE ? $contract->DATEFERMETURE : 'Indéterminée') . '\', \'' . $contract->TARIFMENSUEL . '\')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -30,7 +45,7 @@
         ?>
         
         <p>
-        <button class="button" type="button" onclick="addNewContract()">
+        <button class="button" type="button" id="add-delete" onclick="addNewContract()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -79,7 +94,7 @@
         <input type="hidden" name="client-id" value="<?php echo $clientId; ?>">
         <input type="hidden" name="chosen-contract" id="chosen-contract" value="">
 
-        <button class="button" type="submit" name="delete-client-contract" onClick="confirmation()" >
+        <button class="button" type="submit" name="delete-client-contract" id="add-delete" onClick="confirmation()" >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -184,3 +199,13 @@
         alert("Apres cette operation le contrat courant sera resilie.Voulez vous vraiment le supprimer?");
     }
 </script>
+
+<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+    <script>
+        var buttons = document.querySelectorAll("#add-delete");
+        buttons.forEach(function(button){
+            button.style.backgroundColor = 'grey';
+            button.onclick = null;
+        })
+    </script>
+<?php endif; ?>
