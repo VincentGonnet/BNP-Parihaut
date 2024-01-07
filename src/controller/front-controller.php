@@ -246,7 +246,7 @@ else if (isset($_POST["submit-manage-employee"])) {
     $endDate = $endDate->format('Y-m-d');
     CtlCloseAccount($idClient , $accountName , $endDate);
     CtlGetAllAccountsClient($idClient);
-            }
+}
 
 //ADVISOR CONTRACTS
 else if (isset($_POST['submit-new-contract'])){

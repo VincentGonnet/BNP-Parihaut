@@ -57,18 +57,42 @@ function deleteAllContracts(){
 }
 
 function clientNewContract($idClient, $openingDate, $endDate, $price, $contractType) {
-    $connection = Connection::getInstance()->getConnection();
-    $request = "INSERT INTO contratclient (NOMCONTRAT, NUMCLIENT, DATEFERMETURE, DATEOUVERTURECONTRAT, TARIFMENSUEL) 
-                VALUES (:nomContrat, :idClient, :endDate, :openingDate, :price)";
-    $prepare = $connection->prepare($request);
+    $connection= Connection::getInstance()->getConnection();
+    $request= 'SELECT * FROM contratclient WHERE NUMCLIENT = :idClient AND NOMCONTRAT = :contractName AND DATEFERMETURE IS NOT NULL';
+    $prepare=$connection->prepare($request);
     $prepare->execute(array(
-        'nomContrat' => $contractType,
-        'idClient' => $idClient,
-        'endDate' => empty($endDate) ? null : $endDate, // Utilisez NULL si $endDate est vide, sinon utilisez la valeur
-        'openingDate' => $openingDate,
-        'price' => $price,
+        'contractName' => $contractType ,
+        'idClient' => $idClient
     ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $result = $prepare->fetchall();
     $prepare->closeCursor();
+
+    if (!empty($result)) {
+        $request="UPDATE contratclient SET DATEFERMETURE= NULL , TARIFMENSUEL = :price , DATEOUVERTURECONTRAT = :openingDate, DATEFERMETURE = :endDate WHERE NUMCLIENT= :idClient and NOMCONTRAT = :contractType" ;
+        $prepare=$connection->prepare($request);
+        $prepare->execute(array(
+            'contractType' => $contractType ,
+            'idClient' => $idClient ,
+            'price' => $price,
+            'openingDate' => $openingDate,
+            'endDate' => empty($endDate) ? null : $endDate // Utilisez NULL si $endDate est vide, sinon utilisez la valeur
+        ));
+        $prepare->closeCursor();
+    } else {
+        $connection = Connection::getInstance()->getConnection();
+        $request = "INSERT INTO contratclient (NOMCONTRAT, NUMCLIENT, DATEFERMETURE, DATEOUVERTURECONTRAT, TARIFMENSUEL) 
+                VALUES (:nomContrat, :idClient, :endDate, :openingDate, :price)";
+        $prepare = $connection->prepare($request);
+        $prepare->execute(array(
+            'nomContrat' => $contractType,
+            'idClient' => $idClient,
+            'endDate' => empty($endDate) ? null : $endDate, // Utilisez NULL si $endDate est vide, sinon utilisez la valeur
+            'openingDate' => $openingDate,
+            'price' => $price
+        ));
+        $prepare->closeCursor();
+    }
 }
 
 function deleteClientContract($idClient, $contractType) {

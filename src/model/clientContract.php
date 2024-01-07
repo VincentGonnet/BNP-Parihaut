@@ -20,3 +20,14 @@ function getAllContractsBeforeDate($date) {
 
     return $contracts;
 }
+
+function closeContract($contractName, $clientId, $closeDate) {
+    $connection = Connection::getInstance()->getConnection();
+    $request = $connection->prepare("UPDATE contratclient SET DATEFERMETURE = :closeDate WHERE NOMCONTRAT = :contractName AND NUMCLIENT = :clientId");
+    $request->execute(array(
+        'closeDate' => $closeDate,
+        'contractName' => $contractName,
+        'clientId' => $clientId
+    ));
+    $request->closeCursor();
+}

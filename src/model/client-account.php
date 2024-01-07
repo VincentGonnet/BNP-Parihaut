@@ -27,16 +27,40 @@ function editOverdraft($accountName , $idClient , $overdraft){
 
 function newAccount($idClient , $accountName , $openDate , $balance , $overdraft){
     $connection= Connection::getInstance()->getConnection();
-    $request="INSERT IGNORE INTO compteclient (NUMCLIENT , NOMCOMPTE , DATEOUVERTURE , DATEFERMETURE, SOLDE , MONTANTDECOUVERT) VALUES (:idClient , :accountName , :openDate , NULL , :balance ,:overdraft  )" ;
+    $request= 'SELECT * FROM compteclient WHERE NUMCLIENT = :idClient AND NOMCOMPTE = :accountName AND DATEFERMETURE IS NOT NULL';
     $prepare=$connection->prepare($request);
     $prepare->execute(array(
-        'overdraft' => $overdraft ,
         'accountName' => $accountName ,
-        'idClient' => $idClient ,
-        'balance' => $balance ,
-        'openDate' => $openDate
+        'idClient' => $idClient
     ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $result = $prepare->fetchall();
     $prepare->closeCursor();
+
+    if (!empty($result)) {
+        $request="UPDATE compteclient SET DATEFERMETURE= NULL , SOLDE = :balance , MONTANTDECOUVERT = :overdraft, DATEOUVERTURE = :openDate WHERE NUMCLIENT= :idClient and NOMCOMPTE = :accountName" ;
+        $prepare=$connection->prepare($request);
+        $prepare->execute(array(
+            'overdraft' => $overdraft ,
+            'accountName' => $accountName ,
+            'idClient' => $idClient ,
+            'balance' => $balance,
+            'openDate' => $openDate
+        ));
+        $prepare->closeCursor();
+    } else {
+        $request="INSERT IGNORE INTO compteclient (NUMCLIENT , NOMCOMPTE , DATEOUVERTURE , DATEFERMETURE, SOLDE , MONTANTDECOUVERT) VALUES (:idClient , :accountName , :openDate , NULL , :balance ,:overdraft)" ;
+        $prepare=$connection->prepare($request);
+        $prepare->execute(array(
+            'overdraft' => $overdraft ,
+            'accountName' => $accountName ,
+            'idClient' => $idClient ,
+            'balance' => $balance ,
+            'openDate' => $openDate
+        ));
+        $prepare->closeCursor();
+    }
+
 }
 
 function closeAccount($idClient , $accountName , $endDate){

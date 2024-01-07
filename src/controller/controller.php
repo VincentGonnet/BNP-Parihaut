@@ -17,6 +17,7 @@ require_once 'controller/router.php';
 require_once 'model/employee.php';
 require_once 'model/documents.php';
 require_once 'model/client-account.php';
+require_once 'model/clientContract.php';
 
 
 
@@ -292,8 +293,9 @@ function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractTy
     clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
 }
 function CtlDeleteClientContract($idClient,$contractType){
-    deleteClientContract($idClient,$contractType);
+    closeContract($contractType, $idClient, date('Y-m-d'));
 }
+
 
 
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
