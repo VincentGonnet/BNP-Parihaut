@@ -191,7 +191,7 @@ function CtlEditList($document , $list , $iddoc){
 
 function CtlGetDocument($documentId){
     $document=getDocument($documentId);
-    $_SESSION['getDoc']=$document;
+    $_SESSION['required-docs']=$document;
 }
 
 

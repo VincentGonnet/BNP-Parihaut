@@ -11,10 +11,10 @@
     <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
         <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
     <?php endif; ?>
-    <?php if(isset($_SESSION['getDoc'])) : ?>
+    <?php if(isset($_SESSION['required-docs'])) : ?>
         <?php $present = false; ?>
         <?php foreach(getAllContracts() as $line) : ?>
-            <?php if($line->NOMCONTRAT == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
+            <?php if($line->NOMCONTRAT == $_SESSION['required-docs']->LIBELLEMOTIF) : ?>
                 <?php $present = true; ?>
             <?php endif; ?>
         <?php endforeach; ?>

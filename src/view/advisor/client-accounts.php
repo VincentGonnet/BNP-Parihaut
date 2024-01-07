@@ -4,10 +4,10 @@
         <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
             <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
         <?php endif; ?>
-        <?php if(isset($_SESSION['getDoc'])) : ?>
+        <?php if(isset($_SESSION['required-docs'])) : ?>
             <?php $present = false; ?>
             <?php foreach(getAllAccounts() as $line) : ?>
-                <?php if($line->NOMCOMPTE == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
+                <?php if($line->NOMCOMPTE == $_SESSION['required-docs']->LIBELLEMOTIF) : ?>
                     <?php $present = true; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -105,8 +105,8 @@
                 </div>
                 <div class="inputs">
 
-                    <?php if(isset($_SESSION['getDoc'])) : ?>
-                        <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
+                    <?php if(isset($_SESSION['required-docs'])) : ?>
+                        <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['required-docs']->LIBELLEMOTIF ?> readonly />
                     <?php endif ?>
 
                     <select name="new-account-overdraft" id="new-account-overdraft" onChange="saveSelectedAccountType()">
@@ -139,8 +139,8 @@
                     <p>Nom du compte : </p>
                 </div>
                 <div class="inputs">
-                        <?php if(isset($_SESSION['getDoc'])) : ?>
-                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
+                        <?php if(isset($_SESSION['required-docs'])) : ?>
+                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['required-docs']->LIBELLEMOTIF ?> readonly />
                         <?php endif ?>
                     </select>
                 </div>

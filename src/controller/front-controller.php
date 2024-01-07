@@ -118,6 +118,8 @@ else if(isset($_POST['delete-contract'])){
     $clientId = $event->NUMCLIENT;
     CtlSelectClient($clientId);
     $_SESSION['currentEvent'] = $event;
+    $_SESSION['required-docs'] = getReasonById($event->IDMOTIF);
+    $_SESSION['allChecked'] = false;
     CtlChangeView('advisor-client-documents');
 } else if (isset($_POST['planning-prev-week'])) {
     CtlPlanningPrevWeek();
