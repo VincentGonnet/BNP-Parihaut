@@ -202,11 +202,11 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlDeleteDocument($DocumentID);
     CtlGetAllDocuments();
 
-}  else if(isset($_POST['add-document'])){
-    if(!empty($_POST['new-doc'] && !empty($_POST['new-list']))){
-        $document=$_POST['new-doc'];
+}  else if(isset($_POST['modify-document'])){
+    if(isset($_POST['doc-name']) && isset($_POST['new-list'])) {
+        $documentName=$_POST['doc-name'];
         $list=$_POST['new-list'];
-        CtlAddDocument($document , $list);
+        CtlModifyDocumentByName($documentName , $list);
     }
     CtlGetAllDocuments();
 } 

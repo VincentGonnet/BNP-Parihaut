@@ -14,7 +14,7 @@ function getAllAccounts(){
 }
 
 
-function  getAccount($accountName){
+function getAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
     $request="select NOMCOMPTE from compte where NOMCOMPTE LIKE :accountName" ;
     $prepare=$connection->prepare($request);

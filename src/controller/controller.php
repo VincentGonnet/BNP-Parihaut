@@ -123,14 +123,16 @@ function CtlGetAccount($accountName){
 
 function CtlDeleteAccount($accountName){
     deleteAccount($accountName);
+    deleteDocumentByName($accountName);
 }
 
 function CtlAddAccount($accountName,$overdraft){
-    addAccount($accountName,$overdraft);
-}
-
-function CtlDeleteAllAccounts(){
-    deleteAllAccounts();
+    if (empty(getDocumentByName($accountName))) {
+        addAccount($accountName,$overdraft);
+    CtlAddDocument($accountName , '');
+    } else {
+        echo '<script>alert("Un contrat ou un compte avec le même nom existe déjà")</script>';
+    }
 }
 
 //AFFICHAGE CONTRATS
@@ -147,10 +149,16 @@ function CtlGetContract($contract){
 
 function CtlDeleteContract($contract){
     deleteContract($contract);
+    deleteDocumentByName($contract);
 }
 
-function CtlAddContract($contract){
-    addContract($contract);
+function CtlAddContract($contract) {
+    if (empty(getDocumentByName($contract))) {
+        addContract($contract);
+        CtlAddDocument($contract , '');
+    } else {
+        echo '<script>alert("Un contrat ou un compte avec le même nom existe déjà")</script>';
+    }
 }
 
 function CtlDeleteAllContracts(){
@@ -171,6 +179,10 @@ function CtlDeleteDocument($DocumentID){
 
 function CtlAddDocument($document , $list){
     addDocument($document , $list);
+}
+
+function CtlModifyDocumentByName($document , $list){
+    modifyDocumentByName($document , $list);
 }
 
 function CtlEditList($document , $list , $iddoc){
