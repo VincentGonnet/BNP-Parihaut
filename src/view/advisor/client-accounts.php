@@ -4,6 +4,18 @@
         <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
             <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
         <?php endif; ?>
+        <?php if(isset($_SESSION['getDoc'])) : ?>
+            <?php $present = false; ?>
+            <?php foreach(getAllAccounts() as $line) : ?>
+                <?php if($line->NOMCOMPTE == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
+                    <?php $present = true; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if(!$present) : ?>
+                <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
+            <?php endif; ?>
+        <?php endif; ?>
+                
             <table> 
                 <tr>
                     <th>
@@ -88,11 +100,9 @@
                     <p>Montant du découvert : </p>
                 </div>
                 <div class="inputs">
-                    <select name="new-account-overdraft" id="new-account-overdraft">
-                        <?php foreach(getAllAccounts() as $line) : ?>
-                                <option value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-                        <?php endforeach ?>
-                    </select>
+                    <?php if(isset($_SESSION['getDoc'])) : ?>
+                        <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
+                    <?php endif ?>
                     <div class="horizontal">
                         <input type="number" name="new-overdraft" value="" >
                     </div>
@@ -115,11 +125,8 @@
                     <p>Nom du compte : </p>
                 </div>
                 <div class="inputs">
-                    <select name="account-to-delete" id="account-to-delete">
-                        <?php if(isset($_SESSION['client-accounts'])) : ?>
-                            <?php foreach($_SESSION['client-accounts'] as $line) : ?>
-                                <option value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-                            <?php endforeach ?>
+                        <?php if(isset($_SESSION['getDoc'])) : ?>
+                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
                         <?php endif ?>
                     </select>
                 </div>
@@ -181,7 +188,7 @@ window.onclick = function(event) {
 
 </script>
 
-<?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
+<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
     <script>
         var buttons = document.querySelectorAll("#add-delete");
         buttons.forEach(function(button){
