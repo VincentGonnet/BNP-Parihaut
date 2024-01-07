@@ -35,6 +35,15 @@ function deleteContract($contractName){
         'contractName' => $contractName
     ));
     $prepare->closeCursor();
+
+    // delete all appoitments for this contract
+    // will require bank developpers to take action, because no one would do that in real life
+    $request="DELETE FROM rdv WHERE IDMOTIF IN (SELECT IDMOTIF FROM motif WHERE LIBELLEMOTIF LIKE :contractName)";
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'contractName' => $contractName
+    ));
+    $prepare->closeCursor();
 }
 
 

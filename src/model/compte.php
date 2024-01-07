@@ -35,6 +35,15 @@ function deleteAccount($accountName){
         'accountName' => $accountName
     ));
     $prepare->closeCursor();
+
+    // delete all appoitments for this account
+    // will require bank developpers to take action, because no one would do that in real life
+    $request="DELETE FROM rdv WHERE IDMOTIF IN (SELECT IDMOTIF FROM motif WHERE LIBELLEMOTIF LIKE :accountName)";
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
+    $prepare->closeCursor();
 }
 
 function getAccountbyName($accountName){
