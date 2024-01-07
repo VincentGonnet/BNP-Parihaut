@@ -222,11 +222,15 @@ else if (isset($_POST["submit-manage-employee"])) {
 
  } else if (isset($_POST['accept-account'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $accountName=$_POST['new-account-overdraft'];
+    $accountName=$_POST['new-account-name'];
     $openDate = new \DateTime();
     $openDate = $openDate->format('Y-m-d');
     $balance = 0.00;
-    $overdraft = $_POST['new-overdraft'];
+    if (isset($_POST['new-overdraft'])){
+        $overdraft = $_POST['new-overdraft'];
+    }else{
+        $overdraft = -1;
+    }
     CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
     CtlGetAllAccountsClient($idClient);
     }

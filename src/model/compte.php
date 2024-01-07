@@ -37,6 +37,28 @@ function deleteAccount($accountName){
     $prepare->closeCursor();
 }
 
+function getAccountbyName($accountName){
+    $connection= Connection::getInstance()->getConnection();
+    $request="select * from compte where NOMCOMPTE LIKE :accountName LIMIT 1" ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $result = $prepare->fetchall();
+    $prepare->closeCursor();
+
+    if (empty($result)){
+        return null;
+    }
+
+    if (is_array($result)){
+        $result = $result[0];
+    }
+
+    return $result;
+}
+
 
 
 function addAccount($accountName,$overdraft){
