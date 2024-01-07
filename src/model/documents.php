@@ -4,7 +4,7 @@
 
 function getAllDocuments(){
     $connection = Connection::getInstance()->getConnection(); 
-    $request="select * FROM MOTIF " ;
+    $request="select * FROM motif " ;
     $prepare=$connection->prepare($request);
     $prepare->execute(array());
     $prepare->setFetchMode(PDO::FETCH_OBJ);

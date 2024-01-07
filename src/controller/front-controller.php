@@ -46,6 +46,8 @@ if (isset($_POST['connection'])) {
     CtlLogin($login, $password);
 } else if (isset($_POST['logout'])) {
     CtlLogout();
+} else if (isset($_POST['my-infos'])) {
+    CtlChangeView("all-user-infos");
 } else if (isset($_POST['agent-search-client-by-id'])) {
     $clientId = $_POST['client-id'];
     CtlSearchClientById($clientId);
@@ -66,7 +68,8 @@ if (isset($_POST['connection'])) {
 } else if(isset($_POST['add-account'])){
     if(!empty($_POST['new-account'])){
         $compte=$_POST['new-account'];
-        CtlAddAccount($compte);
+        $overdraft=$_POST['overdraft-value'];
+        CtlAddAccount($compte,$overdraft);
         CtlGetAllAccounts();  
     }
 } 
@@ -278,6 +281,14 @@ else if (isset($_POST['reserve-time'])) {
     $start = date('Y-m-d H:i:s', strtotime($startDate));
     $end = date('Y-m-d H:i:s', strtotime($startDate . ' + ' . $duration[0] . $duration[1] . ' hours ' . $duration[3] . $duration[4] . ' minutes '));
     CtlReserveTimeSlot($start, $end);
+}
+// MY INFOS
+else if (isset($_POST["modify-my-infos"])) {
+    $employeeId = $_SESSION['loggedInUser']->NUMEMPLOYE;
+    $login = $_SESSION['loggedInUser']->LOGIN;
+    $password = $_POST["password"];
+    CtlModifyCredentials($employeeId, $login, $password);
+    $_SESSION['loggedInUser'] = getEmployeeById($employeeId);
 }
 
 if ($_SESSION['loggedIn'] == false) {

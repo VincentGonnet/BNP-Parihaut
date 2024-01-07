@@ -160,6 +160,10 @@ nav button > p {
     margin-right: 15px;
 }
 
+nav button:last-child {
+    margin-top: 0px !important;
+}
+
 /*-----------------------------------------------------------------------------------------------*/
 
 svg {
@@ -290,6 +294,19 @@ svg {
 #search-client th {
     background-color: var(--primary-color);
     color: white;
+}
+
+#search-client th:first-child {
+    width: 18px !important;
+}
+
+#search-client th:nth-child(2),
+#search-client th:nth-child(3) {
+    width: 20% !important;
+}
+
+#search-client th:last-child {
+    width: 35px !important;
 }
 
 #search-client td > button {
@@ -1295,7 +1312,7 @@ svg {
 .account-list-form #div-container {
     display: grid;
 
-    height: 60%;
+    height: 30%;
     width: 70%;
     row-gap: 1%;
     column-gap: 1%;
@@ -2424,4 +2441,37 @@ h4{
 .red-button:focus {
     transform: translateY(-1px);
     box-shadow: 0 1px 0 var(--primary-color);
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*                                      USER INFORMATIONS                                          */
+/* ----------------------------------------------------------------------------------------------- */
+
+#user-infos fieldset {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+
+    padding: 20px;
+    margin: 20px 0;
+}
+
+#user-infos fieldset > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+
+    box-sizing: border-box;
+}
+
+#user-infos fieldset > legend {
+    font-size: large;
+    font-weight: bold;
+}
+
+#user-infos label {
+    margin: 5px 0;
+}
+
+#user-infos p {
+    margin: 5px 0;
 }

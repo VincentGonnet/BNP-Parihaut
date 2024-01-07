@@ -23,7 +23,7 @@
                                     </div>
                                 </div>
                             </td>
-                            
+
                         </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>
@@ -52,6 +52,15 @@
                     <input type="text" name="new-account" id="new-account"  onkeyup="this.value=this.value.toUpperCase()" >   
                 </div>
             </div>
+            <div>
+                <div class="label-containers" style="width: 330px;">
+                    <p>Avec decouvert</p>
+                </div>
+                <div class="inputs">
+                    <input type="checkbox" id="have-overdraft" onClick="overdraft()">
+                    <input type="hidden" name="overdraft-value" id="overdraft-value" value="-1">
+                </div>
+            </div>
         </div>
         <div class="spacer"></div>
         <button type="submit" name="add-account" id="add-account"  >Valider</button>
@@ -64,7 +73,8 @@
 
 <script>
     let modal = document.getElementById('add-account-modal');
-
+    var overdraftCheck=document.getElementById('have-overdraft');
+    var overdraftValue=document.getElementById('overdraft-value');
     function openModal() {
         modal.style.opacity = 1;
         modal.style.pointerEvents = "auto";
@@ -80,5 +90,11 @@
             closeModal();
         }
     }
-
+    function overdraft(){
+        if (overdraftCheck.checked) {
+            overdraftValue.value="0";
+        }else{
+            overdraftValue.value="-1";
+        }
+    }
 </script>

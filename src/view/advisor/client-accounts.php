@@ -70,13 +70,17 @@
                     <p>Nouveau montant : </p>
                 </div>
                 <div class="inputs">
-                    <select name="account-overdraft" id="account-overdraft">
-                        <?php if(isset($_SESSION['client-accounts'])) : ?>
-                            <?php foreach($_SESSION['client-accounts'] as $line) : ?>
-                                <option value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-                            <?php endforeach ?>
-                        <?php endif ?>
-                    </select>
+                <select name="account-overdraft" id="account-overdraft">
+    <?php if(isset($_SESSION['client-accounts'])) : ?>
+        <?php foreach($_SESSION['client-accounts'] as $line) : ?>
+            <?php if($line->MONTANTDECOUVERT === '-1.00'): ?>
+                <option disabled value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
+            <?php else: ?>
+                <option  value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
+            <?php endif; ?>
+        <?php endforeach ?>
+    <?php endif ?>
+</select>
                     <div class="horizontal">
                         <input type="number" name="new-overdraft" value="" >
                     </div>
@@ -97,14 +101,24 @@
             <div>
                 <div class="label-containers">
                     <p>Nom du compte : </p>
-                    <p>Montant du découvert : </p>
+                    <p class="modifiable" >Montant du découvert : </p>
                 </div>
                 <div class="inputs">
+
                     <?php if(isset($_SESSION['getDoc'])) : ?>
                         <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
                     <?php endif ?>
+
+                    <select name="new-account-overdraft" id="new-account-overdraft" onChange="saveSelectedAccountType()">
+                        <option selected disabled>Selectionnez un compte</option>
+                        <?php foreach(getAllAccounts() as $line) : ?>
+                            <option value="<?php echo $line->NOMCOMPTE ?>" id="selected-account-<?php echo $line->AVOIRDECOUVERT ?>"><?php echo $line->NOMCOMPTE ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <input type="hidden" name="selected-account-type" id="selected-account-type" value="">
+
                     <div class="horizontal">
-                        <input type="number" name="new-overdraft" value="" >
+                        <input  class="modifiable" id="new-overdraft" type="number" name="new-overdraft" value="" >
                     </div>
                 </div>
             </div>
@@ -174,16 +188,29 @@ function closeAccountModal() {
     accountModal.style.pointerEvents = "none";
 }
 
-window.onclick = function(event) {
-    if (event.target == overdraftModal) {
-        closeOverdraftModal();
+function saveSelectedAccountType() {
+    var selectElement = document.getElementById('new-account-overdraft');
+    var selectedOption = selectElement.options[selectElement.selectedIndex];
+    var selectedAccountId = selectedOption.id; 
+    var avoirDecouvert = selectedAccountId.split('-')[2]; 
+    var overdraft=document.getElementById('new-overdraft');
+
+    document.getElementById('selected-account-type').value = avoirDecouvert;
+
+    var modifiableFields = document.querySelectorAll('.modifiable');
+    if (avoirDecouvert == '-1'|| avoirDecouvert == "") {
+        modifiableFields.forEach(function(field) {
+            field.style.display = 'none';
+            overdraft.value=-1;
+        });
+    } else {
+        modifiableFields.forEach(function(field) {
+            field.style.display = 'block';
+
+        });
     }
-    if(event.target == accountModal){
-        closeAccountModal();
-    }
-    if(event.target == deleteModal){
-        closeDeleteModal();
-    }
+
+    console.log('AVOIRDECOUVERT:', avoirDecouvert);
 }
 
 </script>

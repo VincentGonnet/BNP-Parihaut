@@ -4,13 +4,21 @@ function displayRoute($routeName) {
     $viewName = array_slice(explode('-', $routeName), 1);
     $viewName = implode('-', $viewName);
 
-    display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle());
+    if ($roleName == "all") {
+        $userRole = $_SESSION['loggedInUser']->CATEGORIE;
+        display($userRole, "view/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle());
+    } else {
+        display($roleName, "view/$roleName/$viewName.php", getRouteTitle($routeName), getRouteAdditionalTitle());
+    }
 }
 
 
 // List all routes here
 function getRouteTitle($routeName) {
     switch($routeName) {
+        case 'all-user-infos':
+            return "Informations personnelles";
+
         case 'agent-search-client':
             return "Rechercher un client";
         case 'agent-client-overview':
