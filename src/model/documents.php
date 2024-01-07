@@ -138,7 +138,7 @@ function getDocumentsAsArray($reasonId) {
 
     $documents = array();
 
-    if ($reason->LISTEPIECES != null) {
+    if (!empty($reason->LISTEPIECES)) {
         $documents = explode(',', $reason->LISTEPIECES);
     } else {
         return null;
