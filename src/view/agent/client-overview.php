@@ -78,12 +78,6 @@ error_reporting(E_ALL);
             <input class="read" name="input-work" for="work" type="text" value="<?= $work ?>" readOnly>
         </p>
 
-    
-    
-        <p>
-            <label id="checked">Enregistre:</label>
-            <input name="input-checked" type="text" value="<?= ($checked == 1) ? 'oui' : 'non' ?>" readonly>
-        </p>
 </div>
 
 <div>

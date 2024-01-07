@@ -73,13 +73,6 @@
             <label id="work">Profession:</label>
             <input name="input-work" for="work" type="text" value="<?= $work ?>" readOnly>
         </p>
-
-    
-    
-        <p>
-            <label id="checked">Enregistre:</label>
-            <input id="checked" name="input-checked" type="checkbox" onchange="submitForm()" value="" <?= ($checked == 1) ? 'checked disabled' : '' ?> onclick="this.form.submit()"> 
-        </p>
 </div>
 
 <div>
