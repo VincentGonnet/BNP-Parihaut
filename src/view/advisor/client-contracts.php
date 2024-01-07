@@ -8,21 +8,23 @@
             $clientId = $_SESSION['currentClient']->NUMCLIENT;
             $contracts = getContractData($clientId);
     ?>
-    <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
-        <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
-    <?php endif; ?>
-    <?php if(isset($_SESSION['required-docs'])) : ?>
-        <?php $present = false; ?>
-        <?php foreach(getAllContracts() as $line) : ?>
-            <?php if($line->NOMCONTRAT == $_SESSION['required-docs']->LIBELLEMOTIF) : ?>
-                <?php $present = true; ?>
-            <?php endif; ?>
-        <?php endforeach; ?>
+    <?php
+        $appointmentConcernsContract = false;
+        foreach (getAllContracts() as $contract) {
+            if($contract->NOMCONTRAT == $_SESSION['required-docs']->LIBELLEMOTIF) {
+                $appointmentConcernsContract = true;
+            }
+        }
 
-        <?php if(!$present) : ?>
-            <h4>Attention le rendez-vous ne concerne pas de contrat. Certaines actions sont par conséquent bloquées.</h4>
-        <?php endif; ?>
+        $allChecked = isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true;
+    ?>
+
+    <?php if(!$appointmentConcernsContract) : ?>
+        <h4>Attention le rendez-vous ne concerne pas les contrats. Certaines actions sont par conséquent bloquées.</h4>
+    <?php elseif (!$allChecked): ?>
+            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
     <?php endif; ?>
+
         <?php
             foreach ($contracts as $contract) {
                 $optionValue = $contract->NOMCONTRAT;
@@ -200,7 +202,7 @@
     }
 </script>
 
-<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+<?php if(!$allChecked || !$appointmentConcernsContract) : ?>
     <script>
         var buttons = document.querySelectorAll("#add-delete");
         buttons.forEach(function(button){

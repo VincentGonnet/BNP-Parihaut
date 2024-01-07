@@ -1,19 +1,21 @@
 <div id="allAccounts">
     <div class="advisor-accounts">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
-            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
-        <?php endif; ?>
-        <?php if(isset($_SESSION['required-docs'])) : ?>
-            <?php $present = false; ?>
-            <?php foreach(getAllAccounts() as $line) : ?>
-                <?php if($line->NOMCOMPTE == $_SESSION['required-docs']->LIBELLEMOTIF) : ?>
-                    <?php $present = true; ?>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <?php if(!$present) : ?>
-                <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
-            <?php endif; ?>
+        <?php
+            $appointmentConcernsAccount = false;
+            foreach (getAllAccounts() as $account) {
+                if($account->NOMCOMPTE == $_SESSION['required-docs']->LIBELLEMOTIF) {
+                    $appointmentConcernsAccount = true;
+                }
+            }
+
+            $allChecked = isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true;
+        ?>
+
+        <?php if(!$appointmentConcernsAccount) : ?>
+            <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
+        <?php elseif (!$allChecked): ?>
+                <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
         <?php endif; ?>
                 
             <table> 
@@ -215,7 +217,7 @@ function saveSelectedAccountType() {
 
 </script>
 
-<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+<?php if(!$allChecked || !$appointmentConcernsAccount) : ?>
     <script>
         var buttons = document.querySelectorAll("#add-delete");
         buttons.forEach(function(button){
