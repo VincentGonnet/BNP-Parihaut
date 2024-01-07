@@ -68,7 +68,8 @@ if (isset($_POST['connection'])) {
 } else if(isset($_POST['add-account'])){
     if(!empty($_POST['new-account'])){
         $compte=$_POST['new-account'];
-        CtlAddAccount($compte);
+        $overdraft=$_POST['overdraft-value'];
+        CtlAddAccount($compte,$overdraft);
         CtlGetAllAccounts();  
     }
 } 
