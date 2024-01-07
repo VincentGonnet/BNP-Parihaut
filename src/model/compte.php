@@ -14,7 +14,7 @@ function getAllAccounts(){
 }
 
 
-function  getAccount($accountName){
+function getAccount($accountName){
     $connection= Connection::getInstance()->getConnection();
     $request="select NOMCOMPTE from compte where NOMCOMPTE LIKE :accountName" ;
     $prepare=$connection->prepare($request);
@@ -35,6 +35,37 @@ function deleteAccount($accountName){
         'accountName' => $accountName
     ));
     $prepare->closeCursor();
+
+    // delete all appoitments for this account
+    // will require bank developpers to take action, because no one would do that in real life
+    $request="DELETE FROM rdv WHERE IDMOTIF IN (SELECT IDMOTIF FROM motif WHERE LIBELLEMOTIF LIKE :accountName)";
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
+    $prepare->closeCursor();
+}
+
+function getAccountbyName($accountName){
+    $connection= Connection::getInstance()->getConnection();
+    $request="select * from compte where NOMCOMPTE LIKE :accountName LIMIT 1" ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'accountName' => $accountName
+    ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $result = $prepare->fetchall();
+    $prepare->closeCursor();
+
+    if (empty($result)){
+        return null;
+    }
+
+    if (is_array($result)){
+        $result = $result[0];
+    }
+
+    return $result;
 }
 
 

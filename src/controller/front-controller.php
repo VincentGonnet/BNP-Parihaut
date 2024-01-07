@@ -118,6 +118,8 @@ else if(isset($_POST['delete-contract'])){
     $clientId = $event->NUMCLIENT;
     CtlSelectClient($clientId);
     $_SESSION['currentEvent'] = $event;
+    $_SESSION['required-docs'] = getReasonById($event->IDMOTIF);
+    $_SESSION['allChecked'] = false;
     CtlChangeView('advisor-client-documents');
 } else if (isset($_POST['planning-prev-week'])) {
     CtlPlanningPrevWeek();
@@ -202,11 +204,11 @@ else if (isset($_POST["submit-manage-employee"])) {
     CtlDeleteDocument($DocumentID);
     CtlGetAllDocuments();
 
-}  else if(isset($_POST['add-document'])){
-    if(!empty($_POST['new-doc'] && !empty($_POST['new-list']))){
-        $document=$_POST['new-doc'];
+}  else if(isset($_POST['modify-document'])){
+    if(isset($_POST['doc-name']) && isset($_POST['new-list'])) {
+        $documentName=$_POST['doc-name'];
         $list=$_POST['new-list'];
-        CtlAddDocument($document , $list);
+        CtlModifyDocumentByName($documentName , $list);
     }
     CtlGetAllDocuments();
 } 
@@ -220,11 +222,15 @@ else if (isset($_POST["submit-manage-employee"])) {
 
  } else if (isset($_POST['accept-account'])){
     $idClient=$_SESSION['currentClient']->NUMCLIENT;
-    $accountName=$_POST['new-account-overdraft'];
+    $accountName=$_POST['new-account-name'];
     $openDate = new \DateTime();
     $openDate = $openDate->format('Y-m-d');
     $balance = 0.00;
-    $overdraft = $_POST['new-overdraft'];
+    if (isset($_POST['new-overdraft'])){
+        $overdraft = $_POST['new-overdraft'];
+    }else{
+        $overdraft = -1;
+    }
     CtlNewAccount($idClient , $accountName , $openDate ,  $balance , $overdraft);
     CtlGetAllAccountsClient($idClient);
     }
@@ -240,7 +246,7 @@ else if (isset($_POST["submit-manage-employee"])) {
     $endDate = $endDate->format('Y-m-d');
     CtlCloseAccount($idClient , $accountName , $endDate);
     CtlGetAllAccountsClient($idClient);
-            }
+}
 
 //ADVISOR CONTRACTS
 else if (isset($_POST['submit-new-contract'])){

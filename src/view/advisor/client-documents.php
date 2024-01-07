@@ -3,11 +3,11 @@
     <div class="advisor-documents"  >
         <form id="documentsForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <table> 
-                <?php if( isset($_SESSION['getDoc'])): ?>
+                <?php if( isset($_SESSION['required-docs'])): ?>
                     <tr>
-                        <th><?= $_SESSION['getDoc']->LIBELLEMOTIF ?></th>
+                        <th><?= $_SESSION['required-docs']->LIBELLEMOTIF ?></th>
                     </tr>
-                    <?php foreach(explode(",", $_SESSION['getDoc']->LISTEPIECES) as $document): ?>
+                    <?php foreach(explode(",", $_SESSION['required-docs']->LISTEPIECES) as $document): ?>
                         <tr>
                             <td>
                                 <label for="<?php echo $document; ?>"><?php echo $document; ?></label>

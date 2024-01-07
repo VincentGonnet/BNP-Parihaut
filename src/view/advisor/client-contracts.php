@@ -7,24 +7,32 @@
         if (isset($_SESSION['currentClient'])) { 
             $clientId = $_SESSION['currentClient']->NUMCLIENT;
             $contracts = getContractData($clientId);
-    ?>
-    <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
-        <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
-    <?php endif; ?>
-    <?php if(isset($_SESSION['getDoc'])) : ?>
-        <?php $present = false; ?>
-        <?php foreach(getAllContracts() as $line) : ?>
-            <?php if($line->NOMCONTRAT == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
-                <?php $present = true; ?>
-            <?php endif; ?>
-        <?php endforeach; ?>
-
-        <?php if(!$present) : ?>
-            <h4>Attention le rendez-vous ne concerne pas de contrat. Certaines actions sont par conséquent bloquées.</h4>
-        <?php endif; ?>
-    <?php endif; ?>
-        <?php
+            $currentContracts = array();
             foreach ($contracts as $contract) {
+                if ($contract->DATEFERMETURE == null) {
+                    array_push($currentContracts, $contract);
+                }
+            }
+    ?>
+    <?php
+        $appointmentConcernsContract = false;
+        foreach (getAllContracts() as $contract) {
+            if($contract->NOMCONTRAT == $_SESSION['required-docs']->LIBELLEMOTIF) {
+                $appointmentConcernsContract = true;
+            }
+        }
+
+        $allChecked = isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true;
+    ?>
+
+    <?php if(!$appointmentConcernsContract) : ?>
+        <h4>Attention le rendez-vous ne concerne pas les contrats. Certaines actions sont par conséquent bloquées.</h4>
+    <?php elseif (!$allChecked): ?>
+            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
+    <?php endif; ?>
+
+        <?php
+            foreach ($currentContracts as $contract) {
                 $optionValue = $contract->NOMCONTRAT;
                 echo '<div id="div-container">';
                 echo '<div class="contract-div">';
@@ -106,33 +114,32 @@
 
 <!--FORM3 pour les nouveaux contrats-->
 
+<?php
+    $allContracts=getAllContracts(); // all contracts in contract table
+    $selectableContracts = array();
+    foreach($allContracts as $contract) {
+        $clientHasContract = false;
+        foreach($contracts as $clientContract) {
+            if ($clientContract->NOMCONTRAT === $contract->NOMCONTRAT && empty($clientContract->DATEFERMETURE)) {
+                $clientHasContract = true;
+                break;
+            }
+        }
+        if (!$clientHasContract) {
+            array_push($selectableContracts, $contract);
+        }
+    }
+?>
+
 <form class="new-contract-page " style="display: none;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div id="new-contract-section" >
-        <?php
-            $allContract=getAllContracts();
-            ?>
         <h5>Veuillez remplir les champs suivants:</h5>
         <p>
             <label class="label" for="new-contract-type">Type du contrat:</label>
             <select id="new-contract-type" name="new-contract-type" style="width:45%;background:#e8d2d2;padding: 6px 1% 6px 1%;margin-top:2px;">
-                <?php 
-                    foreach ($allContract as $contractOption) {
-                        $clientHasContract = false;
-                        foreach ($contracts as $clientContract) {
-                            if ($clientContract->NOMCONTRAT === $contractOption->NOMCONTRAT) {
-                                $clientHasContract = true;
-                                    break;
-                                    }
-                                }
-                                if (!$clientHasContract) {
-                ?>
-                <option value="<?php echo $contractOption->NOMCONTRAT; ?>">
-                <?php echo $contractOption->NOMCONTRAT; ?>
-                </option>
-                <?php 
-                        }
-                    }
-                ?>
+                <?php foreach($selectableContracts as $contractOption): ?>
+                    <option value="<?= $contractOption->NOMCONTRAT ?>"><?= $contractOption->NOMCONTRAT ?></option>
+                <?php endforeach; ?>
             </select>      
         </p>
 
@@ -200,7 +207,7 @@
     }
 </script>
 
-<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+<?php if(!$allChecked || !$appointmentConcernsContract) : ?>
     <script>
         var buttons = document.querySelectorAll("#add-delete");
         buttons.forEach(function(button){

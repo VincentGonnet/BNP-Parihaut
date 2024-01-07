@@ -122,14 +122,14 @@
 </modal>
 
 <!-- If an event was just added, it will display this modal. -->
-<?php if(isset($_POST['add-event']) && isset($_POST['new-event-reason'])): ?>
+<?php if(isset($_POST['add-event']) && isset($_POST['new-event-reason']) && !empty(getDocumentsAsArray($_POST['new-event-reason'])) ): ?>
     <modal id="new-event-documents-modal">
         <div>
             <h1 style="margin: 0;">Justificatifs nécessaires</h1>
             <div>
                 <p>Motif : <?= getReasonById($_POST['new-event-reason'])->LIBELLEMOTIF ?></p>
                 <ul>
-                    <?php foreach (getDocumentsAsArray($reason->IDMOTIF) as $document): ?>
+                    <?php foreach (getDocumentsAsArray($_POST['new-event-reason']) as $document): ?>
                         <li><?= $document ?></li>
                     <?php endforeach; ?>
                 </ul>

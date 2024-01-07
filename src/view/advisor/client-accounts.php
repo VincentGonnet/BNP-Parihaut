@@ -1,19 +1,21 @@
 <div id="allAccounts">
     <div class="advisor-accounts">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <?php if(isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) : ?>
-            <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
-        <?php endif; ?>
-        <?php if(isset($_SESSION['getDoc'])) : ?>
-            <?php $present = false; ?>
-            <?php foreach(getAllAccounts() as $line) : ?>
-                <?php if($line->NOMCOMPTE == $_SESSION['getDoc']->LIBELLEMOTIF) : ?>
-                    <?php $present = true; ?>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <?php if(!$present) : ?>
-                <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
-            <?php endif; ?>
+        <?php
+            $appointmentConcernsAccount = false;
+            foreach (getAllAccounts() as $account) {
+                if($account->NOMCOMPTE == $_SESSION['required-docs']->LIBELLEMOTIF) {
+                    $appointmentConcernsAccount = true;
+                }
+            }
+
+            $allChecked = isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true;
+        ?>
+
+        <?php if(!$appointmentConcernsAccount) : ?>
+            <h4>Attention le rendez-vous ne concerne pas de compte. Certaines actions sont par conséquent bloquées.</h4>
+        <?php elseif (!$allChecked): ?>
+                <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
         <?php endif; ?>
                 
             <table> 
@@ -70,19 +72,26 @@
                     <p>Nouveau montant : </p>
                 </div>
                 <div class="inputs">
+                <?php
+                    if(isset($_SESSION['client-accounts'])) {
+                        $clientAccounts = $_SESSION['client-accounts'];
+                        $overdraftAccounts = array();
+                        foreach($clientAccounts as $account) {
+                            if (getAccountbyName($account->NOMCOMPTE)->AVOIRDECOUVERT != '-1.00' && getAccountbyName($account->NOMCOMPTE)->AVOIRDECOUVERT != '') {
+                                array_push($overdraftAccounts, $account);
+                            }
+                        }
+                    }
+                ?>
                 <select name="account-overdraft" id="account-overdraft">
-    <?php if(isset($_SESSION['client-accounts'])) : ?>
-        <?php foreach($_SESSION['client-accounts'] as $line) : ?>
-            <?php if($line->MONTANTDECOUVERT === '-1.00'): ?>
-                <option disabled value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-            <?php else: ?>
-                <option  value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
-            <?php endif; ?>
-        <?php endforeach ?>
-    <?php endif ?>
-</select>
+                    <?php if(isset($_SESSION['client-accounts'])) : ?>
+                        <?php foreach($overdraftAccounts as $line) : ?>
+                            <option  value="<?php echo $line->NOMCOMPTE ?>"><?php echo $line->NOMCOMPTE ?></option>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                </select>
                     <div class="horizontal">
-                        <input type="number" name="new-overdraft" value="" >
+                        <input type="number" name="new-overdraft" value="" min="0" required >
                     </div>
                 </div>
             </div>
@@ -104,21 +113,16 @@
                     <p class="modifiable" >Montant du découvert : </p>
                 </div>
                 <div class="inputs">
-
-                    <?php if(isset($_SESSION['getDoc'])) : ?>
-                        <input type="text" name="new-account-overdraft" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
-                    <?php endif ?>
-
-                    <select name="new-account-overdraft" id="new-account-overdraft" onChange="saveSelectedAccountType()">
+                    <select name="new-account-name" id="new-account-name" onChange="saveSelectedAccountType()">
                         <option selected disabled>Selectionnez un compte</option>
                         <?php foreach(getAllAccounts() as $line) : ?>
-                            <option value="<?php echo $line->NOMCOMPTE ?>" id="selected-account-<?php echo $line->AVOIRDECOUVERT ?>"><?php echo $line->NOMCOMPTE ?></option>
+                            <option value="<?php echo $line->NOMCOMPTE ?>" id="selected-account,<?php echo $line->AVOIRDECOUVERT ?>"><?php echo $line->NOMCOMPTE ?></option>
                         <?php endforeach ?>
                     </select>
-                    <input type="hidden" name="selected-account-type" id="selected-account-type" value="">
 
                     <div class="horizontal">
-                        <input  class="modifiable" id="new-overdraft" type="number" name="new-overdraft" value="" >
+                        <input class="modifiable" id="new-overdraft" type="number" name="new-overdraft" value="0" min="0" >
+                        <p id="no-overdraft" style="display: none; font-size: small;">Aucun découvert possible</p>
                     </div>
                 </div>
             </div>
@@ -139,8 +143,8 @@
                     <p>Nom du compte : </p>
                 </div>
                 <div class="inputs">
-                        <?php if(isset($_SESSION['getDoc'])) : ?>
-                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['getDoc']->LIBELLEMOTIF ?> readonly />
+                        <?php if(isset($_SESSION['required-docs'])) : ?>
+                            <input type="text" name="account-to-delete" value=<?php echo $_SESSION['required-docs']->LIBELLEMOTIF ?> readonly />
                         <?php endif ?>
                     </select>
                 </div>
@@ -157,65 +161,67 @@
     let overdraftModal = document.getElementById('edit-overdraft-modal');
     let accountModal = document.getElementById('add-account-modal');
     let deleteModal = document.getElementById('delete-modal');
-function openOverdraftModal() {
-    
-    overdraftModal.style.opacity = 1;
-    overdraftModal.style.pointerEvents = "auto";
-}
-
-function openAccountModal(){
-    accountModal.style.opacity = 1;
-    accountModal.style.pointerEvents = "auto";
-}
-
-function openDeleteModal(){
-    deleteModal.style.opacity = 1;
-    deleteModal.style.pointerEvents = "auto";
-}
-
-function closeDeleteModal(){
-    deleteModal.style.opacity = 0;
-    deleteModal.style.pointerEvents = "none";
-}
-
-function closeOverdraftModal() {
-    overdraftModal.style.opacity = 0;
-    overdraftModal.style.pointerEvents = "none";
-}
-
-function closeAccountModal() {
-    accountModal.style.opacity = 0;
-    accountModal.style.pointerEvents = "none";
-}
-
-function saveSelectedAccountType() {
-    var selectElement = document.getElementById('new-account-overdraft');
-    var selectedOption = selectElement.options[selectElement.selectedIndex];
-    var selectedAccountId = selectedOption.id; 
-    var avoirDecouvert = selectedAccountId.split('-')[2]; 
-    var overdraft=document.getElementById('new-overdraft');
-
-    document.getElementById('selected-account-type').value = avoirDecouvert;
-
-    var modifiableFields = document.querySelectorAll('.modifiable');
-    if (avoirDecouvert == '-1'|| avoirDecouvert == "") {
-        modifiableFields.forEach(function(field) {
-            field.style.display = 'none';
-            overdraft.value=-1;
-        });
-    } else {
-        modifiableFields.forEach(function(field) {
-            field.style.display = 'block';
-
-        });
+    function openOverdraftModal() {
+        overdraftModal.style.opacity = 1;
+        overdraftModal.style.pointerEvents = "auto";
     }
 
-    console.log('AVOIRDECOUVERT:', avoirDecouvert);
-}
+    function openAccountModal(){
+        accountModal.style.opacity = 1;
+        accountModal.style.pointerEvents = "auto";
+    }
+
+    function openDeleteModal(){
+        deleteModal.style.opacity = 1;
+        deleteModal.style.pointerEvents = "auto";
+    }
+
+    function closeDeleteModal(){
+        deleteModal.style.opacity = 0;
+        deleteModal.style.pointerEvents = "none";
+    }
+
+    function closeOverdraftModal() {
+        overdraftModal.style.opacity = 0;
+        overdraftModal.style.pointerEvents = "none";
+    }
+
+    function closeAccountModal() {
+        accountModal.style.opacity = 0;
+        accountModal.style.pointerEvents = "none";
+    }
+
+    function saveSelectedAccountType() {
+        var selectElement = document.getElementById('new-account-name');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var selectedAccountId = selectedOption.id; 
+        var avoirDecouvert = selectedAccountId.split(',')[1]; 
+        var overdraft=document.getElementById('new-overdraft');
+
+
+        var modifiableFields = document.querySelectorAll('.modifiable');
+        if (avoirDecouvert == '-1'|| avoirDecouvert == "") {
+            document.getElementById('no-overdraft').style.display = "block";
+            document.getElementById('new-overdraft').style.display = "none";
+        } else {
+            document.getElementById('no-overdraft').style.display = "none";
+            document.getElementById('new-overdraft').style.display = "block";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (event.target == overdraftModal) {
+            closeOverdraftModal();
+        } else if (event.target == accountModal) {
+            closeAccountModal();
+        } else if (event.target == deleteModal) {
+            closeDeleteModal();
+        }
+    }
 
 </script>
 
-<?php if((isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == false) || !$present) : ?>
+<?php if(!$allChecked || !$appointmentConcernsAccount) : ?>
     <script>
         var buttons = document.querySelectorAll("#add-delete");
         buttons.forEach(function(button){

@@ -17,6 +17,7 @@ require_once 'controller/router.php';
 require_once 'model/employee.php';
 require_once 'model/documents.php';
 require_once 'model/client-account.php';
+require_once 'model/clientContract.php';
 
 
 
@@ -123,14 +124,16 @@ function CtlGetAccount($accountName){
 
 function CtlDeleteAccount($accountName){
     deleteAccount($accountName);
+    deleteDocumentByName($accountName);
 }
 
 function CtlAddAccount($accountName,$overdraft){
-    addAccount($accountName,$overdraft);
-}
-
-function CtlDeleteAllAccounts(){
-    deleteAllAccounts();
+    if (empty(getDocumentByName($accountName))) {
+        addAccount($accountName,$overdraft);
+    CtlAddDocument($accountName , '');
+    } else {
+        echo '<script>alert("Un contrat ou un compte avec le même nom existe déjà")</script>';
+    }
 }
 
 //AFFICHAGE CONTRATS
@@ -147,10 +150,16 @@ function CtlGetContract($contract){
 
 function CtlDeleteContract($contract){
     deleteContract($contract);
+    deleteDocumentByName($contract);
 }
 
-function CtlAddContract($contract){
-    addContract($contract);
+function CtlAddContract($contract) {
+    if (empty(getDocumentByName($contract))) {
+        addContract($contract);
+        CtlAddDocument($contract , '');
+    } else {
+        echo '<script>alert("Un contrat ou un compte avec le même nom existe déjà")</script>';
+    }
 }
 
 function CtlDeleteAllContracts(){
@@ -173,13 +182,17 @@ function CtlAddDocument($document , $list){
     addDocument($document , $list);
 }
 
+function CtlModifyDocumentByName($document , $list){
+    modifyDocumentByName($document , $list);
+}
+
 function CtlEditList($document , $list , $iddoc){
     editList($document , $list , $iddoc);
 }
 
 function CtlGetDocument($documentId){
     $document=getDocument($documentId);
-    $_SESSION['getDoc']=$document;
+    $_SESSION['required-docs']=$document;
 }
 
 
@@ -280,8 +293,9 @@ function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractTy
     clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
 }
 function CtlDeleteClientContract($idClient,$contractType){
-    deleteClientContract($idClient,$contractType);
+    closeContract($contractType, $idClient, date('Y-m-d'));
 }
+
 
 
 // DIRECTOR FUNCTIONS ---------------------------------------------------------
