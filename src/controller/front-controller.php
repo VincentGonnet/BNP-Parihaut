@@ -154,20 +154,20 @@ else if(isset($_POST['delete-contract'])){
     $accountType=$_POST['chosen-account'];
     $solde=$_POST['solde'];
     $decouvert=$_POST['decouvert'];
-    if ($accountType=='courant'){
+    //if ($accountType=='courant'){
         if($solde-$ammount>=(-$decouvert)){
             CtlDebit($ammount, $clientId, $accountType);
         }else{
             echo '<script>alert("Vous ne pouvez pas retirer ce montant. Veuillez indiquer un montant plus petit.");</script>';
 
         }
-    }else{
+    /*}else{
             if ($solde-$ammount>=0){
                 CtlDebit($ammount, $clientId, $accountType);
             }else{
                 echo '<script>alert("Vous ne pouvez pas depasser votre solde. Veuillez indiquer un montant plus petit.");</script>';
             }
-        }
+        }*/
         echo "<script>window.location.href = 'http://localhost/BNP-Parihaut/src/index.php';</script>";
         
 } else if(isset($_POST['contract'])){
