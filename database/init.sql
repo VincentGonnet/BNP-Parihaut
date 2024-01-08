@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 23 déc. 2023 à 00:13
+-- Généré le : lun. 08 jan. 2024 à 21:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -47,26 +47,22 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MAIL`, `ENREGISTRE`, `NUMTEL`, `SITUATION`, `PROFESSION`, `DATENAISSANCE`, `DATEENREGISTREMENT`) VALUES
-(1, 2, 'Musk', 'Melon', '123 Main Street', 'melon.musk@space.x', 1, 123456789, 'Married', 'Business man', '1971-06-28', '2023-12-22'),
-(2, 3, 'Johnson', 'Jane', '456 Oak Avenue', 'jane.johnson@example.com', 1, 234567890, 'Married', 'Teacher', '1990-05-15', '2023-12-22'),
-(3, 4, 'Williams', 'Emma', '789 Birch Lane', 'emma.williams@example.com', 1, 345678901, 'Divorced', 'Engineer', '1985-08-22', '2023-12-22'),
-(4, 5, 'Davis', 'Michael', '987 Pine Avenue', 'michael.davis@example.com', 1, 456789012, 'Single', 'Doctor', '1988-12-10', '2023-12-22'),
-(5, 6, 'Miller', 'Olivia', '654 Cedar Street', 'olivia.miller@example.com', 1, 567890123, 'Married', 'Architect', '1982-06-18', '2023-12-22'),
-(6, 8, 'Moore', 'Mason', '876 Oak Avenue', 'mason.moore@example.com', 1, 789012345, 'Divorced', 'Lawyer', '1980-11-05', '2023-12-22'),
-(7, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Lawyer', '1985-01-05', '2023-12-22'),
-(8, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'IT Consultant', '1980-08-28', '2023-12-22'),
-(9, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'IT Consultant', '2000-07-30', '2023-12-22'),
-(10, 5, 'Fisher', 'Ava', '543 Pine Avenue', 'ava.fisher@example.com', 1, 456789012, 'Single', 'IT Consultant', '1975-11-02', '2023-12-22'),
-(11, 12, 'Clark', 'Noah', '654 Birch Lane', 'noah.clark@example.com', 1, 123456789, 'Married', 'Civil Engineer', '1984-02-28', '2023-12-22'),
-(12, 13, 'Davis', 'Sophia', '321 Elm Street', 'sophia.davis@example.com', 1, 234567890, 'Single', 'Data Scientist', '1991-10-20', '2023-12-22'),
-(13, 14, 'Evans', 'Ethan', '876 Oak Avenue', 'ethan.evans@example.com', 1, 345678901, 'Divorced', 'Sales Manager', '1986-06-15', '2023-12-22'),
-(14, 12, 'Ward', 'Lucas', '321 Elm Street', 'lucas.ward@example.com', 1, 12345678, 'Single', 'Data Analyst', '1992-07-05', '2023-12-22'),
-(15, 11, 'Xu', 'Isabella', '876 Oak Avenue', 'isabella.xu@example.com', 1, 123456789, 'Married', 'Data Analyst', '1985-05-25', '2023-12-22'),
-(16, 10, 'Yates', 'Liam', '543 Pine Avenue', 'liam.yates@example.com', 1, 234567890, 'Single', 'Civil Engineer', '1994-02-28', '2023-12-22'),
-(17, 10, 'Zhang', 'Sophie', '210 Cedar Street', 'sophie.zhang@example.com', 1, 345678901, 'Single', 'Teacher', '1999-09-28', '2023-12-22'),
-(18, 5, 'Jackson', 'Avery', '876 Oak Avenue', 'avery.jackson@example.com', 1, 345678901, 'Married', 'HR Specialist', '1994-10-22', '2023-12-22'),
-(19, 9, 'Owens', 'Mason', '321 Elm Street', 'mason.owens@example.com', 1, 890123456, 'Single', 'HR Specialist', '1994-12-02', '2023-12-22'),
-(20, 3, 'Perez', 'Liam', '876 Oak Avenue', 'liam.perez@example.com', 1, 901234567, 'Divorced', 'Teacher', '1983-09-18', '2023-12-22');
+(1, 5, 'Dupont', 'Jean', '75001 Paris, 123 Rue de la Paix', 'jean.dupont@email.com', 1, 123456789, 'Célibataire', 'Ingénieur', '1985-06-20', '2023-12-14'),
+(2, 6, 'Martin', 'Sophie', '75008 Paris, 456 Avenue des Champs-Élysées', 'sophie.martin@email.com', 1, 234567890, 'Marié', 'Professeur', '1990-03-15', '2024-01-02'),
+(3, 8, 'Lefevre', 'Pierre', '69001 Lyon, 789 Boulevard Saint-Michel', 'pierre.lefevre@email.com', 1, 345678901, 'Célibataire', 'Médecin', '1982-11-10', '2023-12-21'),
+(4, 7, 'Bertrand', 'Isabelle', '13001 Marseille, 234 Rue du Faubourg Saint-Antoine', 'isabelle.bertrand@email.com', 1, 456789012, 'Marié', 'Avocat', '1975-09-25', '2024-01-01'),
+(5, 5, 'Leclerc', 'Luc', '33000 Bordeaux, 567 Avenue de la Victoire', 'luc.leclerc@email.com', 1, 567890123, 'Célibataire', 'Architecte', '1995-02-18', '2023-12-28'),
+(6, 6, 'Robert', 'Marie', '69002 Lyon, 890 Rue de la République', 'marie.robert@email.com', 1, 678901234, 'Marié', 'Enseignant', '1988-07-08', '2024-01-03'),
+(7, 8, 'Simon', 'Claire', '75010 Paris, 123 Boulevard de la Villette', 'claire.simon@email.com', 1, 789012345, 'Célibataire', 'Journaliste', '1993-12-03', '2023-12-17'),
+(8, 7, 'Lemoine', 'Thomas', '13008 Marseille, 456 Avenue du Prado', 'thomas.lemoine@email.com', 1, 890123456, 'Marié', 'Ingénieur', '1979-04-26', '2023-12-08'),
+(9, 5, 'Durand', 'Julie', '31000 Toulouse, 789 Rue Saint-Sernin', 'julie.durand@email.com', 1, 901234567, 'Célibataire', 'Médecin', '1980-09-14', '2023-12-13'),
+(10, 6, 'Fournier', 'Antoine', '59000 Lille, 234 Rue de la Clef', 'antoine.fournier@email.com', 1, 123456789, 'Marié', 'Avocat', '1998-01-30', '2024-01-01'),
+(11, 8, 'Girard', 'Emma', '75018 Paris, 567 Rue des Abbesses', 'emma.girard@email.com', 1, 234567890, 'Célibataire', 'Scientifique', '1987-06-07', '2023-12-22'),
+(12, 7, 'Moreau', 'Alex', '44000 Nantes, 890 Rue de la Paix', 'alex.moreau@email.com', 1, 345678901, 'Marié', 'Designer', '1992-03-22', '2024-01-05'),
+(13, 5, 'Leroy', 'Marine', '69003 Lyon, 123 Avenue des Frères Lumière', 'marine.leroy@email.com', 1, 456789012, 'Célibataire', 'Ingénieur', '1989-11-17', '2023-12-15'),
+(14, 6, 'Roux', 'Gabriel', '13006 Marseille, 456 Cours Pierre Puget', 'gabriel.roux@email.com', 1, 567890123, 'Marié', 'Artiste', '1976-08-04', '2023-12-23'),
+(15, 8, 'Petit', 'Laura', '75012 Paris, 789 Avenue Daumesnil', 'laura.petit@email.com', 1, 678901234, 'Célibataire', 'Écrivain', '1997-04-29', '2023-12-30'),
+(16, 7, 'Roy', 'Hugo', '33000 Bordeaux, 234 Cours de la Marne', 'hugo.roy@email.com', 1, 789012345, 'Marié', 'Consultant', '1974-01-12', '2023-12-10');
 
 -- --------------------------------------------------------
 
@@ -77,18 +73,18 @@ INSERT INTO `client` (`NUMCLIENT`, `NUMEMPLOYE`, `NOM`, `PRENOM`, `ADRESSE`, `MA
 CREATE TABLE `compte` (
   `NOMCOMPTE` char(32) NOT NULL,
   `AVOIRDECOUVERT` int(11) DEFAULT NULL
-
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `compte`
 --
 
-INSERT INTO `compte` (`NOMCOMPTE`) VALUES
-('CEL'),
-('Courant'),
-('PEL'),
-('Pro');
+INSERT INTO `compte` (`NOMCOMPTE`, `AVOIRDECOUVERT`) VALUES
+('LIVRET JEUNE', -1),
+('COURANT', 0),
+('LIVRET A', -1),
+('LIVRET B', -1),
+('PEL', -1);
 
 -- --------------------------------------------------------
 
@@ -110,34 +106,11 @@ CREATE TABLE `compteclient` (
 --
 
 INSERT INTO `compteclient` (`NUMCLIENT`, `NOMCOMPTE`, `DATEOUVERTURE`, `DATEFERMETURE`, `SOLDE`, `MONTANTDECOUVERT`) VALUES
-(1, 'Courant', '2004-01-01', NULL, 9999.99, 500.00),
-(2, 'Pro', '2018-11-18', NULL, 99.72, 100.00),
-(1, 'CEL', '2006-08-10', NULL, 9999.99, 1000.00),
-(3, 'PEL', '1998-05-16', NULL, 680.00, 200.00),
-(4, 'CEL', '2014-03-25', '2023-11-10', 3570.99, 450.00),
-(12, 'Pro', '2018-01-18', NULL, 5499.72, 600.00),
-(5, 'Courant', '2015-08-01', NULL, 5861.58, 400.00),
-(6, 'Courant', '2018-09-10', NULL, 6321.30, 500.00),
-(7, 'CEL', '2017-04-05', NULL, 11200.25, 950.00),
-(8, 'Courant', '2019-01-22', NULL, 7512.60, 600.00),
-(9, 'PEL', '2016-08-15', NULL, 12800.50, 1100.00),
-(10, 'Courant', '2017-11-28', NULL, 6913.40, 550.00),
-(11, 'Pro', '2020-04-12', NULL, 14600.20, 1200.00),
-(12, 'Courant', '2016-05-20', NULL, 5623.70, 500.00),
-(13, 'PEL', '2019-08-02', NULL, 10200.75, 900.00),
-(14, 'Courant', '2018-03-15', NULL, 6832.80, 600.00),
-(5, 'Pro', '2017-10-28', NULL, 11900.25, 1000.00),
-(14, 'PEL', '2017-04-22', NULL, 8200.75, 850.00),
-(15, 'Courant', '2018-11-12', NULL, 6723.30, 500.00),
-(16, 'PEL', '2019-06-05', NULL, 14200.20, 1150.00),
-(17, 'Courant', '2017-09-30', NULL, 5810.40, 400.00),
-(18, 'Pro', '2016-03-18', NULL, 9800.15, 750.00),
-(19, 'Courant', '2019-01-25', NULL, 7132.60, 550.00),
-(20, 'PEL', '2020-05-08', NULL, 12800.50, 1050.00),
-(7, 'PEL', '2017-01-28', NULL, 9150.25, 800.00),
-(4, 'Courant', '2016-04-03', NULL, 5423.70, 350.00),
-(18, 'PEL', '2018-11-19', NULL, 11000.40, 950.00),
-(6, 'PEL', '2017-06-15', NULL, 12300.15, 1000.00);
+(7, 'COURANT', '2024-01-08', NULL, 0.00, 300.00),
+(8, 'PEL', '2024-01-08', NULL, 0.00, 0.00),
+(4, 'COURANT', '2024-01-08', NULL, 60.00, 150.00),
+(2, 'LIVRET A', '2024-01-08', NULL, 2000.00, 0.00),
+(1, 'COURANT', '2024-01-05', NULL, 485.00, 300.00);
 
 -- --------------------------------------------------------
 
@@ -154,9 +127,9 @@ CREATE TABLE `contrat` (
 --
 
 INSERT INTO `contrat` (`NOMCONTRAT`) VALUES
-('Assurance auto'),
-('Assurance sante'),
-('Pret');
+('ASSURANCE LOGEMENT'),
+('ASSURANCE VOYAGE'),
+('PRET BANCAIRE');
 
 -- --------------------------------------------------------
 
@@ -177,10 +150,8 @@ CREATE TABLE `contratclient` (
 --
 
 INSERT INTO `contratclient` (`NOMCONTRAT`, `NUMCLIENT`, `DATEFERMETURE`, `DATEOUVERTURECONTRAT`, `TARIFMENSUEL`) VALUES
-('Assurance auto', 6, NULL, '2020-05-10', 50.00),
-('Assurance sante', 10, NULL, '2022-07-20', 30.00),
-('Pret', 4, NULL, '2021-09-10', 150.00),
-('Pret', 1, NULL, '2023-12-21', 10.00);
+('ASSURANCE LOGEMENT', 3, '2025-10-03', '2024-01-08', 20.00),
+('PRET BANCAIRE', 3, NULL, '2024-01-08', 15.00);
 
 -- --------------------------------------------------------
 
@@ -202,52 +173,15 @@ CREATE TABLE `employe` (
 --
 
 INSERT INTO `employe` (`NUMEMPLOYE`, `NOM`, `PRENOM`, `LOGIN`, `MDP`, `CATEGORIE`) VALUES
-(1, 'Doe', 'John', 'directeur', 'directeur', 'director'),
-(2, 'Smith', 'Alice', 'conseiller1', 'conseiller1', 'advisor'),
-(3, 'Johnson', 'Bob', 'conseiller2', 'conseiller2', 'advisor'),
-(4, 'Williams', 'Emma', 'conseiller3', 'conseiller3', 'advisor'),
-(5, 'Brown', 'Charlie', 'conseiller4', 'conseiller4', 'advisor'),
-(6, 'Davis', 'Olivia', 'conseiller5', 'conseiller5', 'advisor'),
-(7, 'Miller', 'Ethan', 'conseiller6', 'conseiller6', 'advisor'),
-(8, 'Wilson', 'Sophia', 'conseiller7', 'conseiller7', 'advisor'),
-(9, 'Moore', 'Mason', 'conseiller8', 'conseiller8', 'advisor'),
-(10, 'Jones', 'Ava', 'conseiller9', 'conseiller9', 'advisor'),
-(11, 'Anderson', 'Sophia', 'conseiller10', 'conseiller10', 'advisor'),
-(12, 'Brown', 'Liam', 'conseiller11', 'conseiller11', 'advisor'),
-(13, 'Clark', 'Isabella', 'conseiller12', 'conseiller12', 'advisor'),
-(14, 'Davis', 'Noah', 'conseiller13', 'conseiller13', 'advisor'),
-(15, 'Evans', 'Emma', 'conseiller14', 'conseiller14', 'advisor'),
-(16, 'Fisher', 'Logan', 'agent1', 'agent1', 'agent'),
-(17, 'Gomez', 'Ella', 'agent2', 'agent2', 'agent'),
-(18, 'Hart', 'Lily', 'agent3', 'agent3', 'agent'),
-(19, 'Ingram', 'Noah', 'agent4', 'agent4', 'agent'),
-(20, 'Jackson', 'Avery', 'agent5', 'agent5', 'agent'),
-(21, 'Keller', 'Mia', 'agent6', 'agent6', 'agent'),
-(22, 'Lopez', 'Lucas', 'agent7', 'agent7', 'agent'),
-(23, 'Morgan', 'Isaac', 'agent8', 'agent8', 'agent'),
-(24, 'Nelson', 'Sophia', 'agent9', 'agent9', 'agent'),
-(25, 'Owens', 'Mason', 'agent10', 'agent10', 'agent'),
-(26, 'Perez', 'Liam', 'agent11', 'agent11', 'agent'),
-(27, 'Quinn', 'Olivia', 'agent12', 'agent12', 'agent'),
-(28, 'Reyes', 'Noah', 'agent13', 'agent13', 'agent'),
-(29, 'Simmons', 'Ava', 'agent14', 'agent14', 'agent'),
-(30, 'Taylor', 'Ethan', 'agent15', 'agent15', 'agent'),
-(31, 'Vargas', 'Mia', 'agent16', 'agent16', 'agent'),
-(32, 'Ward', 'Lucas', 'agent17', 'agent17', 'agent'),
-(33, 'Xu', 'Isabella', 'agent18', 'agent18', 'agent'),
-(34, 'Yates', 'Liam', 'agent19', 'agent19', 'agent'),
-(35, 'Zhang', 'Sophia', 'agent20', 'agent20', 'agent'),
-(36, 'Adams', 'Ella', 'agent21', 'agent21', 'agent'),
-(37, 'Barnes', 'Logan', 'agent22', 'agent22', 'agent'),
-(38, 'Choi', 'Mason', 'agent23', 'agent23', 'agent'),
-(39, 'Diaz', 'Olivia', 'agent24', 'agent24', 'agent'),
-(40, 'Ellis', 'Noah', 'agent25', 'agent25', 'agent'),
-(41, 'Fisher', 'Ava', 'agent26', 'agent26', 'agent'),
-(42, 'Gomez', 'Isaac', 'agent27', 'agent27', 'agent'),
-(43, 'Hart', 'Sophie', 'agent28', 'agent28', 'agent'),
-(44, 'Ingram', 'Mason', 'agent29', 'agent29', 'agent'),
-(45, 'Jackson', 'Ella', 'agent30', 'agent30', 'agent'),
-(46, 'Valjean', 'Jean', 'agent0', 'agent0', 'advisor');
+(1, 'Musk', 'Melon', 'melon.musk', 'password', 'director'),
+(2, 'Dupont', 'Sophie', 'sophie.dupont', 'password', 'agent'),
+(9, 'Moreau', 'Thomas', 'thomas.moreau', 'password', 'advisor'),
+(8, 'Girard', 'Antoine', 'antoine.girard', 'password', 'advisor'),
+(7, 'Lemoine', 'Marie', 'marie.lemoine', 'password', 'advisor'),
+(6, 'Fournier', 'Luc', 'luc.fournier', 'password', 'advisor'),
+(5, 'Bertrand', 'Isabelle', 'isabelle.bertrand', 'password', 'advisor'),
+(4, 'Lefevre', 'Pierre', 'pierre.lefevre', 'password', 'agent'),
+(3, 'Cochard', 'Jean', 'jean.martin', 'password', 'agent');
 
 -- --------------------------------------------------------
 
@@ -266,8 +200,14 @@ CREATE TABLE `motif` (
 --
 
 INSERT INTO `motif` (`IDMOTIF`, `LIBELLEMOTIF`, `LISTEPIECES`) VALUES
-(1, 'Ouverture compte courant', 'Carte d\'identité'),
-(2, 'PEL', 'JUSTIFICATIF DE DOMICILE, CARTE D\'IDENTITÉ');
+(24, 'LIVRET JEUNE', 'Carte d\'identité'),
+(25, 'LIVRET A', 'Carte d\'identité'),
+(26, 'LIVRET B', 'Carte d\'identité'),
+(27, 'PEL', 'Carte d\'identité'),
+(28, 'ASSURANCE VOYAGE', 'Carte d\'identité, Bulletins de salaire'),
+(23, 'COURANT', 'Carte d\'identité, Bulletins de salaire'),
+(29, 'ASSURANCE LOGEMENT', 'Carte d\'identité, Justificatif de domicile'),
+(30, 'PRET BANCAIRE', 'Carte d\'identité, Bulletins de salaire');
 
 -- --------------------------------------------------------
 
@@ -289,7 +229,11 @@ CREATE TABLE `operation` (
 --
 
 INSERT INTO `operation` (`NUMOP`, `NUMCLIENT`, `NOMCOMPTE`, `MONTANT`, `TYPEOP`, `DATEOP`) VALUES
-(1, 1, 'Courant', 500.00, 'ajout', '2023-12-22');
+(2, 1, 'COURANT', 230.00, 'credit', '2024-01-05'),
+(3, 1, 'COURANT', 60.00, 'debit', '2024-01-07'),
+(4, 2, 'LIVRET A', 2000.00, 'credit', '2024-01-08'),
+(5, 4, 'COURANT', 60.00, 'credit', '2024-01-08'),
+(6, 1, 'COURANT', 315.00, 'credit', '2024-01-08');
 
 -- --------------------------------------------------------
 
@@ -311,7 +255,18 @@ CREATE TABLE `rdv` (
 --
 
 INSERT INTO `rdv` (`NUMRDV`, `NUMEMPLOYE`, `NUMCLIENT`, `IDMOTIF`, `DATERDV`, `DATEFINRDV`) VALUES
-(23, 2, 1, 1, '2023-12-21 09:30:00', '2023-12-21 12:00:00');
+(41, 5, 5, 29, '2024-01-11 13:30:00', '2024-01-11 14:30:00'),
+(40, 7, 4, 23, '2024-01-12 08:30:00', '2024-01-12 09:30:00'),
+(45, 8, 7, 23, '2024-01-13 08:30:00', '2024-01-13 09:30:00'),
+(43, 6, 6, 24, '2024-01-11 15:00:00', '2024-01-11 16:00:00'),
+(46, 7, 8, 27, '2024-01-10 16:30:00', '2024-01-10 17:30:00'),
+(39, 8, 3, 30, '2024-01-10 10:00:00', '2024-01-10 11:30:00'),
+(38, 6, 2, 25, '2024-01-09 11:30:00', '2024-01-09 12:30:00'),
+(37, 5, 1, 23, '2024-01-08 10:30:00', '2024-01-08 11:30:00'),
+(47, 9, NULL, 0, '2024-01-12 15:00:00', '2024-01-12 18:00:00'),
+(48, 9, NULL, 0, '2024-01-08 12:00:00', '2024-01-08 14:00:00'),
+(49, 8, NULL, 0, '2024-01-13 12:30:00', '2024-01-13 18:00:00'),
+(50, 8, NULL, 0, '2024-01-09 15:30:00', '2024-01-09 18:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -389,7 +344,7 @@ ALTER TABLE `rdv`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `NUMCLIENT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `NUMCLIENT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `employe`
@@ -401,19 +356,19 @@ ALTER TABLE `employe`
 -- AUTO_INCREMENT pour la table `motif`
 --
 ALTER TABLE `motif`
-  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDMOTIF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `NUMOP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `NUMOP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `rdv`
 --
 ALTER TABLE `rdv`
-  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `NUMRDV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
