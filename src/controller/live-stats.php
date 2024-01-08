@@ -169,10 +169,18 @@ switch ($desiredStat) {
             $transactionDate = $transactionDate->format("d-m-Y");
             foreach ($resultArray as $date => $value) {
                 if (strtotime($date) >= strtotime($transactionDate)) {
-                    $resultArray[$date] += $transaction->MONTANT;
+                    if ($transaction->TYPEOP == "debit") {
+                        $resultArray[$date] -= $transaction->MONTANT;
+                    } else {
+                        $resultArray[$date] += $transaction->MONTANT;
+                    }
                 }
             }
-            $balance += $transaction->MONTANT;
+            if ($transaction->TYPEOP == "debit") {
+                $balance -= $transaction->MONTANT;
+            } else {
+                $balance += $transaction->MONTANT;
+            }
         }
 
         echo json_encode([$chartName, $resultArray, $balance]);

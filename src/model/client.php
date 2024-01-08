@@ -119,18 +119,39 @@ function credit($ammount,$clientId,$accountType){
         ':ammount' => $ammount,
         ':accountType' => $accountType
     ));
+    $result->closeCursor();
+
+    $result = $connection->prepare('INSERT INTO operation (NUMCLIENT, NOMCOMPTE, MONTANT, DATEOP, TYPEOP) VALUES (:clientId, :accountType, :ammount, :date, :type)');
+    $result->execute(array(
+        ':clientId' => $clientId,
+        ':accountType' => $accountType,
+        ':ammount' => $ammount,
+        ':date' => date('Y-m-d'),
+        ':type' => 'credit'
+    ));
+    $result->closeCursor();
 }
 
 
 function debit($ammount,$clientId,$accountType){
     $connection = Connection::getInstance()->getConnection();
-    $result = $connection->prepare('UPDATE compteclient SET SOLDE = SOLDE - :ammount WHERE NUMCLIENT = :clientId AND NOMCOMPTE = :accountType'); 
-    $result->execute(array(
+    $request = $connection->prepare('UPDATE compteclient SET SOLDE = SOLDE - :ammount WHERE NUMCLIENT = :clientId AND NOMCOMPTE = :accountType'); 
+    $request->execute(array(
         ':clientId' => $clientId,
         ':ammount' => $ammount,
         ':accountType' => $accountType
     ));
-    
+    $request->closeCursor();
+
+    $request = $connection->prepare('INSERT INTO operation (NUMCLIENT, NOMCOMPTE, MONTANT, DATEOP, TYPEOP) VALUES (:clientId, :accountType, :ammount, :date, :type)');
+    $request->execute(array(
+        ':clientId' => $clientId,
+        ':accountType' => $accountType,
+        ':ammount' => $ammount,
+        ':date' => date('Y-m-d'),
+        ':type' => 'debit'
+    ));
+    $request->closeCursor();
 }
 function getContractData($clientId){
     $connection = Connection::getInstance()->getConnection();
@@ -138,10 +159,19 @@ function getContractData($clientId){
     $result->execute(array(':clientId' => $clientId));
 
     $result->setFetchMode(PDO::FETCH_OBJ);
-    $contract = $result->fetchAll();
+    $contracts = $result->fetchAll();
     $result->closeCursor();
+
+    if (empty($contracts)) {
+        return null;
+    }
+
+    if (!is_array($contracts)) {
+        $contracts = array($contracts);
+    }
+
     
-    return $contract;
+    return $contracts;
 }
 
 function getAllClientsBeforeDate($date) {

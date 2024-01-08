@@ -9,7 +9,7 @@
             $contracts = getContractData($clientId);
             $currentContracts = array();
             foreach ($contracts as $contract) {
-                if ($contract->DATEFERMETURE == null) {
+                if ($contract->DATEFERMETURE == null || $contract->DATEFERMETURE > date('Y-m-d')) {
                     array_push($currentContracts, $contract);
                 }
             }

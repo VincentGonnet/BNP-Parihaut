@@ -8,7 +8,7 @@
             <option value=" <?= $_SESSION['currentClient']->NUMEMPLOYE ?>" selected> <?= $advisor->PRENOM." ".strtoupper($advisor->NOM) ?></option>
         </select>
         <div style="flex: 100;"></div>
-        <input type="date" name="planning-select-date" id="planning-select-date" onchange="this.form.submit()"
+        <input type="date" name="planning-select-date" id="planning-select-date" onblur="this.form.submit()"
         value="<?= isset($_SESSION['calendarDay']) ? date('Y-m-d', strtotime($_SESSION['calendarDay'])) : date('Y-m-d') ?>"
         >
         <div style="flex: 1;"></div>

@@ -13,6 +13,25 @@ function getAllAccountsClient($idClient){
     return $desc;
 }
 
+function getClientAccount($idClient, $accountName) {
+    $connection = Connection::getInstance()->getConnection(); 
+    $request='SELECT * from compteclient where NUMCLIENT LIKE :idClient AND NOMCOMPTE LIKE :accountName AND DATEFERMETURE IS NULL LIMIT 1' ;
+    $prepare=$connection->prepare($request);
+    $prepare->execute(array(
+        'idClient' => $idClient,
+        'accountName' => $accountName
+    ));
+    $prepare->setFetchMode(PDO::FETCH_OBJ);
+    $desc = $prepare->fetchall();
+    $prepare->closeCursor();
+
+    if (is_array($desc)) {
+        $desc = $desc[0];
+    }
+    return $desc;
+
+}
+
 function editOverdraft($accountName , $idClient , $overdraft){
     $connection= Connection::getInstance()->getConnection();
     $request="UPDATE compteclient SET MONTANTDECOUVERT= :overdraft  WHERE NUMCLIENT= :idClient and NOMCOMPTE = :accountName" ;

@@ -287,7 +287,13 @@ function CtlNewAccount($idClient , $accountName , $openDate , $balance , $overdr
 }
 
 function CtlCloseAccount($idClient , $accountName , $endDate){
-    closeAccount($idClient , $accountName , $endDate);
+    $account = getClientAccount($idClient, $accountName);
+    $balance = $account->SOLDE;
+    if ($balance != 0) {
+        echo '<script>alert("Le solde du compte doit être nul pour le fermer")</script>';
+    } else {
+        closeAccount($idClient , $accountName , $endDate);
+    }
 }
 function CtlClientNewContract($idClient,$openingDate,$endDate,$price,$contractType){
     clientNewContract($idClient,$openingDate,$endDate,$price,$contractType);
