@@ -1386,7 +1386,7 @@ svg {
     height: 100%;
 }
 .contract-list-form {
-    display: grid;
+    display: block;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     height: 100%;
@@ -1400,9 +1400,13 @@ svg {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 50%;
-    width: 50%;
+    height: 30%;
+    width: 30%;
     background-color: var(--secondary-background-color);
+    margin-top: 1%;
+}
+.contract-list-form > div > div{
+    margin-left:35px;
 }
 .contract-list-form > div > div > div > button {
     background-color: #e8d2d2;
@@ -1417,12 +1421,7 @@ svg {
 
 /***********************/
 .contract-details-page {
-    justify-content: space-between;
-
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
+    width:100%;
 }
 
 .contract-details-page > div {
