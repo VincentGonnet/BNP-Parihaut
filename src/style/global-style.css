@@ -131,7 +131,7 @@ nav button {
     width: 85%;
     height: 65px;
 
-    margin: max(10px, 1.5vh) 0;
+    margin: max(8px, 1.3vh);
 
     font-size: 20px;
     font-weight: 500;

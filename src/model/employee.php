@@ -69,6 +69,34 @@ function getAllAdvisors() {
     return $advisors;
 }
 
+function getAllAgents() {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM employe WHERE CATEGORIE = \'agent\'');
+    $result->execute();
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $agents = $result->fetchAll();
+    $result->closeCursor();
+
+    if (empty($agents)) return array();
+    if (!is_array($agents)) return array($agents);
+
+    return $agents;
+}
+
+function getAllDirectors() {
+    $connection = Connection::getInstance()->getConnection();
+    $result = $connection->prepare('SELECT * FROM employe WHERE CATEGORIE = \'director\'');
+    $result->execute();
+    $result->setFetchMode(PDO::FETCH_OBJ);
+    $directors = $result->fetchAll();
+    $result->closeCursor();
+
+    if (empty($directors)) return array();
+    if (!is_array($directors)) return array($directors);
+
+    return $directors;
+}
+
 // AJAX LIVE SEARCH EMPLOYEES
 function liveSearchEmployee($input) {
     $connection = Connection::getInstance()->getConnection();

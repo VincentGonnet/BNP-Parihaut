@@ -125,3 +125,27 @@ img {
     height: 60px;
     width: 60px;
 }
+
+aside {
+    display: none;
+
+    position: absolute;
+    top: 27dvh;
+    right: 7dvw;
+
+    max-height: 43dvh;
+    overflow: auto;
+
+    background-color: var(--secondary-background-color);
+    border-radius: 10px;
+
+    padding: 13px;
+}
+
+aside button {
+    cursor: pointer;
+}
+
+.active {
+    display: block;
+}
