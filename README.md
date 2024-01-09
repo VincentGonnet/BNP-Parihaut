@@ -4,9 +4,11 @@ BNP Parihaut est une interface de gestion bancaire, développée pour une banque
 
 Ce projet a été développé en 2023 dans le cadre du Projet SPRINT, de deuxième année de Licence Informatique à l'Université d'Orléans.
 
+Made with ❤️ by [@JoanGuillard](https://www.github.com/JoanGuillard), [@mhamze04](https://www.github.com/mhamze04) and [@VincentGonnet](https://www.github.com/VincentGonnet)
+
 # Fonctionnalités :
 
-## Agent 
+## 🕵️‍♂️ Agent 
 - enregistrer un nouveau client
 - rechercher un client
 - visualiser et modifier certaines informations personnelles
@@ -15,7 +17,7 @@ Ce projet a été développé en 2023 dans le cadre du Projet SPRINT, de deuxiè
 - visualiser les contrats en cours
 - planifier un rendez-vous avec le conseiller du client
 
-## Conseiller
+## ⚙️ Conseiller
 - visualiser son emploi du temps et celui de ses collègues
 - se bloquer des créneaux 
 - effectuer un rendez-vous avec un client
@@ -25,7 +27,7 @@ Ce projet a été développé en 2023 dans le cadre du Projet SPRINT, de deuxiè
 - ajouter, supprimer un contrat
 - planifier un nouveau rendez-vous
 
-## Directeur
+## 📈 Directeur
 - rechercher les employés
 - modifier les informations de connexion des employés
 - ajouter un nouvel employé
