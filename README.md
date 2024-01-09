@@ -6,6 +6,14 @@ Ce projet a été développé en 2023 dans le cadre du Projet SPRINT, de deuxiè
 
 Made with ❤️ by [@JoanGuillard](https://www.github.com/JoanGuillard), [@mhamze04](https://www.github.com/mhamze04) and [@VincentGonnet](https://www.github.com/VincentGonnet)
 
+# Setup
+Version de la base de donnée testée : 10.4.32-MariaDB (disponible nativement dans les dernières versions de XAMPP)
+Le fichier à importer est disponible dans le dossier `database/init.sql`.
+
+Pour faciliter la connexion, sur la page de login du site, tapez "help" dans le champ "Identifiant".
+Le mot de passe par défaut pour tous les comptes est "password". 
+Une fois changé, le mot de passe n'apparaîtra pas dans la fenêtre d'aide.
+
 # Fonctionnalités :
 
 ## 🕵️‍♂️ Agent 
