@@ -1,224 +1,343 @@
-<form class="contract-list-form" id="contract-page" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-    <?php 
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL);
-        $selectedContract = null;
-
-        if (isset($_SESSION['currentClient']) || !empty(getContractData($clientId))) { 
-            $clientId = $_SESSION['currentClient']->NUMCLIENT;
-            $contracts = getContractData($clientId);
-            $currentContracts = array();
-            if (!empty($contracts)) {
-
-                foreach ($contracts as $contract) {
-                    if ($contract->DATEFERMETURE == null || $contract->DATEFERMETURE > date('Y-m-d')) {
-                        array_push($currentContracts, $contract);
-                    }
-                }
-            }
-    ?>
-    <?php
-        $appointmentConcernsContract = false;
-        foreach (getAllContracts() as $contract) {
-            if($contract->NOMCONTRAT == $_SESSION['required-docs']->LIBELLEMOTIF) {
-                $appointmentConcernsContract = true;
-            }
-        }
-
-        $allChecked = isset($_SESSION['allChecked']) && $_SESSION['allChecked'] == true;
-    ?>
-
-    <?php if(!$appointmentConcernsContract) : ?>
-        <h4>Attention le rendez-vous ne concerne pas les contrats. Certaines actions sont par conséquent bloquées.</h4>
-    <?php elseif (!$allChecked): ?>
-        <h4>Attention vous ne possédez pas toutes les pièces justificatives requises. Certaines actions sont par conséquent bloquées.</h4>
-    <?php endif; ?>
-
-        <?php
-            foreach ($currentContracts as $contract) {
-                $optionValue = $contract->NOMCONTRAT;
-                echo '<div id="div-container">';
-                echo '<div class="contract-div">';
-                echo '<div class="information-div">';
-                echo '<p>Type de contrat:' . $optionValue . '</p>';
-                echo '<p>Date d\'ouverture:' . $contract->DATEOUVERTURECONTRAT . '</p>';
-                echo '<button type="button" id="add-delete"  onclick="switchForms(\'' . $optionValue . '\', \'' . $contract->DATEOUVERTURECONTRAT . '\', \'' . ($contract->DATEFERMETURE ? $contract->DATEFERMETURE : 'Indéterminée') . '\', \'' . $contract->TARIFMENSUEL . '\')">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                        Voir détails
-                        </button>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-            }
-        ?>
-        
-        <p>
-        <button class="button" type="button" style="width:220px;" id="add-delete" onclick="addNewContract()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            Ajouter Contrat
-        </button>
-        </p>
-    
+<!-- To use withing the Calendar class -->
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th></th>
+                <?php foreach ($this->getDaysToDisplay() as $day): ?>
+                    <th>
+                        <?= $day[0] ?> <br>
+                        <?= $day[1] ?>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- display one row per 30mn from 8:00 to 18:00 -->
+            <?php for ($hour = 8; $hour < 18; $hour++): ?>
+                <tr>
+                    <td>
+                        <?= $hour ?>:00
+                    </td>
+                    <?php for ($dayOfWeek = 0; $dayOfWeek < 7; $dayOfWeek++): ?>
+                        <?= $this->displayCalendarEvent($this->getDateFromDayOfWeek($dayOfWeek), $hour, 00) ?>
+                    <?php endfor; ?>
+                </tr>
+                <tr>
+                    <td>
+                        <?= $hour ?>:30
+                    </td>
+                    <?php for ($dayOfWeek = 0; $dayOfWeek < 7; $dayOfWeek++): ?>
+                        <?= $this->displayCalendarEvent($this->getDateFromDayOfWeek($dayOfWeek), $hour, 30) ?>
+                    <?php endfor; ?>
+                </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
 </form>
 
+<modal id="calendar-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h1>Nouveau RDV</h1>
+        <div class="spacer"></div>
+        <div class="form-container">
 
+            <div>
+                <div class="label-containers">
+                    <p>Date</p>
+                    <p>Motif</p>
+                    <p>Durée</p>
+                </div>
+                <div class="inputs">
+                    <select readonly name="new-event-start-time" id="new-event-start-time">
+                        <option value="" selected>Date</option>
+                    </select>
+                    <select name="new-event-reason" id="new-event-reason">
+                        <?php foreach (getAllReasons() as $reason): ?>
+                            <option value="<?= $reason->IDMOTIF ?>">
+                                <?= $reason->LIBELLEMOTIF ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="horizontal">
+                        <input type="time" name="new-event-duration" id="new-event-duration" value="01:00" min="01:00"
+                            step="1800" readonly required>
+                        <div class="arrow-container">
+                            <button type="button" onclick="incrementDurationNewEvent()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+                            <button type="button" onclick="decrementDurationNewEvent()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button type="submit" name="add-event" id="add-event">Valider</button>
+    </form>
+</modal>
 
-<!--LE FORM 2 POUR AFFICHER LES DETAILS.On a plusieurs forms pour pouvoir changer le view facilement.--> 
+<modal id="reserve-time-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h1>Se réserver un créneau</h1>
+        <div class="spacer"></div>
+        <div class="form-container">
+            <div>
+                <div class="label-containers">
+                    <p>Date</p>
+                    <p>Durée</p>
+                </div>
+                <div class="inputs">
+                    <select readonly name="reserve-time-start-time" id="reserve-time-date">
+                        <option value="" selected>Date</option>
+                    </select>
+                    <div class="horizontal">
+                        <input type="time" name="reserve-time-duration" id="reserve-time-duration" value="00:30"
+                            min="00:30" step="1800" readonly required>
+                        <div class="arrow-container">
+                            <button type="button" onclick="incrementDurationReserveTime()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </button>
+                            <button type="button" onclick="decrementDurationReserveTime()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button type="submit" name="reserve-time" id="reserve-time">Valider</button>
+    </form>
 
-<form class="contract-details-page" id="contract-page" style="display: none;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-    <?php 
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL);
-        $selectedContract = null;
-        if (isset($_SESSION['currentClient'])) { 
-            $clientId = $_SESSION['currentClient']->NUMCLIENT;
-            $contracts = getContractData($clientId);
-    ?>
-    <div name="contract-list" id="contract-list">
-        <h5>Informations des contrats:</h5>
-        <p >
-            <label for="selected-contract-text">Type du contrat:</label>
-            <input type="text" id="selected-contract-text" name="selected-contract-text" readonly>
-            <input type="hidden" id="selected-contract" name="selected-contract">
-        </p>
+</modal>
 
-        <p>
-            <label for="openning-date">Date d'ouverture:</label>
-            <input id="openning-date" name="openning-date" type="text" value="<?php echo isset($selectedContract) ? $selectedContract->DATEOUVERTURECONTRAT : ''; ?>" readonly>
-        </p>
+<modal id="delete-event-modal">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <h2>Voulez-vous vraiment supprimer cet évènement ?</h2>
+        <div>
+            <button name="delete-event" id="delete-event" type="submit">Oui</button>
+            <button onclick="closeDeleteEventModal()" type="button">Non</button>
+        </div>
+    </form>
+</modal>
 
-        <p>
-            <label for="closing-date">Date de fermeture:</label>
-            <input id="closing-date" name="closing-date" type="text" value="" readonly>
-        </p>
-
-        <p>
-            <label for="price">Tarif mensuel:</label>
-            <input id="price" name="price" type="text" value="<?php echo isset($selectedContract) ? $selectedContract->TARIFMENSUEL : ''; ?>" readonly>
-        </p>
-
-        <input type="hidden" name="client-id" value="<?php echo $clientId; ?>">
-        <input type="hidden" name="chosen-contract" id="chosen-contract" value="">
-
-        <button class="button" type="submit" name="delete-client-contract" id="add-delete" onClick="confirmation()" >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-            Resilier le contrat
-        </button>
-    </div>
- </form>
-
-
-<!--FORM3 pour les nouveaux contrats-->
-
-<?php
-    if(!empty(getContractData($clientId))) {
-
-        $allContracts=getAllContracts(); // all contracts in contract table
-        $selectableContracts = array();
-        foreach($allContracts as $contract) {
-            $clientHasContract = false;
-            foreach($contracts as $clientContract) {
-                if ($clientContract->NOMCONTRAT === $contract->NOMCONTRAT && empty($clientContract->DATEFERMETURE)) {
-                    $clientHasContract = true;
-                    break;
-                }
-            }
-            if (!$clientHasContract) {
-                array_push($selectableContracts, $contract);
-            }
-        }
-    }
-?>
-
-<form class="new-contract-page " style="display: none;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-    <div id="new-contract-section" >
-        <h5>Veuillez remplir les champs suivants:</h5>
-        <p>
-            <label class="label" for="new-contract-type">Type du contrat:</label>
-            <select id="new-contract-type" name="new-contract-type" style="width:45%;background:#e8d2d2;padding: 6px 1% 6px 1%;margin-top:2px;">
-                <?php foreach($selectableContracts as $contractOption): ?>
-                    <option value="<?= $contractOption->NOMCONTRAT ?>"><?= $contractOption->NOMCONTRAT ?></option>
-                <?php endforeach; ?>
-            </select>      
-        </p>
-
-        <p>
-            <label class="label" for="new-opening-date">Date d'ouverture:</label>
-            <input class="input" id="new-opening-date" placeHolder="aaaa-mm-jj" name="new-opening-date" value="" type="text" style="margin-top:2px;">
-        </p>
-
-        <p>
-            <label  class="label" for="new-closing-date">Date de fermeture:</label>
-            <input  class="input" id="new-closing-date" placeHolder="aaaa-mm-jj" name="new-ending-date" value=""  type="text" style="margin-top:2px;">
-        </p>
-
-        <p>
-            <label  class="label" for="new-price">Tarifs mensuel:</label>
-            <input  class="input" id="new-price" name="new-price" placeHolder="000.00" type="text" style="margin-top:2px;" required>
-        </p>
-
-        <button  class="button" type="submit" name="submit-new-contract">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            Valider
+<!-- If an event was just added, it will display this modal. -->
+<?php if (isset($_POST['add-event']) && isset($_POST['new-event-reason']) && !empty(getDocumentsAsArray($_POST['new-event-reason']))): ?>
+    <modal id="new-event-documents-modal">
+        <div>
+            <h1 style="margin: 0;">Justificatifs nécessaires</h1>
+            <div>
+                <p>Motif :
+                    <?= getReasonById($_POST['new-event-reason'])->LIBELLEMOTIF ?>
+                </p>
+                <ul>
+                    <?php foreach (getDocumentsAsArray($_POST['new-event-reason']) as $document): ?>
+                        <li>
+                            <?= $document ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <button class="red-button" onclick="closeNewEventDocumentsModal()" type="button">
+                Fermer
             </button>
-            <?php } } ?>
-    </div>
-</form>       
-
-    
-
+        </div>
+    </modal>
+<?php endif; ?>
 
 <script>
+    let modal = document.getElementById('calendar-modal');
+    let formattedDateHour = "";
+    let maxEventDuration = "";
 
-    function addNewContract() {
-        var form1 = document.querySelector('.contract-list-form');
-        var form3 = document.querySelector('.new-contract-page');
-        form1.style.display = 'none';
-        form3.style.display = 'block';
-    }
+    let newEventDocumentsModal = document.getElementById('new-event-documents-modal');
 
-    function switchForms(selectedContract, openingDate, closingDate, price) {
-        document.getElementById('selected-contract-text').value = selectedContract;
-        document.getElementById('openning-date').value = openingDate;
-        document.getElementById('closing-date').value = closingDate;
-        document.getElementById('price').value = price;
-        document.getElementById('selected-contract').value = selectedContract;
+    function openNewEventModal(fDate, maxDuration) {
+        modal.style.opacity = 1;
+        modal.style.pointerEvents = "auto";
+        formattedDateHour = fDate;
+        maxEventDuration = maxDuration;
 
-        var form1 = document.querySelector('.contract-list-form');
-        var form2 = document.querySelector('.contract-details-page');
-        form1.style.display = 'none';
-        form2.style.display = 'block';
+        document.querySelector("#calendar-modal input[type='time']").value = "01:00";
+
+        document.querySelector("#new-event-start-time option").innerHTML = formattedDateHour.toString().replace('T', ' à ');
+        document.querySelector("#new-event-start-time option").value = formattedDateHour;
     }
 
-    var newOpeningDateInput = document.getElementById('new-opening-date');
-    if (newOpeningDateInput.value==""){
-        var currentDate = new Date().toISOString().split('T')[0];
-        newOpeningDateInput.value = currentDate;
+    function closeNewEventModal() {
+        modal.style.opacity = 0;
+        modal.style.pointerEvents = "none";
     }
-    var newEndingDateInput = document.getElementById('new-ending-date');
-    if (newEndingDateInput.value==""){
-        newEndingDateInput.value = NULL;
+
+    function incrementDurationNewEvent() {
+        let duration = document.querySelector("#calendar-modal input[type='time']").value;
+        if (duration > maxEventDuration) {
+            duration = maxEventDuration;
+            document.querySelector("#calendar-modal input[type='time']").value = duration;
+            return;
+        }
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        let maxMinutes = parseInt(maxEventDuration.split(':')[1]);
+        let maxHours = parseInt(maxEventDuration.split(':')[0]);
+        if (hours == maxHours && minutes == maxMinutes) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+            hours++;
+        } else {
+            minutes = 30;
+        }
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes == 0) {
+            minutes = "00";
+        }
+        document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
     }
-    function confirmation(){
-        alert("Apres cette operation le contrat courant sera resilie.Voulez vous vraiment le supprimer?");
+
+    function decrementDurationNewEvent() {
+        let duration = document.querySelector("#calendar-modal input[type='time']").value;
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        if (hours == 1 && minutes == 0) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+        } else {
+            minutes = 30;
+            hours--;
+        }
+
+        if (hours < 10) hours = "0" + hours;
+        if (minutes == 0) minutes = "00";
+
+        document.querySelector("#calendar-modal input[type='time']").value = hours + ":" + minutes;
     }
+
+    // click anywhere outside the modal to close it
+    window.onclick = function (event) {
+        if (event.target == newEventDocumentsModal) {
+            console.log("newEventDocumentsModal");
+            closeNewEventDocumentsModal();
+        } else if (event.target == modal) {
+            closeNewEventModal();
+        } else if (event.target == deleteEventModal) {
+            closeDeleteEventModal();
+        } else if (event.target == reserveTimeModal) {
+            closeReserveTimeModal();
+        }
+    }
+
+    let deleteEventModal = document.getElementById('delete-event-modal');
+
+    function openDeleteEventModal($eventId) {
+        deleteEventModal.style.opacity = 1;
+        deleteEventModal.style.pointerEvents = "auto";
+        deleteEventModal.querySelector("#delete-event").value = $eventId;
+    }
+
+    function closeDeleteEventModal() {
+        deleteEventModal.style.opacity = 0;
+        deleteEventModal.style.pointerEvents = "none";
+    }
+
+    let reserveTimeModal = document.getElementById('reserve-time-modal');
+
+    function openReserveTimeModal($date, $timeUntilNextEvent) {
+        reserveTimeModal.style.opacity = 1;
+        reserveTimeModal.style.pointerEvents = "auto";
+
+        formattedDateHour = $date;
+        maxEventDuration = $timeUntilNextEvent;
+
+        reserveTimeModal.querySelector("#reserve-time-modal input[type='time']").value = "00:30";
+
+        reserveTimeModal.querySelector("#reserve-time-date option").value = $date;
+        reserveTimeModal.querySelector("#reserve-time-date option").innerHTML = $date.toString().replace('T', ' à ');
+    }
+
+    function closeReserveTimeModal() {
+        reserveTimeModal.style.opacity = 0;
+        reserveTimeModal.style.pointerEvents = "none";
+    }
+
+    function incrementDurationReserveTime() {
+        let duration = document.querySelector("#reserve-time-modal input[type='time']").value;
+        if (duration > maxEventDuration) {
+            duration = maxEventDuration;
+            document.querySelector("#reserve-time-modal input[type='time']").value = duration;
+            return;
+        }
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        let maxMinutes = parseInt(maxEventDuration.split(':')[1]);
+        let maxHours = parseInt(maxEventDuration.split(':')[0]);
+        if (hours == maxHours && minutes == maxMinutes) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+            hours++;
+        } else {
+            minutes = 30;
+        }
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes == 0) {
+            minutes = "00";
+        }
+        document.querySelector("#reserve-time-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function decrementDurationReserveTime() {
+        let duration = document.querySelector("#reserve-time-modal input[type='time']").value;
+        let durationArray = duration.split(':');
+        let hours = parseInt(durationArray[0]);
+        let minutes = parseInt(durationArray[1]);
+        if (hours == 0 && minutes == 30) return;
+
+        if (minutes == 30) {
+            minutes = 0;
+        } else {
+            minutes = 30;
+            hours--;
+        }
+
+        if (hours < 10) hours = "0" + hours;
+        if (minutes == 0) minutes = "00";
+
+        document.querySelector("#reserve-time-modal input[type='time']").value = hours + ":" + minutes;
+    }
+
+    function closeNewEventDocumentsModal() {
+        newEventDocumentsModal.style.opacity = 0;
+        newEventDocumentsModal.style.pointerEvents = "none";
+    }
+
 </script>
-
-<?php if(!$allChecked || !$appointmentConcernsContract) : ?>
-    <script>
-        var buttons = document.querySelectorAll("#add-delete");
-        buttons.forEach(function(button){
-            button.style.backgroundColor = 'grey';
-            button.onclick = null;
-        })
-    </script>
-<?php endif; ?>
