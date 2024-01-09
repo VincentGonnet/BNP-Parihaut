@@ -9,7 +9,6 @@ function addEmployee($name, $firstname, $login, $password, $job) {
 
     if ($testResult->fetchColumn() > 0) {
         echo '<script>  alert("Le login existe déjà. Veuillez choisir un autre login.");
-                        window.location.href = "http://localhost/BNP-Parihaut/src/index.php";
                 </script>';
         return;
     }
